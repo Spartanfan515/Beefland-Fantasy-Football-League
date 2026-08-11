@@ -1,0 +1,332 @@
+/* ==========================================================================
+   Design tokens
+   ========================================================================== */
+:root {
+  --bg: #0f1e17;
+  --surface: #16281f;
+  --surface-raised: #1e3428;
+  --line: #2b4636;
+  --chalk: #f3efe2;
+  --chalk-dim: #a8bcae;
+  --gold: #d7ab3f;
+  --gold-dim: #9c7e3e;
+  --red: #b54a3c;
+
+  --font-display: "Anton", sans-serif;
+  --font-body: "Work Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --radius: 4px;
+  --max-width: 1080px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--chalk);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+body {
+  background-image:
+    linear-gradient(180deg, rgba(0,0,0,0.15), transparent 200px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 64px);
+}
+
+a { color: var(--gold); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible, button:focus-visible, select:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--chalk);
+  margin: 0 0 0.5em;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ==========================================================================
+   Nav
+   ========================================================================== */
+.site-header {
+  border-bottom: 1px solid var(--line);
+  background: rgba(15, 30, 23, 0.9);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(6px);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.site-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--chalk);
+}
+.site-title span { color: var(--gold); }
+
+.site-nav {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-display);
+  letter-spacing: 0.03em;
+  font-size: 0.9rem;
+}
+
+.site-nav a {
+  color: var(--chalk-dim);
+  text-transform: uppercase;
+}
+.site-nav a:hover, .site-nav a[aria-current="page"] {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.hero {
+  padding: 72px 0 48px;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 0.95;
+  max-width: 14ch;
+}
+
+.hero p {
+  color: var(--chalk-dim);
+  font-size: 1.1rem;
+  max-width: 50ch;
+}
+
+.page-header {
+  padding: 56px 0 32px;
+  border-bottom: 1px solid var(--line);
+}
+.page-header p { color: var(--chalk-dim); max-width: 60ch; }
+
+/* ==========================================================================
+   Ring of Honor banners (signature element)
+   ========================================================================== */
+.banner-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 32px 24px;
+  padding: 56px 0 80px;
+}
+
+.banner {
+  position: relative;
+  padding: 28px 20px 40px;
+  background: linear-gradient(180deg, var(--surface-raised), var(--surface));
+  border: 1px solid var(--line);
+  clip-path: polygon(0 0, 100% 0, 100% 82%, 50% 100%, 0 82%);
+  text-align: center;
+  transition: transform 0.15s ease;
+}
+
+.banner:hover { transform: translateY(-4px); }
+
+.banner:nth-child(1) {
+  border-color: var(--gold-dim);
+  box-shadow: 0 0 0 1px var(--gold-dim), 0 12px 28px -12px rgba(215, 171, 63, 0.35);
+}
+
+.banner .year {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.banner .champion-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  margin: 10px 0 2px;
+}
+
+.banner .owner {
+  color: var(--chalk-dim);
+  font-size: 0.85rem;
+  margin-bottom: 14px;
+}
+
+.banner .record {
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  color: var(--chalk);
+  letter-spacing: 0.05em;
+}
+
+.banner .note {
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: var(--chalk-dim);
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Tables (standings, draft)
+   ========================================================================== */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin: 24px 0 64px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+}
+
+thead th {
+  text-align: left;
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--chalk-dim);
+  background: var(--surface-raised);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 65px;
+}
+
+tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+tbody tr:hover { background: rgba(255,255,255,0.02); }
+tbody tr:last-child td { border-bottom: none; }
+
+td.rank { color: var(--gold); font-weight: 600; }
+td.owner-cell { font-family: var(--font-body); color: var(--chalk-dim); }
+td.team-cell { font-family: var(--font-body); color: var(--chalk); }
+
+/* ==========================================================================
+   Controls (season select)
+   ========================================================================== */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+select {
+  background: var(--surface-raised);
+  color: var(--chalk);
+  border: 1px solid var(--line);
+  padding: 8px 12px;
+  font-family: var(--font-mono);
+  border-radius: var(--radius);
+}
+
+/* ==========================================================================
+   Rules / punishments content
+   ========================================================================== */
+.content-section {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--line);
+}
+.content-section:last-child { border-bottom: none; }
+
+.content-section h2 {
+  font-size: 1.3rem;
+  color: var(--gold);
+}
+
+.content-section ul {
+  padding-left: 1.2em;
+  color: var(--chalk-dim);
+}
+.content-section li { margin-bottom: 6px; }
+
+.punishment-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--red);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+.punishment-card h3 {
+  font-size: 1rem;
+  color: var(--chalk);
+  margin-bottom: 6px;
+}
+.punishment-card p { color: var(--chalk-dim); margin: 0; }
+
+/* ==========================================================================
+   Misc
+   ========================================================================== */
+.loading {
+  color: var(--chalk-dim);
+  font-family: var(--font-mono);
+  padding: 24px 0;
+}
+
+.error-box {
+  border: 1px solid var(--red);
+  background: rgba(181, 74, 60, 0.1);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+.error-box p { margin: 0 0 8px; }
+.error-hint { color: var(--chalk-dim); font-size: 0.85rem; }
+.error-box code {
+  background: var(--surface-raised);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 32px 0;
+  color: var(--chalk-dim);
+  font-size: 0.85rem;
+  text-align: center;
+}

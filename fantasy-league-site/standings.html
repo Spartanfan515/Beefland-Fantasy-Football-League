@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Standings — The League</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="site-title" id="site-title">The <span>League</span></div>
+    <nav>
+      <ul class="site-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="standings.html" aria-current="page">Standings</a></li>
+        <li><a href="draft.html">Draft</a></li>
+        <li><a href="rules.html">Rules</a></li>
+        <li><a href="punishments.html">Punishments</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="container">
+    <h1>Standings</h1>
+    <p>Live from the ESPN Fantasy API. Cached for 5 minutes at the edge.</p>
+    <div class="controls">
+      <label for="season-select">Season</label>
+      <select id="season-select"></select>
+    </div>
+  </div>
+</section>
+
+<section class="container">
+  <div id="standings-wrap">
+    <p class="loading">Loading standings…</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">Standings and draft data pulled live from the ESPN Fantasy API.</div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/render-standings.js"></script>
+</body>
+</html>

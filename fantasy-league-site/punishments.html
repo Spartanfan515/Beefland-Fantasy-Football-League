@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Punishments — The League</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="site-title" id="site-title">The <span>League</span></div>
+    <nav>
+      <ul class="site-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="standings.html">Standings</a></li>
+        <li><a href="draft.html">Draft</a></li>
+        <li><a href="rules.html">Rules</a></li>
+        <li><a href="punishments.html" aria-current="page">Punishments</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="container">
+    <h1>Punishments</h1>
+    <p>Edit CONFIG.punishments in js/config.js to update this page.</p>
+  </div>
+</section>
+
+<section class="container" id="punishments-content" style="padding: 40px 0 80px;"></section>
+
+<footer class="site-footer">
+  <div class="container">Standings and draft data pulled live from the ESPN Fantasy API.</div>
+</footer>
+
+<script src="js/config.js"></script>
+<script>
+  document.getElementById("site-title").innerHTML =
+    `${CONFIG.leagueName.split(" ").slice(0, -1).join(" ")} <span>${CONFIG.leagueName.split(" ").slice(-1)}</span>`;
+
+  document.getElementById("punishments-content").innerHTML = CONFIG.punishments
+    .map(
+      (p) => `
+      <div class="punishment-card">
+        <h3>${p.title}</h3>
+        <p>${p.description}</p>
+      </div>
+    `
+    )
+    .join("");
+</script>
+</body>
+</html>
