@@ -98,7 +98,30 @@ DNS is already on Cloudflare, this takes about a minute.
 
 ---
 
-## 5. Updating things later
+## Calculating League Superlatives
+
+`js/config.js` has a `superlatives` array (Most Playoff Wins, Best Win %, Highest
+Career PPG, etc.) that starts out full of placeholders — these need real season data
+to fill in, which isn't something to fill in by hand.
+
+Run this once locally (requires Node.js 18+):
+
+```bash
+node scripts/calculate-superlatives.mjs
+```
+
+It fetches every season from ESPN, calculates all 7 stats, and prints a ready-to-paste
+`superlatives:` block — copy that into `js/config.js`, replacing the placeholder array.
+
+A few judgment calls are baked into how it defines things (e.g. "playoff wins" only
+counts the winners' bracket, "win %" uses regular season only) — the top of the script
+explains each one and where to tweak it if you'd define a stat differently.
+
+Re-run it any time after a season ends to refresh the numbers.
+
+---
+
+## 6. Updating things later
 
 - **New champion each year:** add an entry to `history` in `js/config.js`, commit, push.
 - **Rule change:** edit `rules` in `js/config.js`, commit, push.
@@ -124,6 +147,8 @@ fantasy-league-site/
 │   ├── render-history.js      home page banners
 │   ├── render-standings.js    standings page logic
 │   └── render-draft.js        draft page logic
+├── scripts/
+│   └── calculate-superlatives.mjs   run locally to fill in Superlatives
 └── functions/api/league.js  Cloudflare Function — proxies + caches ESPN API calls
 ```
 

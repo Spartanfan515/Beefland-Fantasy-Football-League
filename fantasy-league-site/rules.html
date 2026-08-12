@@ -39,20 +39,6 @@
 </footer>
 
 <script src="js/config.js"></script>
-<script>
-  document.getElementById("site-title").innerHTML =
-    `${CONFIG.leagueName.split(" ").slice(0, -1).join(" ")} <span>${CONFIG.leagueName.split(" ").slice(-1)}</span>`;
-
-  document.getElementById("rules-content").innerHTML = CONFIG.rules
-    .map(
-      (section) => `
-      <div class="content-section">
-        <h2>${section.section}</h2>
-        <ul>${section.items.map((item) => `<li>${item}</li>`).join("")}</ul>
-      </div>
-    `
-    )
-    .join("");
-</script>
+<script src="js/render-rules.js"></script>
 </body>
 </html>

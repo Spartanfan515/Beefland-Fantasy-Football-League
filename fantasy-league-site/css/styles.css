@@ -201,6 +201,131 @@ h1, h2, h3 {
 }
 
 /* ==========================================================================
+   Section blocks (Superlatives / Wall of Shame)
+   ========================================================================== */
+.section-block {
+  border-bottom: 1px solid var(--line);
+  padding: 8px 0 64px;
+}
+.section-block--shame { border-bottom: none; }
+
+.section-block h2 {
+  font-size: 1.8rem;
+  color: var(--chalk);
+}
+
+.section-intro {
+  color: var(--chalk-dim);
+  margin: 0 0 32px;
+}
+
+/* Superlatives */
+.superlatives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+}
+
+.stat-category {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.85rem;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.stat-value {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  color: var(--chalk);
+  margin-bottom: 8px;
+}
+
+.stat-holder {
+  font-size: 0.92rem;
+  color: var(--chalk);
+}
+
+.stat-owner {
+  font-size: 0.8rem;
+  color: var(--chalk-dim);
+}
+
+/* Wall of Shame — pinned, slightly crooked, corkboard feel */
+.shame-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 28px 20px;
+  padding-top: 8px;
+}
+
+.shame-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px dashed #4a3230;
+  border-radius: var(--radius);
+  padding: 22px 18px 18px;
+  text-align: center;
+  transform: rotate(-1.2deg);
+  transition: transform 0.15s ease;
+}
+
+.shame-card:nth-child(even) { transform: rotate(1.4deg); }
+.shame-card:nth-child(3n) { transform: rotate(-0.6deg); }
+.shame-card:hover { transform: rotate(0deg) translateY(-2px); }
+
+.shame-card::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.shame-year {
+  font-family: var(--font-mono);
+  color: var(--red);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.shame-team {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: var(--chalk);
+  margin-bottom: 4px;
+}
+
+.shame-owner {
+  font-size: 0.82rem;
+  color: var(--chalk-dim);
+  margin-bottom: 10px;
+}
+
+.shame-record {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  color: var(--red);
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================================================
    Tables (standings, draft)
    ========================================================================== */
 .table-wrap {
@@ -266,9 +391,10 @@ select {
 /* ==========================================================================
    Rules / punishments content
    ========================================================================== */
-.content-section {
-  padding: 40px 0;
-  border-bottom: 1px solid var(--line);
+.content-section { padding: 40px 0; border-bottom: 1px solid var(--line); }
+.punishment-rules {
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 .content-section:last-child { border-bottom: none; }
 
@@ -283,20 +409,130 @@ select {
 }
 .content-section li { margin-bottom: 6px; }
 
+.rules-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: var(--chalk-dim);
+}
+
+.rules-list > li {
+  position: relative;
+  padding-left: 1.6em;
+  margin-bottom: 16px;
+  line-height: 1.55;
+}
+
+.rules-list > li::before {
+  content: "➔";
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 0.9em;
+}
+
+.rules-list ol {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+.rules-list ol li {
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 8px;
+  font-size: 0.92rem;
+}
+
+.rules-list ol li::before {
+  content: "◆";
+  position: absolute;
+  left: 0;
+  color: var(--gold-dim);
+  font-size: 0.7em;
+  top: 0.4em;
+}
+
+.rules-list ol.list-letters {
+  counter-reset: letter-counter;
+}
+.rules-list ol.list-letters li {
+  counter-increment: letter-counter;
+  padding-left: 1.8em;
+}
+.rules-list ol.list-letters li::before {
+  content: counter(letter-counter, lower-alpha) ")";
+  font-size: 0.85rem;
+  color: var(--gold-dim);
+  top: 0;
+  font-family: var(--font-mono);
+}
+
 .punishment-card {
   background: var(--surface);
   border: 1px solid var(--line);
   border-left: 3px solid var(--red);
   border-radius: var(--radius);
-  padding: 20px 24px;
-  margin-bottom: 16px;
+  padding: 24px 28px;
+  margin-bottom: 20px;
 }
+
+.punishment-year {
+  font-family: var(--font-mono);
+  color: var(--gold);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
 .punishment-card h3 {
-  font-size: 1rem;
+  font-size: 1.15rem;
   color: var(--chalk);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
-.punishment-card p { color: var(--chalk-dim); margin: 0; }
+
+.punishment-loser {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+.punishment-loser--tbd { color: var(--chalk-dim); }
+
+.punishment-card p {
+  color: var(--chalk-dim);
+  margin: 0;
+}
+
+.regs-details {
+  margin-top: 16px;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+
+.regs-details summary {
+  cursor: pointer;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.85rem;
+  color: var(--gold);
+  padding: 4px 0;
+}
+.regs-details summary:hover { color: var(--chalk); }
+.regs-details[open] summary { margin-bottom: 8px; }
+
+.regs-details ol {
+  color: var(--chalk-dim);
+  font-size: 0.92rem;
+  padding-left: 1.4em;
+  margin: 10px 0;
+}
+.regs-details li { margin-bottom: 8px; }
+.regs-details ol ol {
+  margin-top: 8px;
+  font-size: 0.88rem;
+}
 
 /* ==========================================================================
    Misc

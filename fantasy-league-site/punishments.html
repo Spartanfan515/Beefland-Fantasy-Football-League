@@ -32,27 +32,16 @@
   </div>
 </section>
 
-<section class="container" id="punishments-content" style="padding: 40px 0 80px;"></section>
+<section class="container">
+  <div id="punishment-rules-content"></div>
+  <div id="punishments-content"></div>
+</section>
 
 <footer class="site-footer">
   <div class="container">Standings and draft data pulled live from the ESPN Fantasy API.</div>
 </footer>
 
 <script src="js/config.js"></script>
-<script>
-  document.getElementById("site-title").innerHTML =
-    `${CONFIG.leagueName.split(" ").slice(0, -1).join(" ")} <span>${CONFIG.leagueName.split(" ").slice(-1)}</span>`;
-
-  document.getElementById("punishments-content").innerHTML = CONFIG.punishments
-    .map(
-      (p) => `
-      <div class="punishment-card">
-        <h3>${p.title}</h3>
-        <p>${p.description}</p>
-      </div>
-    `
-    )
-    .join("");
-</script>
+<script src="js/render-punishments.js"></script>
 </body>
 </html>
