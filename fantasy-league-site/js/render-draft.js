@@ -55,8 +55,10 @@ function renderDraft(year) {
       const owner = owners[team];
       return `
       <th class="draft-team-col">
-        <div class="draft-team-name">${team}</div>
-        <div class="draft-team-owner${owner ? "" : " draft-team-owner--tbd"}">${owner || "Owner TBD"}</div>
+        <div class="draft-team-col-inner">
+          <div class="draft-team-name">${team}</div>
+          <div class="draft-team-owner${owner ? "" : " draft-team-owner--tbd"}">${owner || "Owner TBD"}</div>
+        </div>
       </th>
     `;
     })
@@ -68,8 +70,9 @@ function renderDraft(year) {
       .map((team) => {
         const p = pickGrid[team][round];
         if (!p) return `<td class="draft-pick-cell draft-pick-cell--empty">—</td>`;
+        const posClass = p.position ? ` draft-pos--${p.position}` : "";
         return `
-        <td class="draft-pick-cell">
+        <td class="draft-pick-cell${posClass}">
           <span class="draft-pick-num">${p.round}.${p.pick}</span>
           <span class="draft-pick-player">${p.player}</span>
         </td>
@@ -79,8 +82,20 @@ function renderDraft(year) {
     bodyRows.push(`<tr>${cells}</tr>`);
   }
 
+  const legend = [
+    ["WR", "WR"],
+    ["RB", "RB"],
+    ["TE", "TE"],
+    ["QB", "QB"],
+    ["K", "K"],
+    ["DST", "DEF"],
+  ]
+    .map(([cls, label]) => `<span class="draft-legend-item"><span class="draft-legend-swatch draft-pos--${cls}"></span>${label}</span>`)
+    .join("");
+
   content.innerHTML = `
     <h2 class="bracket-heading">Draft Board</h2>
+    <div class="draft-legend">${legend}</div>
     <div class="table-wrap draft-board-wrap">
       <table class="draft-board-table">
         <thead><tr>${headerRow}</tr></thead>

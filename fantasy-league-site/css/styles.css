@@ -293,7 +293,26 @@ h1, h2, h3 {
   font-size: 1.5rem;
   color: var(--chalk);
   margin-bottom: 8px;
-  white-space: nowrap;
+  overflow-wrap: break-word;
+}
+
+.stat-value--tight {
+  font-size: 1.15rem;
+}
+
+.stat-value--player {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  line-height: 1.15;
+}
+
+.stat-value-detail {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--chalk-dim);
+  margin-bottom: 8px;
+  overflow-wrap: break-word;
 }
 
 .stat-holder {
@@ -371,27 +390,21 @@ h1, h2, h3 {
   letter-spacing: 0.04em;
 }
 
-.shame-card--bust {
-  border-style: solid;
-  border-color: var(--gold-dim);
-}
-.shame-card--bust::before { background: var(--gold-dim); }
-
-.shame-year--bust {
+.shame-bust-label {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
   font-family: var(--font-display);
   text-transform: uppercase;
   letter-spacing: 0.03em;
   color: var(--gold);
-  font-size: 0.85rem;
+  font-size: 0.7rem;
 }
 
-.shame-card--bust .shame-record { color: var(--chalk); }
-
 .shame-bust-note {
-  margin-top: 10px;
-  font-size: 0.76rem;
+  margin-top: 4px;
+  font-size: 0.78rem;
   color: var(--chalk-dim);
-  font-style: italic;
 }
 
 /* ==========================================================================
@@ -825,9 +838,17 @@ select {
   border-right: 1px solid var(--line);
   text-align: left;
   min-width: 150px;
-  vertical-align: top;
+  height: 100%;
 }
 .draft-team-col:last-child { border-right: none; }
+
+.draft-team-col-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 64px;
+}
 
 .draft-team-name {
   font-family: var(--font-display);
@@ -842,7 +863,7 @@ select {
   font-family: var(--font-body);
   font-size: 0.72rem;
   color: var(--chalk-dim);
-  margin-top: 3px;
+  margin-top: 8px;
 }
 .draft-team-owner--tbd {
   color: var(--red);
@@ -882,3 +903,35 @@ tbody tr:last-child .draft-pick-cell { border-bottom: none; }
   font-size: 0.85rem;
   line-height: 1.3;
 }
+
+.draft-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0 0 16px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--chalk-dim);
+}
+
+.draft-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.draft-legend-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1px solid var(--line);
+}
+
+/* Position color key: WR blue, RB green, TE orange, QB red, K purple, DST gray */
+.draft-pos--WR { background: #cfe3f6; }
+.draft-pos--RB { background: #d2ecd6; }
+.draft-pos--TE { background: #f7ddba; }
+.draft-pos--QB { background: #f6d0cc; }
+.draft-pos--K  { background: #e3d3f2; }
+.draft-pos--DST { background: #dcdcdc; }

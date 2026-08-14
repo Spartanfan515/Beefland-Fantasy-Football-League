@@ -91,7 +91,7 @@ const CONFIG = {
       owner: "Zack Rollis",
       record: "9-6",
       asterisk: true,
-      note: "*Both Zack and Jacob still had players live in the Bengals–Bills Monday Night game when it was called off; Zack was declared champion on projected points, but the payout was split 75/25 since Jacob still had a ~25% win probability at the time. Also the lowest-scoring championship game in Beefland history — 67.40 to 57.80, a combined 125.2 points.",
+      note: "*The Bengals–Bills Monday Night game ended early with the title unsettled — the payout was split 75/25.",
     },
     {
       year: 2021,
@@ -255,8 +255,11 @@ const CONFIG = {
       category: "Draft Steal",
       holder: "Jack Callahan",
       team: "Chasing Contracts",
-      value: "R11.6 → 362.6 pts",
-      note: "Jayden Daniels, 2024",
+      player: "Jayden Daniels",
+      draftSpot: "R11.6",
+      points: "366.82 pts",
+      finalRank: "QB5",
+      note: "2024",
     },
   ],
 
@@ -311,8 +314,11 @@ const CONFIG = {
       category: "Draft Steal",
       holder: "Zach Crook",
       team: "Team Crook",
-      value: "R9.2 → 380.6 pts",
-      note: "Jalen Hurts, 2022",
+      player: "Jalen Hurts",
+      draftSpot: "R9.2",
+      points: "389.04 pts",
+      finalRank: "QB3",
+      note: "2022",
     },
   ],
 
@@ -322,44 +328,37 @@ const CONFIG = {
       team: "Burrow this Chubb in the Brown",
       owner: "Adam Kahler",
       record: "4-10",
+      worstPick: { player: "Joe Burrow", pick: "R3.3", points: "115.3 pts" },
     },
     {
       year: 2024,
       team: "Richmond Diamond Dogs",
       owner: "Zack Rollis",
       record: "2-12",
+      worstPick: { player: "Stefon Diggs", pick: "R3.11", points: "121.9 pts" },
     },
     {
       year: 2023,
       team: "I Can't Brees",
       owner: "Adam Schon",
       record: "2-13",
+      worstPick: { player: "Bijan Robinson", pick: "R2.3", points: "224.2 pts" },
     },
     {
       year: 2022,
       team: "I Can't Brees",
       owner: "Adam Schon",
       record: "3-12",
+      worstPick: { player: "Deebo Samuel", pick: "R2.2", points: "171.0 pts" },
     },
     {
       year: 2021,
       team: "Gore Winning Me a Championship",
       owner: "Bobby Mowry",
       record: "2-12",
+      worstPick: { player: "Christian McCaffrey", pick: "R1.1", points: "127.5 pts" },
     },
   ],
-
-  // Biggest draft bust: among Round 1-3 picks ("high draft position") across
-  // all seasons, whoever scored the fewest total points that year.
-  draftBust: {
-    year: 2023,
-    team: "I Like Turtles",
-    owner: "Ben Schon",
-    player: "Nick Chubb",
-    pick: "R2.4",
-    points: "25.1 pts",
-    note: "A torn ACL/MCL in Week 2 ended his season.",
-  },
 
   rules: [
     {
