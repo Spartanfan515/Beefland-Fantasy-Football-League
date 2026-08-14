@@ -325,6 +325,141 @@ h1, h2, h3 {
   color: var(--chalk-dim);
 }
 
+/* Records page */
+.records-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 24px;
+  padding: 8px 0 40px;
+}
+
+.record-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+}
+
+.record-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.record-owner {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 1.3rem;
+  color: var(--chalk);
+}
+
+.record-years {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--gold);
+}
+
+.record-years-count {
+  color: var(--chalk-dim);
+}
+
+.record-stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.record-stat-label {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.68rem;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.record-stat-value {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  color: var(--chalk);
+  overflow-wrap: break-word;
+}
+
+.record-stat-value--tight {
+  font-size: 1.05rem;
+}
+
+.record-stat-sub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--chalk-dim);
+  margin-top: 2px;
+}
+
+.record-pick-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+
+.record-pick {
+  text-align: center;
+  padding: 10px 8px;
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.record-pick-label {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.68rem;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.record-pick--bust .record-pick-label {
+  color: var(--red);
+}
+
+.record-pick-player {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  color: var(--chalk);
+  margin-bottom: 4px;
+}
+
+.record-pick-detail {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--chalk-dim);
+  margin-bottom: 4px;
+}
+
+.record-pick-rank {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--chalk);
+  margin-bottom: 4px;
+}
+
+.record-pick-note {
+  font-size: 0.72rem;
+  color: var(--chalk-dim);
+}
+
 /* Wall of Shame — pinned, slightly crooked, corkboard feel */
 .shame-grid {
   display: grid;
