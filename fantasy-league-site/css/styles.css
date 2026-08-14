@@ -2,15 +2,17 @@
    Design tokens
    ========================================================================== */
 :root {
-  --bg: #0f1e17;
-  --surface: #16281f;
-  --surface-raised: #1e3428;
-  --line: #2b4636;
-  --chalk: #f3efe2;
-  --chalk-dim: #a8bcae;
-  --gold: #d7ab3f;
-  --gold-dim: #9c7e3e;
-  --red: #b54a3c;
+  --bg: #f2e9d8;
+  --surface: #faf3e6;
+  --surface-raised: #ecdec0;
+  --line: #d9c8a4;
+  --chalk: #241f16;
+  --chalk-dim: #6e6147;
+  --gold: #b8862e;
+  --gold-dim: #8f6a28;
+  --red: #a8402f;
+  --green-deep: #14291d;
+  --green-accent: #2f5233;
 
   --font-display: "Anton", sans-serif;
   --font-body: "Work Sans", system-ui, sans-serif;
@@ -36,8 +38,8 @@ html, body {
 
 body {
   background-image:
-    linear-gradient(180deg, rgba(0,0,0,0.15), transparent 200px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 64px);
+    linear-gradient(180deg, rgba(20,41,29,0.05), transparent 200px),
+    repeating-linear-gradient(90deg, rgba(20,41,29,0.025) 0px, rgba(20,41,29,0.025) 1px, transparent 1px, transparent 64px);
 }
 
 a { color: var(--gold); text-decoration: none; }
@@ -65,8 +67,8 @@ h1, h2, h3 {
    Nav
    ========================================================================== */
 .site-header {
-  border-bottom: 1px solid var(--line);
-  background: rgba(15, 30, 23, 0.9);
+  border-bottom: 3px solid var(--gold-dim);
+  background: rgba(20, 41, 29, 0.96);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -88,7 +90,7 @@ h1, h2, h3 {
   font-size: 1.4rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--chalk);
+  color: #f3efe2;
 }
 .site-title span { color: var(--gold); }
 
@@ -105,7 +107,7 @@ h1, h2, h3 {
 }
 
 .site-nav a {
-  color: var(--chalk-dim);
+  color: #b9c9b9;
   text-transform: uppercase;
 }
 .site-nav a:hover, .site-nav a[aria-current="page"] {
@@ -133,6 +135,22 @@ h1, h2, h3 {
   max-width: 50ch;
 }
 
+.hero--centered {
+  text-align: center;
+}
+
+.hero--centered .hero-title {
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  line-height: 1.05;
+  max-width: 20ch;
+  margin: 0 auto 0.5em;
+}
+
+.hero--centered p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .page-header {
   padding: 56px 0 32px;
   border-bottom: 1px solid var(--line);
@@ -153,7 +171,7 @@ h1, h2, h3 {
   position: relative;
   padding: 28px 20px 40px;
   background: linear-gradient(180deg, var(--surface-raised), var(--surface));
-  border: 1px solid var(--line);
+  border: 4px solid var(--gold-dim);
   clip-path: polygon(0 0, 100% 0, 100% 82%, 50% 100%, 0 82%);
   text-align: center;
   transition: transform 0.15s ease;
@@ -162,8 +180,8 @@ h1, h2, h3 {
 .banner:hover { transform: translateY(-4px); }
 
 .banner:nth-child(1) {
-  border-color: var(--gold-dim);
-  box-shadow: 0 0 0 1px var(--gold-dim), 0 12px 28px -12px rgba(215, 171, 63, 0.35);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px var(--gold), 0 12px 28px -12px rgba(184, 134, 46, 0.4);
 }
 
 .banner .year {
@@ -290,7 +308,7 @@ h1, h2, h3 {
 .shame-card {
   position: relative;
   background: var(--surface);
-  border: 1px dashed #4a3230;
+  border: 4px dashed var(--red);
   border-radius: var(--radius);
   padding: 22px 18px 18px;
   text-align: center;
@@ -381,7 +399,7 @@ tbody td {
   border-bottom: 1px solid var(--line);
 }
 
-tbody tr:hover { background: rgba(255,255,255,0.02); }
+tbody tr:hover { background: rgba(20,41,29,0.04); }
 tbody tr:last-child td { border-bottom: none; }
 
 td.rank { color: var(--gold); font-weight: 600; }
@@ -424,7 +442,7 @@ select {
   gap: 20px;
   background: linear-gradient(180deg, var(--surface-raised), var(--surface));
   border: 1px solid var(--gold-dim);
-  box-shadow: 0 12px 28px -16px rgba(215, 171, 63, 0.4);
+  box-shadow: 0 12px 28px -16px rgba(184, 134, 46, 0.4);
   border-radius: var(--radius);
   padding: 24px 28px;
   margin-bottom: 48px;
@@ -470,7 +488,7 @@ select {
 .bracket-round {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   gap: 16px;
   min-width: 220px;
   flex: 1;
@@ -507,7 +525,7 @@ select {
 
 .bracket-team--winner {
   color: var(--chalk);
-  background: rgba(215, 171, 63, 0.08);
+  background: rgba(184, 134, 46, 0.12);
   font-weight: 600;
 }
 
@@ -697,7 +715,7 @@ select {
 
 .error-box {
   border: 1px solid var(--red);
-  background: rgba(181, 74, 60, 0.1);
+  background: rgba(168, 64, 47, 0.1);
   border-radius: var(--radius);
   padding: 20px 24px;
   margin: 24px 0;
@@ -712,7 +730,7 @@ select {
 }
 
 .site-footer {
-  border-top: 1px solid var(--line);
+  border-top: 3px solid var(--green-deep);
   padding: 32px 0;
   color: var(--chalk-dim);
   font-size: 0.85rem;

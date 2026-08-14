@@ -25,6 +25,42 @@ const TROPHY_SVG = `
   </svg>
 `;
 
+// Owner names are shortened to first name only in recap prose/callouts.
+// The two Adams (Adam Kahler, Adam Schon) are disambiguated with a last initial.
+const FIRST_NAMES = {
+  "Jacob Ayriss": "Jacob",
+  "Zach Crook": "Zach",
+  "Austin Gauss": "Austin",
+  "Jon Hurlburt": "Jon",
+  "Brent Hurlburt": "Brent",
+  "Jack Callahan": "Jack",
+  "Benjamin Schon": "Benjamin",
+  "Ben Schon": "Ben",
+  "Zack Rollis": "Zack",
+  "Adam Kahler": "Adam K.",
+  "Adam Schon": "Adam S.",
+  "Evan Lamb": "Evan",
+  "Blake Beachnau": "Blake",
+};
+
+function shortenName(fullName) {
+  if (FIRST_NAMES[fullName]) return FIRST_NAMES[fullName];
+  const parts = fullName.split(" ");
+  if (parts[0] === "Adam" && parts.length > 1) return `Adam ${parts[1][0]}.`;
+  return parts[0];
+}
+
+function shortenOwnersInText(text) {
+  let result = text;
+  Object.keys(FIRST_NAMES)
+    .sort((a, b) => b.length - a.length)
+    .forEach((full) => {
+      const escaped = full.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      result = result.replace(new RegExp(escaped, "g"), FIRST_NAMES[full]);
+    });
+  return result;
+}
+
 select.addEventListener("change", () => renderRecap(select.value));
 renderRecap(years[0]);
 
@@ -41,7 +77,7 @@ function renderRecap(year) {
       <div class="champion-callout-text">
         <div class="champion-callout-label">${year} Champion</div>
         <div class="champion-callout-team">${data.champion.team}</div>
-        <div class="champion-callout-owner">${data.champion.owner} &middot; #${data.champion.seed} seed</div>
+        <div class="champion-callout-owner">${shortenName(data.champion.owner)} &middot; #${data.champion.seed} seed</div>
       </div>
     </div>
   `;
@@ -62,7 +98,7 @@ function renderRecap(year) {
   `;
 
   content.innerHTML = `
-    <div class="recap-overview">${data.overview}</div>
+    <div class="recap-overview">${shortenOwnersInText(data.overview)}</div>
     ${championCard}
     <h2 class="bracket-heading">Playoff Bracket</h2>
     ${bracketHtml}
