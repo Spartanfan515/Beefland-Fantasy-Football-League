@@ -191,6 +191,13 @@ h1, h2, h3 {
   line-height: 1;
 }
 
+.banner .year .asterisk {
+  color: var(--red);
+  font-size: 1.4rem;
+  vertical-align: super;
+  margin-left: 2px;
+}
+
 .banner .champion-name {
   font-family: var(--font-display);
   font-size: 1.1rem;
@@ -269,6 +276,7 @@ h1, h2, h3 {
   border-top: 3px solid var(--gold);
   border-radius: var(--radius);
   padding: 20px 22px;
+  text-align: center;
 }
 
 .stat-category {
@@ -285,6 +293,7 @@ h1, h2, h3 {
   font-size: 1.5rem;
   color: var(--chalk);
   margin-bottom: 8px;
+  white-space: nowrap;
 }
 
 .stat-holder {
@@ -360,6 +369,29 @@ h1, h2, h3 {
   font-size: 1.1rem;
   color: var(--red);
   letter-spacing: 0.04em;
+}
+
+.shame-card--bust {
+  border-style: solid;
+  border-color: var(--gold-dim);
+}
+.shame-card--bust::before { background: var(--gold-dim); }
+
+.shame-year--bust {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--gold);
+  font-size: 0.85rem;
+}
+
+.shame-card--bust .shame-record { color: var(--chalk); }
+
+.shame-bust-note {
+  margin-top: 10px;
+  font-size: 0.76rem;
+  color: var(--chalk-dim);
+  font-style: italic;
 }
 
 /* ==========================================================================
@@ -439,6 +471,7 @@ select {
 .champion-callout {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 20px;
   background: linear-gradient(180deg, var(--surface-raised), var(--surface));
   border: 1px solid var(--gold-dim);
@@ -449,6 +482,8 @@ select {
 }
 
 .trophy-icon { width: 56px; height: auto; flex-shrink: 0; }
+
+.champion-callout-text { flex: 1; min-width: 200px; }
 
 .champion-callout-label {
   font-family: var(--font-mono);
@@ -471,6 +506,36 @@ select {
   color: var(--chalk-dim);
   font-size: 0.9rem;
   margin-top: 4px;
+}
+
+.champion-callout-mvp {
+  flex-shrink: 0;
+  padding-left: 24px;
+  border-left: 1px solid var(--line);
+}
+
+.champion-callout-mvp-label {
+  font-family: var(--font-mono);
+  color: var(--gold);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.champion-callout-mvp-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  color: var(--chalk);
+  line-height: 1.15;
+}
+
+.champion-callout-mvp-points {
+  font-family: var(--font-mono);
+  color: var(--chalk-dim);
+  font-size: 0.85rem;
+  margin-top: 2px;
 }
 
 .bracket-heading {
@@ -735,4 +800,85 @@ select {
   color: var(--chalk-dim);
   font-size: 0.85rem;
   text-align: center;
+}
+
+/* ==========================================================================
+   Draft board
+   ========================================================================== */
+.draft-board-wrap {
+  overflow-x: auto;
+  margin: 0 0 64px;
+}
+
+.draft-board-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.draft-team-col {
+  position: static;
+  background: var(--surface-raised);
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--gold-dim);
+  border-right: 1px solid var(--line);
+  text-align: left;
+  min-width: 150px;
+  vertical-align: top;
+}
+.draft-team-col:last-child { border-right: none; }
+
+.draft-team-name {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 0.85rem;
+  color: var(--chalk);
+  line-height: 1.15;
+}
+
+.draft-team-owner {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--chalk-dim);
+  margin-top: 3px;
+}
+.draft-team-owner--tbd {
+  color: var(--red);
+  font-style: italic;
+}
+
+.draft-pick-cell {
+  position: relative;
+  padding: 10px 12px 10px 14px;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  color: var(--chalk);
+  min-width: 150px;
+  vertical-align: top;
+}
+.draft-pick-cell:last-child { border-right: none; }
+tbody tr:last-child .draft-pick-cell { border-bottom: none; }
+
+.draft-pick-cell--empty {
+  color: var(--chalk-dim);
+  text-align: center;
+}
+
+.draft-pick-num {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 0.62rem;
+  color: var(--gold-dim);
+  letter-spacing: 0.02em;
+}
+
+.draft-pick-player {
+  display: block;
+  padding-right: 30px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.3;
 }

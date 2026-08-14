@@ -28,15 +28,18 @@
 
 <section class="page-header">
   <div class="container">
-    <h1>Draft Board</h1>
-    <p>Live draft data isn't connected yet — the ESPN API integration didn't work out. This page is wired up and ready for whenever a working data source is in place.</p>
+    <h1>Draft</h1>
+    <p>Every pick, every season.</p>
+    <div class="controls">
+      <label for="draft-season-select">Season</label>
+      <select id="draft-season-select"></select>
+    </div>
   </div>
 </section>
 
 <section class="container">
-  <div class="not-connected-box">
-    <p><strong>No live data source yet.</strong></p>
-    <p>Once another way to pull this data in is set up, the draft board for any season will show up here.</p>
+  <div id="draft-content">
+    <p class="loading">Loading draft board…</p>
   </div>
 </section>
 
@@ -45,9 +48,7 @@
 </footer>
 
 <script src="js/config.js"></script>
-<script>
-  document.getElementById("site-title").innerHTML =
-    `${CONFIG.leagueName.split(" ").slice(0, -1).join(" ")} <span>${CONFIG.leagueName.split(" ").slice(-1)}</span>`;
-</script>
+<script src="js/drafts.js"></script>
+<script src="js/render-draft.js"></script>
 </body>
 </html>

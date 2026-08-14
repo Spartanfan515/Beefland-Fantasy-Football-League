@@ -34,7 +34,7 @@ const FIRST_NAMES = {
   "Jon Hurlburt": "Jon",
   "Brent Hurlburt": "Brent",
   "Jack Callahan": "Jack",
-  "Benjamin Schon": "Benjamin",
+  "Benjamin Schon": "Ben",
   "Ben Schon": "Ben",
   "Zack Rollis": "Zack",
   "Adam Kahler": "Adam K.",
@@ -71,6 +71,7 @@ function renderRecap(year) {
     return;
   }
 
+  const mvp = data.champion.playoffMVP;
   const championCard = `
     <div class="champion-callout">
       ${TROPHY_SVG}
@@ -79,6 +80,16 @@ function renderRecap(year) {
         <div class="champion-callout-team">${data.champion.team}</div>
         <div class="champion-callout-owner">${shortenName(data.champion.owner)} &middot; #${data.champion.seed} seed</div>
       </div>
+      ${
+        mvp
+          ? `
+      <div class="champion-callout-mvp">
+        <div class="champion-callout-mvp-label">Playoff MVP</div>
+        <div class="champion-callout-mvp-name">${mvp.name}</div>
+        <div class="champion-callout-mvp-points">${mvp.points.toFixed(2)} pts</div>
+      </div>`
+          : ""
+      }
     </div>
   `;
 

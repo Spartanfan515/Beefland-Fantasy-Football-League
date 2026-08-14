@@ -12,7 +12,7 @@ if (!CONFIG.history || CONFIG.history.length === 0) {
     .map(
       (entry) => `
       <div class="banner">
-        <div class="year">${entry.year}</div>
+        <div class="year">${entry.year}${entry.asterisk ? '<span class="asterisk">*</span>' : ""}</div>
         <div class="champion-name">${entry.champion}</div>
         <div class="owner">${entry.owner}</div>
         <div class="record">${entry.record}</div>

@@ -16,7 +16,7 @@
 
 const RECAPS = {
   2025: {
-    champion: { owner: "Jacob Ayriss", team: "Magic in the Hamptons", seed: 6 },
+    champion: { owner: "Jacob Ayriss", team: "Magic in the Hamptons", seed: 6, playoffMVP: { name: "Drake Maye", points: 52.94 } },
     overview:
       "Jacob Ayriss squeaked into the field as the No. 6 seed, beating out Blake Beachnau for the final playoff spot by a league-record-thin 35.84 points — the closest cutoff in Beefland history. Zach Crook's Oh. My. Gosh. Lookit. Her. Bert. finished the regular season at 10-4 to grab the top seed and a first-round bye, with Jon Hurlburt's 208.56-point outburst in Week 12 standing as the best single week by any eventual playoff team. None of that mattered once the bracket started: Jacob knocked off the No. 3 seed, then the No. 2 seed, then top-seeded Zach in the final — running the table on every higher seed to complete one of the most unlikely title runs in league history, as a 7-7 team.",
     bracket: [
@@ -46,7 +46,7 @@ const RECAPS = {
   },
 
   2024: {
-    champion: { owner: "Adam Kahler", team: "Saquon Deez Nuts", seed: 2 },
+    champion: { owner: "Adam Kahler", team: "Saquon Deez Nuts", seed: 2, playoffMVP: { name: "Joe Burrow", points: 77.80 } },
     overview:
       "Blake Beachnau's Steeler Virginity locked up the No. 1 seed at 10-4, earning a bye alongside Adam Kahler's No. 2 seed Saquon Deez Nuts. The final playoff spot went to Brent Hurlburt's Baby Mama U over Austin Gauss by a comfortable 98-point margin despite identical 8-6 records. Adam K.'s 189.26-point explosion in Week 14 turned out to be a preview: after his bye, he handled Brent Hurlburt in the semifinals, then upset top-seeded Blake in the championship to become the first No. 2 seed to win it all in Beefland history.",
     bracket: [
@@ -76,7 +76,7 @@ const RECAPS = {
   },
 
   2023: {
-    champion: { owner: "Jon Hurlburt", team: "Commissioner of the Year", seed: 4 },
+    champion: { owner: "Jon Hurlburt", team: "Commissioner of the Year", seed: 4, playoffMVP: { name: "Breece Hall", points: 70.70 } },
     overview:
       "Jack Callahan's Saquon These Balls put together the best regular season in league history to that point at 11-4, claiming the top seed with a full three-game cushion over the next team out. It didn't matter. Jon Hurlburt's Commissioner of the Year snuck in as the No. 4 seed, immediately knocked off Jack's No. 1 team in the semifinals, then beat Jacob Ayriss's No. 3 seed in the final to win it all — the first time a lower seed had taken down the league's best regular-season team on the way to a title. Jack's 208.82-point Week 8 remains one of the best single weeks in franchise history — just not enough to matter in the end.",
     bracket: [
@@ -97,7 +97,7 @@ const RECAPS = {
   },
 
   2022: {
-    champion: { owner: "Zack Rollis", team: "Richmond Diamond Dogs", seed: 1 },
+    champion: { owner: "Zack Rollis", team: "Richmond Diamond Dogs", seed: 1, playoffMVP: { name: "T.J. Hockenson", points: 50.80 } },
     overview:
       "Zack Rollis's Richmond Diamond Dogs claimed the No. 1 seed at 9-6, part of a crowded five-team logjam all sitting at 9-6 that was separated only by points scored — Austin Gauss grabbed the final playoff spot over Jon Hurlburt by 85 points despite an identical record. Zack's own best week of the year, 183.92 points in Week 12, came right in the middle of that chase. He beat Austin in the semifinals, then held off Jacob Ayriss in a low-scoring championship to join Benjamin Schon as a No. 1-seed champion — Beefland's second straight top-seed title.",
     bracket: [
@@ -118,9 +118,9 @@ const RECAPS = {
   },
 
   2021: {
-    champion: { owner: "Benjamin Schon", team: "Nick Foles SZN Champ", seed: 1 },
+    champion: { owner: "Benjamin Schon", team: "Nick Foles SZN Champ", seed: 1, playoffMVP: { name: "Ja'Marr Chase", points: 91.40 } },
     overview:
-      "In Beefland's inaugural season, Benjamin Schon's Nick Foles SZN Champ ran away with the top seed at 10-4. Zach Crook's Save The Bees set the league scoring record that still stands — 211.20 points in Week 14 — and rode a hot finish all the way to the No. 3 seed and a championship appearance, but Benjamin's team held on to win the first title in franchise history. At the bottom of the playoff race, Jon Hurlburt edged out Evan Lamb for the final spot despite identical 8-6 records, winning the tiebreaker by a lopsided 160.90 points.",
+      "In Beefland's inaugural season, Benjamin Schon's Nick Foles SZN Champ ran away with the top seed at 10-4. Zach Crook's Save The Bees set the league scoring record that still stands — 211.20 points in Week 14 — and rode a hot finish all the way to the No. 3 seed and a championship appearance, but Ben's team held on to win the first title in franchise history. At the bottom of the playoff race, Jon Hurlburt edged out Evan Lamb for the final spot despite identical 8-6 records, winning the tiebreaker by a lopsided 160.90 points.",
     bracket: [
       {
         label: "Semifinals",

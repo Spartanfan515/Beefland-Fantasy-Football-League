@@ -37,7 +37,7 @@
  *                  to its current 12-team size — stats from the 8- and
  *                  10-team years aren't really apples-to-apples with today.
  *
- *  superlativesAllTime -> The same 7 categories, but across full league
+ *  superlativesAllTime -> The same 8 categories, but across full league
  *                  history since 2021, teams of every size included.
  *
  *  Both use the same shape: category, holder (owner name), team, value
@@ -90,7 +90,8 @@ const CONFIG = {
       champion: "Richmond Diamond Dogs",
       owner: "Zack Rollis",
       record: "9-6",
-      note: "Won the lowest-scoring championship game in Beefland history — 67.40 to 57.80, a combined 125.2 points.",
+      asterisk: true,
+      note: "*Both Zack and Jacob still had players live in the Bengals–Bills Monday Night game when it was called off; Zack was declared champion on projected points, but the payout was split 75/25 since Jacob still had a ~25% win probability at the time. Also the lowest-scoring championship game in Beefland history — 67.40 to 57.80, a combined 125.2 points.",
     },
     {
       year: 2021,
@@ -207,11 +208,11 @@ const CONFIG = {
       category: "Most Playoff Wins",
       holder: "Jacob Ayriss",
       team: "Magic in the Hamptons",
-      value: "3 playoff wins",
+      value: "3 Wins",
     },
     {
       category: "Best Win %",
-      holder: "Benjamin Schon",
+      holder: "Ben Schon",
       team: "Bill! Bill! Bill! Bill!",
       value: "60.7% (17-11)",
       note: "tied with Blake Beachnau",
@@ -250,6 +251,13 @@ const CONFIG = {
       value: "#6 seed",
       note: "2025",
     },
+    {
+      category: "Draft Steal",
+      holder: "Jack Callahan",
+      team: "Chasing Contracts",
+      value: "R11.6 → 362.6 pts",
+      note: "Jayden Daniels, 2024",
+    },
   ],
 
   superlativesAllTime: [
@@ -257,7 +265,7 @@ const CONFIG = {
       category: "Most Playoff Wins",
       holder: "Jacob Ayriss",
       team: "Magic in the Hamptons",
-      value: "5 playoff wins",
+      value: "5 Wins",
     },
     {
       category: "Best Win %",
@@ -267,7 +275,7 @@ const CONFIG = {
     },
     {
       category: "Highest Career PPG",
-      holder: "Benjamin Schon",
+      holder: "Ben Schon",
       team: "Bill! Bill! Bill! Bill!",
       value: "130.7 PPG",
     },
@@ -298,6 +306,13 @@ const CONFIG = {
       team: "Magic in the Hamptons",
       value: "#6 seed",
       note: "2025",
+    },
+    {
+      category: "Draft Steal",
+      holder: "Zach Crook",
+      team: "Team Crook",
+      value: "R9.2 → 380.6 pts",
+      note: "Jalen Hurts, 2022",
     },
   ],
 
@@ -333,6 +348,18 @@ const CONFIG = {
       record: "2-12",
     },
   ],
+
+  // Biggest draft bust: among Round 1-3 picks ("high draft position") across
+  // all seasons, whoever scored the fewest total points that year.
+  draftBust: {
+    year: 2023,
+    team: "I Like Turtles",
+    owner: "Ben Schon",
+    player: "Nick Chubb",
+    pick: "R2.4",
+    points: "25.1 pts",
+    note: "A torn ACL/MCL in Week 2 ended his season.",
+  },
 
   rules: [
     {

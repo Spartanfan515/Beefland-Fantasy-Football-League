@@ -1,74 +1,91 @@
 document.getElementById("site-title").innerHTML =
   `${CONFIG.leagueName.split(" ").slice(0, -1).join(" ")} <span>${CONFIG.leagueName.split(" ").slice(-1)}</span>`;
 
-const select = document.getElementById("season-select");
-const wrap = document.getElementById("draft-wrap");
+const select = document.getElementById("draft-season-select");
+const content = document.getElementById("draft-content");
 
-CONFIG.seasons.forEach((year) => {
+const years = Object.keys(DRAFTS).map(Number).sort((a, b) => b - a);
+
+years.forEach((year, i) => {
   const opt = document.createElement("option");
   opt.value = year;
   opt.textContent = year;
-  if (year === CONFIG.currentSeason) opt.selected = true;
+  if (i === 0) opt.selected = true;
   select.appendChild(opt);
 });
 
-select.addEventListener("change", () => loadDraft(select.value));
-loadDraft(CONFIG.currentSeason);
+select.addEventListener("change", () => renderDraft(select.value));
+renderDraft(years[0]);
 
-async function loadDraft(season) {
-  wrap.innerHTML = `<p class="loading">Loading draft board…</p>`;
-  try {
-    const data = await fetchLeague(season, ["mDraftDetail", "mTeam"]);
-    const picks = data.draftDetail?.picks || [];
+function renderDraft(year) {
+  const data = DRAFTS[year];
+  if (!data) {
+    content.innerHTML = `<p class="loading">No draft board for ${year} yet.</p>`;
+    return;
+  }
 
-    if (!data.draftDetail?.drafted || picks.length === 0) {
-      wrap.innerHTML = `<p class="loading">No draft data available for ${season} yet.</p>`;
-      return;
-    }
+  const picks = data.picks;
+  const owners = data.owners || {};
 
-    const teamsById = {};
-    (data.teams || []).forEach((t) => (teamsById[t.id] = teamDisplayName(t)));
-
-    const rounds = {};
-    picks.forEach((pick) => {
-      rounds[pick.roundId] = rounds[pick.roundId] || [];
-      rounds[pick.roundId].push(pick);
+  // Column order = the order teams picked in Round 1.
+  const teamOrder = [];
+  const seen = new Set();
+  picks
+    .filter((p) => p.round === 1)
+    .sort((a, b) => a.pick - b.pick)
+    .forEach((p) => {
+      if (!seen.has(p.team)) {
+        seen.add(p.team);
+        teamOrder.push(p.team);
+      }
     });
 
-    const roundIds = Object.keys(rounds).sort((a, b) => a - b);
+  // pickGrid[team][round] = { player, round, pick }
+  const pickGrid = {};
+  teamOrder.forEach((t) => (pickGrid[t] = {}));
+  let maxRound = 1;
+  picks.forEach((p) => {
+    if (!pickGrid[p.team]) pickGrid[p.team] = {};
+    pickGrid[p.team][p.round] = p;
+    if (p.round > maxRound) maxRound = p.round;
+  });
 
-    wrap.innerHTML = roundIds
-      .map((roundId) => {
-        const rows = rounds[roundId]
-          .sort((a, b) => a.roundPickNumber - b.roundPickNumber)
-          .map((pick) => {
-            const playerName =
-              pick.playerPoolEntry?.player?.fullName || `Player #${pick.playerId}`;
-            const teamName = teamsById[pick.teamId] || `Team ${pick.teamId}`;
-            return `
-              <tr>
-                <td class="rank">${pick.overallPickNumber}</td>
-                <td class="team-cell">${playerName}</td>
-                <td class="owner-cell">${teamName}</td>
-              </tr>
-            `;
-          })
-          .join("");
+  const headerRow = teamOrder
+    .map((team) => {
+      const owner = owners[team];
+      return `
+      <th class="draft-team-col">
+        <div class="draft-team-name">${team}</div>
+        <div class="draft-team-owner${owner ? "" : " draft-team-owner--tbd"}">${owner || "Owner TBD"}</div>
+      </th>
+    `;
+    })
+    .join("");
 
+  const bodyRows = [];
+  for (let round = 1; round <= maxRound; round++) {
+    const cells = teamOrder
+      .map((team) => {
+        const p = pickGrid[team][round];
+        if (!p) return `<td class="draft-pick-cell draft-pick-cell--empty">—</td>`;
         return `
-          <h2>Round ${roundId}</h2>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr><th>Pick</th><th>Player</th><th>Drafted By</th></tr>
-              </thead>
-              <tbody>${rows}</tbody>
-            </table>
-          </div>
-        `;
+        <td class="draft-pick-cell">
+          <span class="draft-pick-num">${p.round}.${p.pick}</span>
+          <span class="draft-pick-player">${p.player}</span>
+        </td>
+      `;
       })
       .join("");
-  } catch (err) {
-    showError(wrap, err);
+    bodyRows.push(`<tr>${cells}</tr>`);
   }
+
+  content.innerHTML = `
+    <h2 class="bracket-heading">Draft Board</h2>
+    <div class="table-wrap draft-board-wrap">
+      <table class="draft-board-table">
+        <thead><tr>${headerRow}</tr></thead>
+        <tbody>${bodyRows.join("")}</tbody>
+      </table>
+    </div>
+  `;
 }
