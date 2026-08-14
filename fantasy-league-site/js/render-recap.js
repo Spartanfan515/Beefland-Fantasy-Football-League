@@ -14,9 +14,6 @@ years.forEach((year, i) => {
   select.appendChild(opt);
 });
 
-select.addEventListener("change", () => renderRecap(select.value));
-renderRecap(years[0]);
-
 const TROPHY_SVG = `
   <svg viewBox="0 0 100 120" class="trophy-icon" aria-hidden="true">
     <path d="M25 10 H75 V28 C75 45 63 55 50 55 C37 55 25 45 25 28 Z" fill="var(--gold)" />
@@ -27,6 +24,9 @@ const TROPHY_SVG = `
     <rect x="25" y="85" width="50" height="10" rx="2" fill="var(--gold-dim)" />
   </svg>
 `;
+
+select.addEventListener("change", () => renderRecap(select.value));
+renderRecap(years[0]);
 
 function renderRecap(year) {
   const data = RECAPS[year];

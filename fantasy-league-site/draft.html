@@ -29,26 +29,25 @@
 <section class="page-header">
   <div class="container">
     <h1>Draft Board</h1>
-    <p>Browse any season's draft, round by round.</p>
-    <div class="controls">
-      <label for="season-select">Season</label>
-      <select id="season-select"></select>
-    </div>
+    <p>Live draft data isn't connected yet — the ESPN API integration didn't work out. This page is wired up and ready for whenever a working data source is in place.</p>
   </div>
 </section>
 
 <section class="container">
-  <div id="draft-wrap">
-    <p class="loading">Loading draft board…</p>
+  <div class="not-connected-box">
+    <p><strong>No live data source yet.</strong></p>
+    <p>Once another way to pull this data in is set up, the draft board for any season will show up here.</p>
   </div>
 </section>
 
 <footer class="site-footer">
-  <div class="container">Standings and draft data pulled live from the ESPN Fantasy API.</div>
+  <div class="container">Historical results available on the Recap page.</div>
 </footer>
 
 <script src="js/config.js"></script>
-<script src="js/api.js"></script>
-<script src="js/render-draft.js"></script>
+<script>
+  document.getElementById("site-title").innerHTML =
+    `${CONFIG.leagueName.split(" ").slice(0, -1).join(" ")} <span>${CONFIG.leagueName.split(" ").slice(-1)}</span>`;
+</script>
 </body>
 </html>

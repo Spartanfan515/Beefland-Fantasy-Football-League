@@ -32,12 +32,16 @@
  *                { text, subitems: [...] } for nested sub-rules — subitems
  *                can nest again the same way if you need a third level.
  *
- *  superlatives -> Career awards shown on the home page. Each has category,
- *                  holder (owner name), team, value (the stat itself, as
- *                  display text), and an optional note/year. These require
- *                  looking across every season's box scores, so they're
- *                  filled in by hand — see the placeholders below for what's
- *                  needed for each category.
+ *  superlativesCurrent -> Career awards computed from only the last two
+ *                  seasons (2024-2025), since that's when the league grew
+ *                  to its current 12-team size — stats from the 8- and
+ *                  10-team years aren't really apples-to-apples with today.
+ *
+ *  superlativesAllTime -> The same 7 categories, but across full league
+ *                  history since 2021, teams of every size included.
+ *
+ *  Both use the same shape: category, holder (owner name), team, value
+ *  (the stat itself, as display text), and an optional note/year.
  *
  *  wallOfShame -> One entry per season's last-place team, shown on the home
  *                 page opposite the Ring of Honor. Same shape as `history`.
@@ -198,7 +202,57 @@ const CONFIG = {
     },
   ],
 
-  superlatives: [
+  superlativesCurrent: [
+    {
+      category: "Most Playoff Wins",
+      holder: "Jacob Ayriss",
+      team: "Magic in the Hamptons",
+      value: "3 playoff wins",
+    },
+    {
+      category: "Best Win %",
+      holder: "Benjamin Schon",
+      team: "Bill! Bill! Bill! Bill!",
+      value: "60.7% (17-11)",
+      note: "tied with Blake Beachnau",
+    },
+    {
+      category: "Highest Career PPG",
+      holder: "Jon Hurlburt",
+      team: "Brocklyn Nine-Nine",
+      value: "124.5 PPG",
+    },
+    {
+      category: "Best Regular Season",
+      holder: "Zach Crook",
+      team: "Oh. My. Gosh. Lookit. Her. Bert",
+      value: "10-4",
+      note: "2025",
+    },
+    {
+      category: "Highest Scoring Season",
+      holder: "Jon Hurlburt",
+      team: "Brocklyn Nine-Nine",
+      value: "1,891.10 pts",
+      note: "2025",
+    },
+    {
+      category: "Single-Game Record",
+      holder: "Jon Hurlburt",
+      team: "Brocklyn Nine-Nine",
+      value: "208.56 pts",
+      note: "Week 12, 2025",
+    },
+    {
+      category: "Cinderella Champ",
+      holder: "Jacob Ayriss",
+      team: "Magic in the Hamptons",
+      value: "#6 seed",
+      note: "2025",
+    },
+  ],
+
+  superlativesAllTime: [
     {
       category: "Most Playoff Wins",
       holder: "Jacob Ayriss",

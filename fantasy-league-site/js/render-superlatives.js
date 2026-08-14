@@ -1,9 +1,10 @@
-const superlativesGrid = document.getElementById("superlatives-grid");
-
-if (!CONFIG.superlatives || CONFIG.superlatives.length === 0) {
-  superlativesGrid.innerHTML = `<p class="loading">No superlatives added yet — edit CONFIG.superlatives in js/config.js.</p>`;
-} else {
-  superlativesGrid.innerHTML = CONFIG.superlatives
+function renderSuperlativeGrid(containerId, data) {
+  const container = document.getElementById(containerId);
+  if (!data || data.length === 0) {
+    container.innerHTML = `<p class="loading">No superlatives added yet — edit js/config.js.</p>`;
+    return;
+  }
+  container.innerHTML = data
     .map(
       (s) => `
       <div class="stat-card">
@@ -16,3 +17,6 @@ if (!CONFIG.superlatives || CONFIG.superlatives.length === 0) {
     )
     .join("");
 }
+
+renderSuperlativeGrid("superlatives-current-grid", CONFIG.superlativesCurrent);
+renderSuperlativeGrid("superlatives-alltime-grid", CONFIG.superlativesAllTime);

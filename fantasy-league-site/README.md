@@ -2,48 +2,48 @@
 
 A static site for your fantasy football league:
 
-- **Home** — "Ring of Honor" championship banners, League Superlatives, and the Wall of Shame
-- **Standings** — live current-season standings, pulled from the ESPN Fantasy API
-- **Draft** — draft board by round, for any season, pulled live
+- **Home** — "Ring of Honor" championship banners, League Superlatives (Current Era + All-Time), and the Wall of Shame
+- **Standings** — placeholder for now, see note below
+- **Draft** — placeholder for now, see note below
 - **Recap** — a season-by-season breakdown: a written overview, the full playoff bracket, and the champion, for every year 2021–2025
 - **Rules** — your league rules
 - **Punishments** — your league punishments
 
-Live data is fetched through a small Cloudflare Pages Function (`functions/api/league.js`)
-that proxies and caches requests to ESPN — this avoids CORS issues and keeps you from
-hammering ESPN's servers.
-
-**Works with public leagues only.** Private leagues require ESPN login cookies, which
-aren't handled here on purpose (you don't want personal credentials sitting in a GitHub repo).
+**A note on Standings and Draft:** these originally pulled live data from ESPN's Fantasy
+API through a Cloudflare Pages Function, but that integration didn't work out reliably,
+so it's been removed. The pages are still there and styled, just showing a "not connected
+yet" message. When there's a working way to pull this data in (another ESPN API attempt,
+a spreadsheet export like the one used for Superlatives and Recap, manual entry, etc.),
+those two pages are ready to be wired back up.
 
 ---
 
 ## 1. Edit your league info
 
-Open `js/config.js`. This is the only file you need to touch to get the site working:
+Open `js/config.js`. This is the file you'll touch most:
 
-- `leagueId` — from your ESPN league URL: `.../league?leagueId=123456`
-- `seasons` — the years your league has existed
-- `currentSeason` — the year that loads by default
-- `history` — one entry per year for the championship banners (fill in by hand once a
-  season wraps up — ESPN doesn't cleanly expose "who won" in the API across all years)
-- `punishments` / `rules` — plain text, edit freely
+- `leagueName`, `tagline` — shown in the header and hero
+- `seasons`, `currentSeason` — the years your league has existed
+- `history` — one entry per year for the championship banners
+- `superlativesCurrent` — career stats from just the last two seasons (2024–2025, the
+  12-team years) — already filled in
+- `superlativesAllTime` — the same 7 categories across full history since 2021 — already
+  filled in
+- `punishmentRules`, `punishments` — your league's punishment rules and yearly history
+- `rules` — your league rules, by section
 
 ---
 
 ## 2. Try it locally (optional but recommended)
 
-You'll need [Node.js](https://nodejs.org) installed. Then, from the project folder:
+You'll need [Node.js](https://nodejs.org) installed. From the project folder:
 
 ```bash
-npm install -g wrangler
-wrangler pages dev .
+npx serve .
 ```
 
-This starts a local server (usually `http://localhost:8788`) that runs the site
-**and** the API function together, so the live data actually works while testing.
-If you just double-click `index.html` in a browser, the Standings/Draft pages
-won't load data — they need the Cloudflare Function running.
+Or any other static file server — this is a plain HTML/CSS/JS site now, no build step
+and no server-side function to run.
 
 ---
 
@@ -87,8 +87,6 @@ git push -u origin main
 5. Click **Save and Deploy**
 
 Cloudflare will give you a URL like `fantasy-league-site.pages.dev` within a minute or two.
-The `functions/api/league.js` file is automatically picked up and deployed as part of
-this — no extra setup needed.
 
 From now on, every time you push to `main` on GitHub, Cloudflare redeploys automatically.
 
@@ -101,30 +99,26 @@ DNS is already on Cloudflare, this takes about a minute.
 
 ## League Superlatives & Season Recaps
 
-Both of these are already filled in with real data from your 2021–2025 matchup history
-(computed from a matchup log spreadsheet, cross-checked against ESPN's own API for 2021).
+Both are already filled in with real data from your 2021–2025 matchup history, computed
+from a matchup log spreadsheet (cross-checked against ESPN's own API for 2021).
 
-- `CONFIG.superlatives` in `js/config.js` — the 7 career stat cards on the home page.
-- `RECAPS` in `js/recaps.js` — the written overview, playoff bracket, and champion for
-  each season, shown on the Recap page.
+- `CONFIG.superlativesCurrent` / `CONFIG.superlativesAllTime` in `js/config.js`
+- `RECAPS` in `js/recaps.js` — overview, bracket, and champion per season, on the Recap page
 
-**After the 2026 season wraps**, you'll want to add a new entry to `RECAPS` for that year
-and update the superlatives if any records changed. The easiest path is the same one used
-to build the current data: export a fresh matchup log (or ask for a fresh ESPN API pull)
-and recompute. Alternatively, `scripts/calculate-superlatives.mjs` can recalculate the
-superlatives directly from ESPN's live API if you'd rather not export a spreadsheet each
-year — run it locally with `node scripts/calculate-superlatives.mjs` once the season is
-final.
+**After the 2026 season wraps**, add a new entry to `RECAPS` for that year, and update
+both superlatives arrays if any records changed (remember `superlativesCurrent` should
+shift to cover 2025–2026 once 2026 is final, keeping it a rolling two-season window).
+`scripts/calculate-superlatives.mjs` can also recalculate the all-time superlatives
+directly from ESPN's live API if that ever starts working reliably — run it locally with
+`node scripts/calculate-superlatives.mjs`.
 
 ---
 
-## 6. Updating things later
+## Updating things later
 
 - **New champion each year:** add an entry to `history` in `js/config.js`, commit, push.
 - **Rule change:** edit `rules` in `js/config.js`, commit, push.
 - **New season starts:** add the year to `seasons` and update `currentSeason` in `js/config.js`.
-
-Standings and draft data need no manual updates — they're live.
 
 ---
 
@@ -133,37 +127,21 @@ Standings and draft data need no manual updates — they're live.
 ```
 fantasy-league-site/
 ├── index.html              Home page (banners, superlatives, wall of shame)
-├── standings.html          Live standings
-├── draft.html               Live draft board
+├── standings.html          Placeholder — not connected to a data source yet
+├── draft.html               Placeholder — not connected to a data source yet
 ├── recap.html                Season-by-season recaps + playoff brackets
 ├── rules.html                League rules
 ├── punishments.html          League punishments
 ├── css/styles.css           All styling
 ├── js/
 │   ├── config.js              ← edit this one most often
-│   ├── api.js                  fetch helper + ESPN data shaping
 │   ├── recaps.js                season overview + bracket data
 │   ├── render-history.js        home page championship banners
-│   ├── render-superlatives.js   home page stat cards
+│   ├── render-superlatives.js   home page stat cards (current + all-time)
 │   ├── render-shame.js          home page wall of shame
-│   ├── render-standings.js      standings page logic
-│   ├── render-draft.js          draft page logic
 │   ├── render-recap.js          recap page logic
 │   ├── render-rules.js          rules page logic
 │   └── render-punishments.js    punishments page logic
-├── scripts/
-│   └── calculate-superlatives.mjs   run locally to refresh Superlatives
-└── functions/api/league.js  Cloudflare Function — proxies + caches ESPN API calls
+└── scripts/
+    └── calculate-superlatives.mjs   run locally against ESPN's API, if it's ever reconnected
 ```
-
-## A note on the ESPN API
-
-ESPN's Fantasy API is public but **unofficial and undocumented** — field names have
-been reverse-engineered by the community and can shift over time. If a page stops
-showing data:
-
-1. Open your browser's dev tools → Network tab, reload the page, and look at the
-   response from `/api/league?...` to see the raw shape ESPN is returning.
-2. Compare against [cwendt94/espn-api](https://github.com/cwendt94/espn-api), a
-   well-maintained community reference for these endpoints.
-3. Adjust the field lookups in `js/api.js` or the relevant `render-*.js` file.

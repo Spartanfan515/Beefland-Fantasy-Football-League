@@ -29,26 +29,25 @@
 <section class="page-header">
   <div class="container">
     <h1>Standings</h1>
-    <p>Live from the ESPN Fantasy API. Cached for 5 minutes at the edge.</p>
-    <div class="controls">
-      <label for="season-select">Season</label>
-      <select id="season-select"></select>
-    </div>
+    <p>Live standings aren't connected yet — the ESPN API integration didn't work out. This page is wired up and ready for whenever a working data source is in place.</p>
   </div>
 </section>
 
 <section class="container">
-  <div id="standings-wrap">
-    <p class="loading">Loading standings…</p>
+  <div class="not-connected-box">
+    <p><strong>No live data source yet.</strong></p>
+    <p>In the meantime, you can find final standings and playoff results for 2021–2025 on the <a href="recap.html">Recap</a> page.</p>
   </div>
 </section>
 
 <footer class="site-footer">
-  <div class="container">Standings and draft data pulled live from the ESPN Fantasy API.</div>
+  <div class="container">Historical results available on the Recap page.</div>
 </footer>
 
 <script src="js/config.js"></script>
-<script src="js/api.js"></script>
-<script src="js/render-standings.js"></script>
+<script>
+  document.getElementById("site-title").innerHTML =
+    `${CONFIG.leagueName.split(" ").slice(0, -1).join(" ")} <span>${CONFIG.leagueName.split(" ").slice(-1)}</span>`;
+</script>
 </body>
 </html>
