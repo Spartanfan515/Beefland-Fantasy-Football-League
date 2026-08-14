@@ -389,6 +389,128 @@ select {
 }
 
 /* ==========================================================================
+   Season Recap
+   ========================================================================== */
+.recap-overview {
+  color: var(--chalk-dim);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 72ch;
+  margin: 32px 0;
+}
+
+.champion-callout {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: linear-gradient(180deg, var(--surface-raised), var(--surface));
+  border: 1px solid var(--gold-dim);
+  box-shadow: 0 12px 28px -16px rgba(215, 171, 63, 0.4);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: 48px;
+}
+
+.trophy-icon { width: 56px; height: auto; flex-shrink: 0; }
+
+.champion-callout-label {
+  font-family: var(--font-mono);
+  color: var(--gold);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.champion-callout-team {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  color: var(--chalk);
+  line-height: 1.1;
+}
+
+.champion-callout-owner {
+  color: var(--chalk-dim);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.bracket-heading {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
+.bracket {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 64px;
+}
+
+.bracket-round {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 16px;
+  min-width: 220px;
+  flex: 1;
+}
+
+.bracket-round-label {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.85rem;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.bracket-game {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.bracket-team {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  color: var(--chalk-dim);
+  border-bottom: 1px solid var(--line);
+}
+.bracket-team:last-child { border-bottom: none; }
+
+.bracket-team--winner {
+  color: var(--chalk);
+  background: rgba(215, 171, 63, 0.08);
+  font-weight: 600;
+}
+
+.bracket-seed {
+  font-family: var(--font-mono);
+  color: var(--gold-dim);
+  font-size: 0.75rem;
+}
+.bracket-team--winner .bracket-seed { color: var(--gold); }
+
+.bracket-team-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bracket-points {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
    Rules / punishments content
    ========================================================================== */
 .content-section { padding: 40px 0; border-bottom: 1px solid var(--line); }

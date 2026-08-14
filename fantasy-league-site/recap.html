@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The League — Ring of Honor</title>
+<title>Season Recap — The League</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/styles.css" />
@@ -15,10 +15,10 @@
     <div class="site-title" id="site-title">The <span>League</span></div>
     <nav>
       <ul class="site-nav">
-        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="index.html">Home</a></li>
         <li><a href="standings.html">Standings</a></li>
         <li><a href="draft.html">Draft</a></li>
-        <li><a href="recap.html">Recap</a></li>
+        <li><a href="recap.html" aria-current="page">Recap</a></li>
         <li><a href="rules.html">Rules</a></li>
         <li><a href="punishments.html">Punishments</a></li>
       </ul>
@@ -26,32 +26,20 @@
   </div>
 </header>
 
-<section class="hero">
+<section class="page-header">
   <div class="container">
-    <h1>Ring of Honor</h1>
-    <p id="tagline">Glory is temporary. The group chat is forever.</p>
+    <h1>Season Recap</h1>
+    <p>How each championship actually played out.</p>
+    <div class="controls">
+      <label for="recap-season-select">Season</label>
+      <select id="recap-season-select"></select>
+    </div>
   </div>
 </section>
 
 <section class="container">
-  <div id="banner-grid" class="banner-grid">
-    <p class="loading">Loading champions…</p>
-  </div>
-</section>
-
-<section class="section-block">
-  <div class="container">
-    <h2>League Superlatives</h2>
-    <p class="section-intro">Career records across every Beefland season.</p>
-    <div id="superlatives-grid" class="superlatives-grid"></div>
-  </div>
-</section>
-
-<section class="section-block section-block--shame">
-  <div class="container">
-    <h2>The Wall of Shame</h2>
-    <p class="section-intro">Last place. Every year. No exceptions.</p>
-    <div id="shame-grid" class="shame-grid"></div>
+  <div id="recap-content">
+    <p class="loading">Loading recap…</p>
   </div>
 </section>
 
@@ -60,8 +48,7 @@
 </footer>
 
 <script src="js/config.js"></script>
-<script src="js/render-history.js"></script>
-<script src="js/render-superlatives.js"></script>
-<script src="js/render-shame.js"></script>
+<script src="js/recaps.js"></script>
+<script src="js/render-recap.js"></script>
 </body>
 </html>

@@ -2,9 +2,10 @@
 
 A static site for your fantasy football league:
 
-- **Home** — "Ring of Honor" championship banners, one per year (manually entered, see below)
+- **Home** — "Ring of Honor" championship banners, League Superlatives, and the Wall of Shame
 - **Standings** — live current-season standings, pulled from the ESPN Fantasy API
 - **Draft** — draft board by round, for any season, pulled live
+- **Recap** — a season-by-season breakdown: a written overview, the full playoff bracket, and the champion, for every year 2021–2025
 - **Rules** — your league rules
 - **Punishments** — your league punishments
 
@@ -98,26 +99,22 @@ DNS is already on Cloudflare, this takes about a minute.
 
 ---
 
-## Calculating League Superlatives
+## League Superlatives & Season Recaps
 
-`js/config.js` has a `superlatives` array (Most Playoff Wins, Best Win %, Highest
-Career PPG, etc.) that starts out full of placeholders — these need real season data
-to fill in, which isn't something to fill in by hand.
+Both of these are already filled in with real data from your 2021–2025 matchup history
+(computed from a matchup log spreadsheet, cross-checked against ESPN's own API for 2021).
 
-Run this once locally (requires Node.js 18+):
+- `CONFIG.superlatives` in `js/config.js` — the 7 career stat cards on the home page.
+- `RECAPS` in `js/recaps.js` — the written overview, playoff bracket, and champion for
+  each season, shown on the Recap page.
 
-```bash
-node scripts/calculate-superlatives.mjs
-```
-
-It fetches every season from ESPN, calculates all 7 stats, and prints a ready-to-paste
-`superlatives:` block — copy that into `js/config.js`, replacing the placeholder array.
-
-A few judgment calls are baked into how it defines things (e.g. "playoff wins" only
-counts the winners' bracket, "win %" uses regular season only) — the top of the script
-explains each one and where to tweak it if you'd define a stat differently.
-
-Re-run it any time after a season ends to refresh the numbers.
+**After the 2026 season wraps**, you'll want to add a new entry to `RECAPS` for that year
+and update the superlatives if any records changed. The easiest path is the same one used
+to build the current data: export a fresh matchup log (or ask for a fresh ESPN API pull)
+and recompute. Alternatively, `scripts/calculate-superlatives.mjs` can recalculate the
+superlatives directly from ESPN's live API if you'd rather not export a spreadsheet each
+year — run it locally with `node scripts/calculate-superlatives.mjs` once the season is
+final.
 
 ---
 
@@ -135,20 +132,27 @@ Standings and draft data need no manual updates — they're live.
 
 ```
 fantasy-league-site/
-├── index.html              Home page (championship banners)
+├── index.html              Home page (banners, superlatives, wall of shame)
 ├── standings.html          Live standings
 ├── draft.html               Live draft board
-├── rules.html               League rules
-├── punishments.html         League punishments
+├── recap.html                Season-by-season recaps + playoff brackets
+├── rules.html                League rules
+├── punishments.html          League punishments
 ├── css/styles.css           All styling
 ├── js/
-│   ├── config.js             ← edit this one most often
-│   ├── api.js                 fetch helper + ESPN data shaping
-│   ├── render-history.js      home page banners
-│   ├── render-standings.js    standings page logic
-│   └── render-draft.js        draft page logic
+│   ├── config.js              ← edit this one most often
+│   ├── api.js                  fetch helper + ESPN data shaping
+│   ├── recaps.js                season overview + bracket data
+│   ├── render-history.js        home page championship banners
+│   ├── render-superlatives.js   home page stat cards
+│   ├── render-shame.js          home page wall of shame
+│   ├── render-standings.js      standings page logic
+│   ├── render-draft.js          draft page logic
+│   ├── render-recap.js          recap page logic
+│   ├── render-rules.js          rules page logic
+│   └── render-punishments.js    punishments page logic
 ├── scripts/
-│   └── calculate-superlatives.mjs   run locally to fill in Superlatives
+│   └── calculate-superlatives.mjs   run locally to refresh Superlatives
 └── functions/api/league.js  Cloudflare Function — proxies + caches ESPN API calls
 ```
 
