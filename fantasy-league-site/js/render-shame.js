@@ -17,7 +17,14 @@ if (!CONFIG.wallOfShame || CONFIG.wallOfShame.length === 0) {
           wp
             ? `
         <div class="shame-bust-label">Worst Pick</div>
-        <div class="shame-bust-note">${wp.player} &middot; ${wp.pick} &middot; ${wp.points}</div>`
+        <div class="shame-bust-note">${wp.player} &middot; ${wp.pick} &middot; ${wp.points}</div>
+        ${
+          wp.draftRank && wp.finalRank
+            ? `<div class="shame-bust-rank">${wp.draftRank} &rarr; ${wp.finalRank}</div>`
+            : wp.draftRank
+            ? `<div class="shame-bust-rank">${wp.draftRank}</div>`
+            : ""
+        }`
             : ""
         }
       </div>

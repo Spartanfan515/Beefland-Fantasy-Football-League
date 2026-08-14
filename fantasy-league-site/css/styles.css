@@ -407,6 +407,14 @@ h1, h2, h3 {
   color: var(--chalk-dim);
 }
 
+.shame-bust-rank {
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  color: var(--red);
+}
+
 /* ==========================================================================
    Tables (standings, draft)
    ========================================================================== */
@@ -554,6 +562,75 @@ select {
 .bracket-heading {
   font-size: 1.4rem;
   margin-bottom: 20px;
+}
+
+/* Draft Steal / Draft Bust cards */
+.steal-bust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.steal-bust-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  text-align: center;
+}
+
+.steal-bust-card--bust {
+  border-top-color: var(--red);
+}
+
+.steal-bust-label {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.85rem;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.steal-bust-card--bust .steal-bust-label {
+  color: var(--red);
+}
+
+.steal-bust-player {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  color: var(--chalk);
+  margin-bottom: 8px;
+}
+
+.steal-bust-detail {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--chalk-dim);
+  margin-bottom: 6px;
+  overflow-wrap: break-word;
+}
+
+.steal-bust-rank {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  color: var(--chalk);
+  margin-bottom: 10px;
+}
+
+.steal-bust-team {
+  font-size: 0.92rem;
+  color: var(--chalk);
+}
+
+.steal-bust-owner {
+  font-size: 0.8rem;
+  color: var(--chalk-dim);
 }
 
 .bracket {

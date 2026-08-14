@@ -93,7 +93,18 @@ function renderDraft(year) {
     .map(([cls, label]) => `<span class="draft-legend-item"><span class="draft-legend-swatch draft-pos--${cls}"></span>${label}</span>`)
     .join("");
 
+  const sb = data.stealBust;
+  const stealBustBlock = sb
+    ? `
+    <div class="steal-bust-grid">
+      ${renderStealBustCard("Draft Steal", sb.steal, "steal")}
+      ${renderStealBustCard("Draft Bust", sb.bust, "bust")}
+    </div>
+  `
+    : "";
+
   content.innerHTML = `
+    ${stealBustBlock}
     <h2 class="bracket-heading">Draft Board</h2>
     <div class="draft-legend">${legend}</div>
     <div class="table-wrap draft-board-wrap">
@@ -101,6 +112,19 @@ function renderDraft(year) {
         <thead><tr>${headerRow}</tr></thead>
         <tbody>${bodyRows.join("")}</tbody>
       </table>
+    </div>
+  `;
+}
+
+function renderStealBustCard(label, entry, kind) {
+  return `
+    <div class="steal-bust-card steal-bust-card--${kind}">
+      <div class="steal-bust-label">${label}</div>
+      <div class="steal-bust-player">${entry.player}</div>
+      <div class="steal-bust-detail">${entry.pick} &middot; ${entry.points}</div>
+      <div class="steal-bust-rank">${entry.draftRank} &rarr; ${entry.finalRank}</div>
+      <div class="steal-bust-team">${entry.team}</div>
+      <div class="steal-bust-owner">${entry.holder}</div>
     </div>
   `;
 }
