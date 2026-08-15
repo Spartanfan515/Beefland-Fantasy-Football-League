@@ -1156,15 +1156,14 @@ tbody tr:last-child .draft-pick-cell { border-bottom: none; }
 }
 
 .h2h-corner {
-  position: sticky;
-  left: 0;
-  z-index: 2;
+  position: static;
   background: var(--surface-raised);
   border-bottom: 2px solid var(--gold-dim);
   border-right: 1px solid var(--line);
 }
 
 .h2h-col-head {
+  position: static;
   background: var(--surface-raised);
   padding: 10px 12px;
   border-bottom: 2px solid var(--gold-dim);
@@ -1180,9 +1179,6 @@ tbody tr:last-child .draft-pick-cell { border-bottom: none; }
 .h2h-col-head:last-child { border-right: none; }
 
 .h2h-row-head {
-  position: sticky;
-  left: 0;
-  z-index: 1;
   background: var(--surface-raised);
   padding: 10px 14px;
   border-bottom: 1px solid var(--line);
