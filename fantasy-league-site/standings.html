@@ -41,11 +41,19 @@
   </div>
 </section>
 
+<section class="container">
+  <div id="h2h-content">
+    <p class="loading">Loading head-to-head records…</p>
+  </div>
+</section>
+
 <footer class="site-footer">
   <div class="container">Historical results available on the Recap page.</div>
 </footer>
 
 <script src="js/config.js"></script>
+<script src="js/h2h.js"></script>
+<script src="js/render-h2h.js"></script>
 <script>
   document.getElementById("site-title").innerHTML =
     `${CONFIG.leagueName.split(" ").slice(0, -1).join(" ")} <span>${CONFIG.leagueName.split(" ").slice(-1)}</span>`;

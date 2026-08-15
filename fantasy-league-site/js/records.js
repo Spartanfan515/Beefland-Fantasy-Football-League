@@ -29,7 +29,7 @@ const RECORDS = {
   "Adam Kahler": {
     years: [2024, 2025],
     regSeason: [13, 15],
-    playoff: [0, 3],
+    playoff: [2, 0],
     titles: [2024],
     careerPoints: 3255.08,
     ppg: 116.25,
@@ -105,7 +105,7 @@ const RECORDS = {
   "Blake Beachnau": {
     years: [2024, 2025],
     regSeason: [17, 11],
-    playoff: [0, 3],
+    playoff: [1, 1],
     titles: [],
     careerPoints: 3290.76,
     ppg: 117.53,
@@ -143,7 +143,7 @@ const RECORDS = {
   "Brent Hurlburt": {
     years: [2022, 2023, 2024, 2025],
     regSeason: [27, 31],
-    playoff: [0, 2],
+    playoff: [1, 1],
     titles: [],
     careerPoints: 6904.48,
     ppg: 119.04,
@@ -181,7 +181,7 @@ const RECORDS = {
   "Jack Callahan": {
     years: [2021, 2022, 2023, 2024, 2025],
     regSeason: [44, 28],
-    playoff: [0, 6],
+    playoff: [1, 5],
     titles: [],
     careerPoints: 9387.36,
     ppg: 130.38,
