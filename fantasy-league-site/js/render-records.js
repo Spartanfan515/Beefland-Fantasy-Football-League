@@ -37,15 +37,37 @@ function yearsLabel(years) {
   return years.join(", ");
 }
 
+function initials(name) {
+  return name
+    .split(" ")
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+}
+
+function avatarColorClass(name) {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash += name.charCodeAt(i);
+  return `avatar--${hash % 5}`;
+}
+
 function renderRecordCard(owner, r) {
   const titlesLabel = r.titles.length
     ? `${r.titles.length} · ${r.titles.join(", ")}`
     : "—";
 
+  const isInactive = r.active === false;
+  const cardClass = isInactive ? "record-card record-card--inactive" : "record-card";
+  const bioHtml = r.bio ? `<div class="record-bio">${r.bio}</div>` : "";
+
   return `
-    <div class="record-card">
+    <div class="${cardClass}">
       <div class="record-card-header">
-        <div class="record-owner">${owner}</div>
+        <div class="record-owner-group">
+          <div class="record-avatar ${avatarColorClass(owner)}">${initials(owner)}</div>
+          <div class="record-owner">${owner}${isInactive ? '<span class="record-inactive-tag">No Longer in League</span>' : ""}</div>
+        </div>
         <div class="record-years">${yearsLabel(r.years)} <span class="record-years-count">(${r.years.length} ${r.years.length === 1 ? "season" : "seasons"})</span></div>
       </div>
 
@@ -103,6 +125,7 @@ function renderRecordCard(owner, r) {
           <div class="record-pick-note">${r.draftBust.team} &middot; ${r.draftBust.note}</div>
         </div>
       </div>
+      ${bioHtml}
     </div>
   `;
 }

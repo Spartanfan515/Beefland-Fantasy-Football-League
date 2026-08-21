@@ -151,6 +151,15 @@ h1, h2, h3 {
   margin-right: auto;
 }
 
+.hero-est {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin: -0.3em 0 0.8em;
+}
+
 .page-header {
   padding: 56px 0 32px;
   border-bottom: 1px solid var(--line);
@@ -164,24 +173,71 @@ h1, h2, h3 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 32px 24px;
-  padding: 56px 0 80px;
+  padding: 64px 0 80px;
 }
 
 .banner {
   position: relative;
-  padding: 28px 20px 40px;
-  background: linear-gradient(180deg, var(--surface-raised), var(--surface));
+  padding: 36px 20px 44px;
+  background:
+    repeating-linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.05) 0px,
+      rgba(0, 0, 0, 0.05) 2px,
+      transparent 2px,
+      transparent 6px
+    ),
+    linear-gradient(180deg, var(--surface-raised), var(--surface));
   border: 4px solid var(--gold-dim);
-  clip-path: polygon(0 0, 100% 0, 100% 82%, 50% 100%, 0 82%);
+  border-top: none;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
   text-align: center;
+  transform-origin: top center;
   transition: transform 0.15s ease;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
-.banner:hover { transform: translateY(-4px); }
+.banner::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 8px;
+  right: 8px;
+  height: 10px;
+  background: linear-gradient(180deg, var(--gold), var(--gold-dim));
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+.banner::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: var(--bg);
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+}
+
+.banner:hover {
+  animation: banner-wave 0.7s ease-in-out;
+}
+
+@keyframes banner-wave {
+  0% { transform: rotate(0deg) translateY(-4px); }
+  15% { transform: rotate(-4deg) translateY(-4px); }
+  35% { transform: rotate(3deg) translateY(-4px); }
+  55% { transform: rotate(-2deg) translateY(-4px); }
+  75% { transform: rotate(1.2deg) translateY(-4px); }
+  100% { transform: rotate(0deg) translateY(-4px); }
+}
 
 .banner:nth-child(1) {
   border-color: var(--gold);
-  box-shadow: 0 0 0 2px var(--gold), 0 12px 28px -12px rgba(184, 134, 46, 0.4);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15), 0 0 0 2px var(--gold), 0 12px 28px -12px rgba(184, 134, 46, 0.4);
 }
 
 .banner .year {
@@ -344,7 +400,7 @@ h1, h2, h3 {
 .record-card-header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   flex-wrap: wrap;
   gap: 6px 16px;
   border-bottom: 1px solid var(--line);
@@ -352,12 +408,72 @@ h1, h2, h3 {
   margin-bottom: 16px;
 }
 
+.record-owner-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.record-avatar {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: var(--bg);
+  border: 2px solid var(--gold-dim);
+}
+
+.avatar--0 { background: var(--gold); }
+.avatar--1 { background: var(--green-accent); color: #f3efe2; }
+.avatar--2 { background: var(--red); color: #f3efe2; }
+.avatar--3 { background: var(--green-deep); color: #f3efe2; }
+.avatar--4 { background: var(--gold-dim); }
+
 .record-owner {
   font-family: var(--font-display);
   text-transform: uppercase;
   letter-spacing: 0.02em;
   font-size: 1.3rem;
   color: var(--chalk);
+}
+
+.record-bio {
+  font-size: 0.85rem;
+  color: var(--chalk-dim);
+  font-style: italic;
+  line-height: 1.5;
+  border-top: 1px solid var(--line);
+  margin-top: 16px;
+  padding-top: 14px;
+}
+
+.record-card--inactive {
+  opacity: 0.55;
+  filter: grayscale(0.7);
+}
+
+.record-card--inactive:hover {
+  opacity: 0.85;
+  filter: grayscale(0.3);
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.record-inactive-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--chalk-dim);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 2px 6px;
+  margin-left: 8px;
 }
 
 .record-years {
@@ -458,6 +574,94 @@ h1, h2, h3 {
 .record-pick-note {
   font-size: 0.72rem;
   color: var(--chalk-dim);
+}
+
+/* 2026 Season — Upcoming Events */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  padding: 8px 0 40px;
+}
+
+.event-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 22px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.event-date {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.event-title {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 1.15rem;
+  color: var(--chalk);
+}
+
+.event-desc {
+  color: var(--chalk-dim);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.event-countdown {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.event-countdown-unit {
+  text-align: center;
+  flex: 1;
+}
+
+.event-countdown-value {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  color: var(--chalk);
+}
+
+.event-countdown-label {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--chalk-dim);
+  margin-top: 2px;
+}
+
+.event-countdown--live .event-countdown-value { color: var(--gold); }
+
+.event-card--placeholder {
+  border-top-color: var(--gold-dim);
+}
+
+.event-placeholder-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--chalk-dim);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 2px 6px;
+  align-self: flex-start;
 }
 
 /* Wall of Shame — pinned, slightly crooked, corkboard feel */
