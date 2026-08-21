@@ -21,7 +21,7 @@ const EVENTS_2026 = [
     id: "draft-recap",
     date: "9/6",
     title: "2026 Draft Recap",
-    desc: "A full breakdown of the 2026 draft: biggest reach, draft-day steal, team compositions (RB-heavy, Zero RB, Early QB, etc.), and initial standings.",
+    desc: "A full breakdown of the 2026 draft: biggest reach, draft-day steal, team composition analysis, and initial standings.",
     placeholder: true,
   },
   {
@@ -61,7 +61,6 @@ grid.innerHTML = EVENTS_2026.map((e) => {
       <div class="event-date">${e.date}${e.countdownLabel ? ` &middot; ${e.countdownLabel}` : ""}</div>
       <div class="event-title">${e.title}</div>
       <div class="event-desc">${e.desc}</div>
-      ${e.placeholder ? '<div class="event-placeholder-tag">Content posts after the date</div>' : ""}
       ${e.countdownTo ? renderCountdown(e.countdownTo) : ""}
     </div>
   `;

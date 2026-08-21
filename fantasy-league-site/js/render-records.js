@@ -71,6 +71,8 @@ function renderRecordCard(owner, r) {
         <div class="record-years">${yearsLabel(r.years)} <span class="record-years-count">(${r.years.length} ${r.years.length === 1 ? "season" : "seasons"})</span></div>
       </div>
 
+      ${bioHtml}
+
       <div class="record-stat-row">
         <div class="record-stat">
           <div class="record-stat-label">Regular Season</div>
@@ -125,7 +127,6 @@ function renderRecordCard(owner, r) {
           <div class="record-pick-note">${r.draftBust.team} &middot; ${r.draftBust.note}</div>
         </div>
       </div>
-      ${bioHtml}
     </div>
   `;
 }
