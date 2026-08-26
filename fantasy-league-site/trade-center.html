@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Trade Center — The League</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="site-title" id="site-title">The <span>League</span></div>
+    <nav>
+      <ul class="site-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="season-2026.html">2026 Season</a></li>
+        <li><a href="standings.html">Standings</a></li>
+        <li><a href="managers.html">Managers</a></li>
+        <li><a href="draft.html">Draft</a></li>
+        <li><a href="trade-center.html" aria-current="page">Trade Center</a></li>
+        <li><a href="recap.html">Recap</a></li>
+        <li><a href="rules.html">Rules</a></li>
+        <li><a href="punishments.html">Punishments</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="container">
+    <h1>Trade Center</h1>
+    <p>Every trade in league history, graded. Net Trade Value measures what each side actually got vs. what their own bench would have given them anyway — not just who "won" on paper.</p>
+  </div>
+</section>
+
+<section class="container">
+  <h2 class="subsection-heading">Trade Superlatives</h2>
+  <p class="section-intro">Career awards, compiled across all 41 trades since 2021.</p>
+  <div id="trade-superlatives-grid" class="superlatives-grid">
+    <p class="loading">Loading superlatives…</p>
+  </div>
+</section>
+
+<section class="container">
+  <h2 class="subsection-heading">Manager Leaderboard</h2>
+  <p class="section-intro">Cumulative Net Trade Value across every trade a manager has made. Positive means their trades have been a net win over their careers.</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Manager</th>
+          <th>Team</th>
+          <th>Net Trade Value</th>
+          <th>Trades</th>
+        </tr>
+      </thead>
+      <tbody id="leaderboard-body">
+        <tr><td colspan="5" class="loading">Loading leaderboard…</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="container">
+  <h2 class="subsection-heading">All Trades</h2>
+  <div class="controls">
+    <label for="trade-season-select">Season</label>
+    <select id="trade-season-select"></select>
+    <label for="trade-owner-select">Manager</label>
+    <select id="trade-owner-select"></select>
+  </div>
+  <div id="trade-list" class="trade-list">
+    <p class="loading">Loading trades…</p>
+  </div>
+</section>
+
+<section class="container content-section" id="methodology-section">
+  <h2>How This Is Calculated</h2>
+  <div class="methodology-body">
+
+    <h3>Points Above (actual) Replacement — PAR</h3>
+    <p>Every player's value in a trade is measured against what the manager's own roster would have produced instead — not a league-wide average, and not a preseason ranking. If a manager traded away a bench receiver who was buried behind a 90%-usage starter, that receiver's departure cost the team nothing, because the team was never going to start him anyway. If a manager received a player who immediately became their starting tight end, his real weekly production is compared directly to whatever tight end he actually replaced in the lineup. This is why the same trade can look completely different from how it appeared at the time: PAR only cares what actually happened afterward, not who was more famous on the day of the trade.</p>
+
+    <h3>How a baseline is chosen</h3>
+    <p>For every player entering or leaving a roster, the model looks at exactly one thing: usage share — the fraction of weeks (since he first joined that roster) a player was actually active in a starting slot, not benched or on IR. A departing player who was started in at least half of his weeks on that roster (and has at least 5 weeks of history — 4 or fewer is treated as too small a sample to trust) is considered to have created a real vacancy. If that same trade also brought in a player at the same position, the two are paired directly: the incoming player's real weekly points minus the outgoing player's real weekly points, summed for the rest of the season. That single number captures both what a team gained and what it gave up in one step, because it's the same comparison from either side.</p>
+    <p>If there's no departing starter to pair against — say, a team received a player but didn't give up anyone at his position — the incoming player is compared against whichever of the team's own returning players was the established starter at that spot before the trade (again requiring at least half-usage over a meaningful sample). If no single player clearly owned that role, the incoming player is compared against the average of the team's current bench options who were actually eligible for that roster slot, so a team that received a starting-caliber player is credited with beating out a realistic replacement, not an empty bench spot.</p>
+    <p>A player who was flexed as often as started at his own position (say, a receiver used in the WR slot some weeks and the flex slot other weeks) is still tracked correctly — the model checks whichever slot he actually occupied that specific week, not just his most common one.</p>
+
+    <h3>Zero means unavailable, not worthless</h3>
+    <p>A real point total of exactly zero is treated as "didn't play that week" (bye week, injury, inactive) and is excluded from every comparison — it would be unfair to charge or credit anyone for a week nobody could have controlled. Critically, this is the ONLY thing a zero means. A player who was benched but still scored real points if he'd been started counts in full: if a team's newly-acquired starter got hurt and was replaced in the lineup by a bench player who then quietly put up 20 points a week, those 20 points count fully against the team that gave that player away, whether or not he was technically "starting" on paper. The model only cares what a player was actually worth, not what roster slot he happened to occupy.</p>
+
+    <h3>No floors, no caps</h3>
+    <p>Every weekly margin is counted exactly as it happened, positive or negative, with no rounding toward zero. If a team traded away a player who then had a huge second half of the season for his new team, that team is charged for the full, actual cost — there's no protection for a trade that ages badly.</p>
+
+    <h3>Playoff cutoffs are tracked per manager</h3>
+    <p>Value only accrues through the weeks a manager's season was actually alive. A manager who made the winners bracket keeps accruing value all the way through the championship; a manager who was eliminated into the losers bracket (which has no bearing on final standings) stops accruing value the moment their real season ended — even if the other side of the trade kept playing meaningful games for weeks afterward.</p>
+
+    <h3>Preseason trades</h3>
+    <p>The two trades made before Week 1 of a season have no prior-roster history to establish a baseline from, so they're handled differently: since each side traded exactly one player per position for another player at that same position, the two are paired directly for the full season with no ambiguity about who's being compared to whom.</p>
+
+    <h3>Net Trade Value</h3>
+    <p>Net Trade Value (NTV) is simply one side's total PAR minus the other side's total PAR for that trade. A positive NTV means that side came out ahead; the other side's NTV is the same number, negative. Summed across every trade a manager has made, that's the number driving the Manager Leaderboard above — and the basis for Golden Fleecer and Sheep.</p>
+
+    <h3>A few honest limitations</h3>
+    <p>This model isn't perfect, and a handful of edge cases are worth knowing about. When a roster has two starters at the same position (two running backs, say) and only one of them is involved in a trade, the model only credits a change in value when the OTHER starter was actually benched or dropped that week — if he kept starting unaffected, he has zero bearing on the trade, regardless of how established he was. A few players left the league's own historical data entirely after being traded (dropped and picked up by no one, in a league Beefland doesn't track); their real NFL production for the relevant weeks was researched and verified by hand against public box scores rather than left uncounted. And a very small number of trades involve a player who never had a single recorded start anywhere in the data on either side — those are credited at full raw production, since there's no baseline to net them against at all.</p>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">Historical results available on the Recap page.</div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/records.js"></script>
+<script src="js/trades.js"></script>
+<script src="js/render-trade-center.js"></script>
+</body>
+</html>
