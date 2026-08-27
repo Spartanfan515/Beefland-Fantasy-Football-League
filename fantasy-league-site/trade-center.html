@@ -48,7 +48,7 @@
   <h2 class="subsection-heading">Manager Leaderboard</h2>
   <p class="section-intro">Cumulative Net Trade Value across every trade a manager has made. Positive means their trades have been a net win over their careers.</p>
   <div class="table-wrap">
-    <table>
+    <table id="leaderboard-table">
       <thead>
         <tr>
           <th>Rank</th>
@@ -78,7 +78,8 @@
   </div>
 </section>
 
-<section class="container content-section" id="methodology-section">
+<section class="container" id="methodology-section">
+  <div class="content-section">
   <h2>How This Is Calculated</h2>
   <div class="methodology-body">
 
@@ -109,6 +110,7 @@
     <p>This model isn't perfect, and a handful of edge cases are worth knowing about. When a roster has two starters at the same position (two running backs, say) and only one of them is involved in a trade, the model only credits a change in value when the OTHER starter was actually benched or dropped that week — if he kept starting unaffected, he has zero bearing on the trade, regardless of how established he was. A few players left the league's own historical data entirely after being traded (dropped and picked up by no one, in a league Beefland doesn't track); their real NFL production for the relevant weeks was researched and verified by hand against public box scores rather than left uncounted. And a very small number of trades involve a player who never had a single recorded start anywhere in the data on either side — those are credited at full raw production, since there's no baseline to net them against at all.</p>
 
   </div>
+  </div>
 </section>
 
 <footer class="site-footer">
@@ -116,7 +118,6 @@
 </footer>
 
 <script src="js/config.js"></script>
-<script src="js/records.js"></script>
 <script src="js/trades.js"></script>
 <script src="js/render-trade-center.js"></script>
 </body>

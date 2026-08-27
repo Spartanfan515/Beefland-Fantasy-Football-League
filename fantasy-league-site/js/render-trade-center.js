@@ -63,10 +63,47 @@ function fmtSigned(n) {
 }
 
 // ------------------------------------------------------------------
+// Fair Merchant: the manager whose trades have most consistently left
+// BOTH sides with positive PAR (a true win-win), not just the manager
+// who came out ahead. Requires a minimum sample of trades so a single
+// lucky trade can't crown someone off an n=1 record; ties on win-win
+// rate are broken by whoever's trades swing the least on average (the
+// more genuinely "even" trader), since that's the closer read on "fair".
+// ------------------------------------------------------------------
+const MIN_TRADES_FOR_FAIR_MERCHANT = 5;
+
+function computeFairMerchant() {
+  const byManager = {};
+  TRADES.forEach((t) => {
+    const a = canonicalOwner(t.ownerA);
+    const b = canonicalOwner(t.ownerB);
+    (byManager[a] = byManager[a] || []).push({ own: t.valueA, other: t.valueB, ntv: t.ntvA });
+    (byManager[b] = byManager[b] || []).push({ own: t.valueB, other: t.valueA, ntv: t.ntvB });
+  });
+
+  const stats = Object.entries(byManager).map(([owner, trades]) => {
+    const winWin = trades.filter((x) => x.own > 0 && x.other > 0).length;
+    const avgAbsNtv = trades.reduce((sum, x) => sum + Math.abs(x.ntv), 0) / trades.length;
+    return { owner, trades: trades.length, winWin, rate: winWin / trades.length, avgAbsNtv };
+  });
+
+  const eligible = stats.filter((s) => s.trades >= MIN_TRADES_FOR_FAIR_MERCHANT);
+  const pool = eligible.length ? eligible : stats;
+
+  const maxRate = Math.max(...pool.map((s) => s.rate));
+  const tiedOnRate = pool.filter((s) => Math.abs(s.rate - maxRate) < 1e-9);
+  tiedOnRate.sort((a, b) => a.avgAbsNtv - b.avgAbsNtv);
+
+  const bestAvg = tiedOnRate[0].avgAbsNtv;
+  const holders = tiedOnRate.filter((s) => Math.abs(s.avgAbsNtv - bestAvg) < 0.05);
+
+  return { holders, rate: maxRate, winWin: holders[0].winWin, trades: holders[0].trades };
+}
+
+// ------------------------------------------------------------------
 // Superlatives
 // ------------------------------------------------------------------
 function computeSuperlatives() {
-  const allOwners = typeof RECORDS !== "undefined" ? Object.keys(RECORDS) : Object.keys(MANAGER_STATS);
   const entries = Object.entries(MANAGER_STATS);
 
   const maxTrades = Math.max(...entries.map(([, s]) => s.trades));
@@ -78,9 +115,9 @@ function computeSuperlatives() {
   const minNtv = Math.min(...entries.map(([, s]) => s.ntv));
   const sheep = entries.filter(([, s]) => Math.abs(s.ntv - minNtv) < 0.05).map(([o]) => o);
 
-  const npc = allOwners.filter((o) => !MANAGER_STATS[o] || MANAGER_STATS[o].trades === 0);
+  const fairMerchant = computeFairMerchant();
 
-  return { triggerFinger, maxTrades, goldenFleecer, maxNtv, sheep, minNtv, npc };
+  return { triggerFinger, maxTrades, goldenFleecer, maxNtv, sheep, minNtv, fairMerchant };
 }
 
 function statCard(category, value, holderNames, note) {
@@ -101,15 +138,16 @@ function statCard(category, value, holderNames, note) {
 function renderSuperlatives() {
   const s = computeSuperlatives();
   const container = document.getElementById("trade-superlatives-grid");
+  const fm = s.fairMerchant;
   container.innerHTML = [
     statCard("Trigger Finger", `${s.maxTrades} Trades`, s.triggerFinger, "most trades made"),
     statCard("Golden Fleecer", fmtSigned(s.maxNtv), s.goldenFleecer, "highest career Net Trade Value"),
     statCard("Sheep", fmtSigned(s.minNtv), s.sheep, "lowest career Net Trade Value"),
     statCard(
-      "NPC",
-      s.npc.length ? `${s.npc.length}` : "None",
-      s.npc,
-      s.npc.length ? "has never made a trade" : "every manager has made at least one trade"
+      "Fair Merchant",
+      `${Math.round(fm.rate * 100)}%`,
+      fm.holders.map((h) => h.owner),
+      `${fm.winWin} of ${fm.trades} trades left both sides better off`
     ),
   ].join("");
 }
@@ -149,19 +187,21 @@ function playerBadge(p) {
 }
 
 function legRow(leg) {
-  let label;
-  if (leg.in && leg.out) label = `${leg.in} <span class="trade-leg-vs">vs</span> ${leg.out}`;
-  else if (leg.in) label = leg.in;
-  else if (leg.out) label = leg.out;
-  else label = "—";
   const cls = leg.margin > 0 ? "positive" : leg.margin < 0 ? "negative" : "";
   return `
     <div class="trade-leg">
-      <span class="trade-leg-player">${label}</span>
-      <span class="trade-leg-margin ${cls}">${fmtSigned(leg.margin)}</span>
-      <span class="trade-leg-note">${leg.note}</span>
+      <span class="trade-leg-player">${leg.in}</span>
+      <span class="trade-leg-margin ${cls}">${fmtSigned(leg.margin)} PAR</span>
     </div>
   `;
+}
+
+// Legs with no "in" player are bookkeeping placeholders for a departing
+// player who created no real vacancy (kind "depart_zero", margin always
+// 0) -- not a player anyone actually received, so they don't belong in a
+// "what did each side receive" breakdown.
+function receivedLegs(legs) {
+  return legs.filter((leg) => leg.in);
 }
 
 function sideClass(ntv, washThreshold) {
@@ -174,6 +214,9 @@ function tradeCard(t) {
   const isWash = Math.abs(t.ntvA) < WASH;
   const ownerA = canonicalOwner(t.ownerA);
   const ownerB = canonicalOwner(t.ownerB);
+  const legsA = receivedLegs(t.legsA);
+  const legsB = receivedLegs(t.legsB);
+  const noLegs = '<p class="trade-leg-empty">No net PAR impact.</p>';
   return `
     <div class="trade-card">
       <div class="trade-card-header">
@@ -184,8 +227,9 @@ function tradeCard(t) {
         <div class="trade-side ${sideClass(t.ntvA, WASH)}">
           <div class="trade-side-team">${t.teamA}</div>
           <div class="trade-side-owner">${ownerA}</div>
+          <div class="trade-side-flow">Sends <span class="trade-side-arrow">&rarr;</span></div>
           <div class="trade-side-players">${t.playersA.map(playerBadge).join("")}</div>
-          <div class="trade-side-value">${fmtSigned(t.valueA)} PAR</div>
+          <div class="trade-side-value">${fmtSigned(t.valueA)} PAR received</div>
         </div>
         <div class="trade-ntv-badge">
           <div class="trade-ntv-value ${t.ntvA >= 0 ? "positive" : "negative"}">${fmtSigned(t.ntvA)}</div>
@@ -194,8 +238,9 @@ function tradeCard(t) {
         <div class="trade-side ${sideClass(t.ntvB, WASH)}">
           <div class="trade-side-team">${t.teamB}</div>
           <div class="trade-side-owner">${ownerB}</div>
+          <div class="trade-side-flow"><span class="trade-side-arrow">&larr;</span> Sends</div>
           <div class="trade-side-players">${t.playersB.map(playerBadge).join("")}</div>
-          <div class="trade-side-value">${fmtSigned(t.valueB)} PAR</div>
+          <div class="trade-side-value">${fmtSigned(t.valueB)} PAR received</div>
         </div>
       </div>
       <details class="trade-details">
@@ -203,11 +248,11 @@ function tradeCard(t) {
         <div class="trade-legs">
           <div class="trade-legs-side">
             <div class="trade-legs-side-label">${ownerA} received</div>
-            ${t.legsA.map(legRow).join("")}
+            ${legsA.length ? legsA.map(legRow).join("") : noLegs}
           </div>
           <div class="trade-legs-side">
             <div class="trade-legs-side-label">${ownerB} received</div>
-            ${t.legsB.map(legRow).join("")}
+            ${legsB.length ? legsB.map(legRow).join("") : noLegs}
           </div>
         </div>
       </details>

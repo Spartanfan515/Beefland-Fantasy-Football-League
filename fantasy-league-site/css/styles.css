@@ -1439,6 +1439,16 @@ tbody tr:last-child .h2h-cell { border-bottom: none; }
 .ntv-positive { color: var(--green-accent); font-weight: 600; }
 .ntv-negative { color: var(--red); font-weight: 600; }
 
+/* The sitewide sticky thead (positioned relative to the page scroll,
+   meant for long scrollable tables like standings/draft) overlaps the
+   body rows on this short 13-row leaderboard -- it has nowhere near
+   enough height to make a sticky header useful, so keep it in normal
+   flow instead. */
+#leaderboard-table thead th {
+  position: static;
+  top: auto;
+}
+
 .trade-list {
   display: flex;
   flex-direction: column;
@@ -1519,6 +1529,20 @@ tbody tr:last-child .h2h-cell { border-bottom: none; }
   font-size: 0.8rem;
   color: var(--chalk-dim);
   margin-bottom: 10px;
+}
+
+.trade-side-flow {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.68rem;
+  color: var(--gold-dim);
+  margin-bottom: 6px;
+}
+
+.trade-side-arrow {
+  color: var(--gold);
+  font-weight: 600;
 }
 
 .trade-side-players {
@@ -1627,12 +1651,6 @@ tbody tr:last-child .h2h-cell { border-bottom: none; }
   color: var(--chalk);
 }
 
-.trade-leg-vs {
-  color: var(--chalk-dim);
-  font-style: italic;
-  font-size: 0.8em;
-}
-
 .trade-leg-margin {
   font-family: var(--font-mono);
   font-weight: 600;
@@ -1641,12 +1659,11 @@ tbody tr:last-child .h2h-cell { border-bottom: none; }
 .trade-leg-margin.positive { color: var(--green-accent); }
 .trade-leg-margin.negative { color: var(--red); }
 
-.trade-leg-note {
-  grid-column: 1 / -1;
+.trade-leg-empty {
   color: var(--chalk-dim);
-  font-size: 0.76rem;
-  line-height: 1.4;
-  margin-top: 2px;
+  font-size: 0.85rem;
+  font-style: italic;
+  margin: 0;
 }
 
 @media (max-width: 720px) {
