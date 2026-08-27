@@ -17,29 +17,14 @@ function canonicalOwner(name) {
 }
 
 // ------------------------------------------------------------------
-// Derived data: each owner's current team name, and career NTV/trade
-// totals, both computed straight from TRADES so this page never goes
-// stale relative to the underlying trade data.
+// Career NTV/trade totals per manager, computed straight from TRADES so
+// this page never goes stale relative to the underlying trade data.
+// Note: we deliberately don't track a "current team" per manager here --
+// team names are reused/renamed every season, so superlatives and the
+// leaderboard identify people by manager name only. Individual trade
+// cards still show the team name because that name is tied to the
+// specific season the trade happened in, which is unambiguous.
 // ------------------------------------------------------------------
-function latestTeamByOwner() {
-  const seen = {};
-  TRADES.forEach((t) => {
-    [
-      [canonicalOwner(t.ownerA), t.teamA],
-      [canonicalOwner(t.ownerB), t.teamB],
-    ].forEach(([owner, team]) => {
-      const season = t.season;
-      if (!seen[owner] || season >= seen[owner].season) {
-        seen[owner] = { team, season };
-      }
-    });
-  });
-  const out = {};
-  Object.keys(seen).forEach((o) => (out[o] = seen[o].team));
-  return out;
-}
-const TEAM_OF_OWNER = latestTeamByOwner();
-
 function computeManagerStats() {
   const stats = {};
   TRADES.forEach((t) => {
@@ -121,16 +106,13 @@ function computeSuperlatives() {
 }
 
 function statCard(category, value, holderNames, note) {
-  const holder = holderNames.length ? holderNames.join(" & ") : "—";
-  const team = holderNames.length
-    ? holderNames.map((o) => TEAM_OF_OWNER[o] || "").join(" & ")
-    : "Nobody yet";
+  const holder = holderNames.length ? holderNames.join(" & ") : "Nobody yet";
   return `
     <div class="stat-card">
       <div class="stat-category">${category}</div>
       <div class="stat-value">${value}</div>
-      <div class="stat-holder">${team}</div>
-      <div class="stat-owner">${holder}${note ? ` &middot; ${note}` : ""}</div>
+      <div class="stat-holder">${holder}</div>
+      ${note ? `<div class="stat-owner">${note}</div>` : ""}
     </div>
   `;
 }
@@ -164,7 +146,6 @@ function renderLeaderboard() {
     <tr>
       <td class="rank">${i + 1}</td>
       <td class="owner-cell">${owner}</td>
-      <td class="team-cell">${TEAM_OF_OWNER[owner] || ""}</td>
       <td class="${s.ntv >= 0 ? "ntv-positive" : "ntv-negative"}">${fmtSigned(s.ntv)}</td>
       <td>${s.trades}</td>
     </tr>
@@ -230,6 +211,7 @@ function tradeCard(t) {
           <div class="trade-side-flow">Sends <span class="trade-side-arrow">&rarr;</span></div>
           <div class="trade-side-players">${t.playersA.map(playerBadge).join("")}</div>
           <div class="trade-side-value">${fmtSigned(t.valueA)} PAR received</div>
+          <div class="trade-side-ntv ${t.ntvA >= 0 ? "positive" : "negative"}">NTV ${fmtSigned(t.ntvA)}</div>
         </div>
         <div class="trade-ntv-badge">
           <div class="trade-ntv-value ${t.ntvA >= 0 ? "positive" : "negative"}">${fmtSigned(t.ntvA)}</div>
@@ -241,6 +223,7 @@ function tradeCard(t) {
           <div class="trade-side-flow"><span class="trade-side-arrow">&larr;</span> Sends</div>
           <div class="trade-side-players">${t.playersB.map(playerBadge).join("")}</div>
           <div class="trade-side-value">${fmtSigned(t.valueB)} PAR received</div>
+          <div class="trade-side-ntv ${t.ntvB >= 0 ? "positive" : "negative"}">NTV ${fmtSigned(t.ntvB)}</div>
         </div>
       </div>
       <details class="trade-details">
