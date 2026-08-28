@@ -1493,7 +1493,7 @@ tbody tr:last-child .h2h-cell { border-bottom: none; }
 
 .trade-sides {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr auto 1fr auto;
   align-items: stretch;
   gap: 0;
 }
@@ -1545,9 +1545,13 @@ tbody tr:last-child .h2h-cell { border-bottom: none; }
 
 .trade-side-arrow {
   color: var(--gold);
-  font-weight: 700;
-  font-size: 1.4rem;
-  line-height: 1;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.trade-side-arrow--flip {
+  transform: scaleX(-1);
 }
 
 .trade-side-players {
@@ -1562,15 +1566,6 @@ tbody tr:last-child .h2h-cell { border-bottom: none; }
   font-size: 0.78rem;
   color: var(--chalk-dim);
 }
-
-.trade-side-ntv {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-top: 2px;
-}
-.trade-side-ntv.positive { color: var(--green-accent); }
-.trade-side-ntv.negative { color: var(--red); }
 
 .trade-ntv-badge {
   display: flex;

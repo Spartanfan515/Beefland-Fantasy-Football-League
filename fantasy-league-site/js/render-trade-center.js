@@ -167,6 +167,16 @@ function playerBadge(p) {
   return `<span class="player-badge ${posClass}">${p.name}</span>`;
 }
 
+// A drawn SVG arrow (rather than a unicode glyph) so thickness and
+// vertical centering against the "Sends" label are reliable across
+// fonts/browsers instead of depending on how a font happens to render →.
+function arrowIcon(flip) {
+  return `<svg class="trade-side-arrow${flip ? " trade-side-arrow--flip" : ""}" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+    <line x1="3" y1="12" x2="18" y2="12" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+    <polyline points="12 5.5 19 12 12 18.5" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`;
+}
+
 function legRow(leg) {
   const cls = leg.margin > 0 ? "positive" : leg.margin < 0 ? "negative" : "";
   return `
@@ -208,10 +218,9 @@ function tradeCard(t) {
         <div class="trade-side ${sideClass(t.ntvA, WASH)}">
           <div class="trade-side-team">${t.teamA}</div>
           <div class="trade-side-owner">${ownerA}</div>
-          <div class="trade-side-flow">Sends <span class="trade-side-arrow">&rarr;</span></div>
+          <div class="trade-side-flow">Sends ${arrowIcon(false)}</div>
           <div class="trade-side-players">${t.playersA.map(playerBadge).join("")}</div>
           <div class="trade-side-value">${fmtSigned(t.valueA)} PAR received</div>
-          <div class="trade-side-ntv ${t.ntvA >= 0 ? "positive" : "negative"}">NTV ${fmtSigned(t.ntvA)}</div>
         </div>
         <div class="trade-ntv-badge">
           <div class="trade-ntv-value ${t.ntvA >= 0 ? "positive" : "negative"}">${fmtSigned(t.ntvA)}</div>
@@ -220,10 +229,13 @@ function tradeCard(t) {
         <div class="trade-side ${sideClass(t.ntvB, WASH)}">
           <div class="trade-side-team">${t.teamB}</div>
           <div class="trade-side-owner">${ownerB}</div>
-          <div class="trade-side-flow"><span class="trade-side-arrow">&larr;</span> Sends</div>
+          <div class="trade-side-flow">${arrowIcon(true)} Sends</div>
           <div class="trade-side-players">${t.playersB.map(playerBadge).join("")}</div>
           <div class="trade-side-value">${fmtSigned(t.valueB)} PAR received</div>
-          <div class="trade-side-ntv ${t.ntvB >= 0 ? "positive" : "negative"}">NTV ${fmtSigned(t.ntvB)}</div>
+        </div>
+        <div class="trade-ntv-badge">
+          <div class="trade-ntv-value ${t.ntvB >= 0 ? "positive" : "negative"}">${fmtSigned(t.ntvB)}</div>
+          <div class="trade-ntv-label">NTV</div>
         </div>
       </div>
       <details class="trade-details">
