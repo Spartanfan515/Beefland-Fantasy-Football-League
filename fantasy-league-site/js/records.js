@@ -36,7 +36,7 @@ const RECORDS = {
     bestPfSeason: { points: 1806.2, year: 2024 },
     weeklyHigh: { points: 189.26, year: 2024, week: 14 },
     chugs: 5,
-    bio: "The most volatile résumé in Beefland: a 2024 title as a No. 2 seed shocker, sealed with a 52.38-point championship blowout, followed by a last-place finish and a date with the Carnivore Challenge in 2025. Feast or famine, no in-between.",
+    bio: "The most volatile résumé in Beefland: a 2024 title as a No. 2 seed shocker, sealed with a 52.38-point championship blowout, followed by a last-place finish and a date with 18 Holes in a Skirt in 2025. Feast or famine, no in-between.",
     draftSteal: {
       player: "Jakobi Meyers", pick: "R12.3", draftRank: "WR56",
       finalRank: "WR22", points: "224.0 pts", team: "Saquon Deez Nuts", note: "2024",
