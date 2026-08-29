@@ -323,7 +323,7 @@ function buildManagerSummary(data, owner) {
       ? ` In Week ${impact.week}, ${owner} started ${swap.out.name} (${fmtPts(swap.out.points)} pts) over ${swap.in.name} (${fmtPts(swap.in.points)} pts), who was left on the bench — that single decision was worth ${fmtPts(swap.gain)} points, enough by itself to flip the tiebreaker.`
       : "";
     items.push(
-      `<strong>Playoff-altering decision:</strong> ${owner} finished the season tied with ${impact.opponent}, but lost the points-for tiebreaker by ${fmtPts(impact.margin)} points.${swapText}`
+      `<strong>Playoff-altering decision:</strong> ${owner} finished the season tied with ${impact.opponent}, but lost the points-for tiebreaker by ${fmtPts(impact.margin)} points.${swapText} That tiebreaker is what kept ${owner} out of the playoffs that year, with ${impact.opponent} taking the spot instead.`
     );
   }
 
