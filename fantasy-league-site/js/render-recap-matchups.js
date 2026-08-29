@@ -137,6 +137,51 @@ function orientForManager(m, owner) {
 // matchups.js; this just picks the highlights and writes the sentences.
 // ------------------------------------------------------------------
 
+// Renders one bracket-reseed game as "winner (score) over loser (score)",
+// figuring out the winner straight from the two scores rather than trusting
+// a pre-labeled side, so it reads correctly regardless of which owner ended
+// up in the "A" vs "B" slot.
+function fmtBracketGame(g) {
+  const aWon = g.scoreA > g.scoreB;
+  const winner = aWon ? g.ownerA : g.ownerB;
+  const winnerScore = aWon ? g.scoreA : g.scoreB;
+  const loser = aWon ? g.ownerB : g.ownerA;
+  const loserScore = aWon ? g.scoreB : g.scoreA;
+  return `${winner} (${fmtPts(winnerScore)}) over ${loser} (${fmtPts(loserScore)})`;
+}
+
+// A trade that crosses the real playoff cutoff line changed who actually
+// held a bracket seed -- this narrates how the real playoff bracket would
+// have played out with that seed change, using exactly what each team
+// really scored in those weeks (see simulate_bracket_reseed in the export
+// pipeline). Only present when the league ran the simple 4-team, no-bye,
+// two-round bracket shape that simulation supports.
+function bracketImpactSentence(bracketImpact) {
+  if (!bracketImpact || !bracketImpact.final) return "";
+  const semis = bracketImpact.round1.map(fmtBracketGame).join("; ");
+  let s = ` Re-running that playoff bracket with the reseeded field — using exactly what each team really scored those weeks — Week ${bracketImpact.round1[0].week} semis: ${semis}. Week ${bracketImpact.final.week} final: ${fmtBracketGame(bracketImpact.final)} for the title`;
+  s += bracketImpact.thirdPlace ? `, while ${fmtBracketGame(bracketImpact.thirdPlace)} for 3rd.` : ".";
+  return s;
+}
+
+// Finds every trade-impact entry (costly or good, any owner) whose
+// hypothetical bracket reseed lands its championship game in `week` --
+// naturally scopes to the actual championship week of whichever season is
+// selected, since bracketImpact.final.week always is that week.
+function bracketImpactsForWeek(data, week) {
+  const found = [];
+  for (const kind of ["tradeImpact", "goodTradeImpact"]) {
+    for (const [owner, entries] of Object.entries(data[kind] || {})) {
+      for (const e of entries) {
+        if (e.bracketImpact && String(e.bracketImpact.final.week) === String(week)) {
+          found.push({ owner, entry: e, isGood: kind === "goodTradeImpact" });
+        }
+      }
+    }
+  }
+  return found;
+}
+
 function summaryListHtml(items) {
   if (!items.length) {
     return `<p class="matchup-summary-empty">Nothing notable to call out.</p>`;
@@ -209,6 +254,13 @@ function buildWeekSummary(data, week) {
     );
   }
 
+  for (const { owner, entry, isGood } of bracketImpactsForWeek(data, week)) {
+    const tradeDesc = isGood
+      ? `${owner}'s Week ${entry.tradeWeek} trade with ${entry.tradePartner} (getting ${entry.received.join(" and ")} for ${entry.gaveUp.join(" and ")})`
+      : `${owner}'s Week ${entry.tradeWeek} trade with ${entry.tradePartner} (sending away ${entry.tradedAway.join(" and ")} for ${entry.receivedInstead.join(" and ")})`;
+    items.push(`<strong>Trade-altered bracket:</strong> ${tradeDesc} decided who held a seed in this championship.${bracketImpactSentence(entry.bracketImpact)}`);
+  }
+
   const note = isPlayoffWeek
     ? `<div class="matchup-summary-note">Playoff week — this summary covers winners-bracket games only.</div>`
     : "";
@@ -255,11 +307,66 @@ function buildManagerSummary(data, owner) {
   if (impact) {
     const swap = impact.swaps && impact.swaps[0];
     const swapText = swap
-      ? ` Week ${impact.week} alone left ${fmtPts(swap.gain)} points on the bench just by starting ${swap.in.name} over ${swap.out.name} — enough by itself to flip the tiebreaker.`
+      ? ` In Week ${impact.week}, ${owner} started ${swap.out.name} (${fmtPts(swap.out.points)} pts) over ${swap.in.name} (${fmtPts(swap.in.points)} pts), who was left on the bench — that single decision was worth ${fmtPts(swap.gain)} points, enough by itself to flip the tiebreaker.`
       : "";
     items.push(
       `<strong>Playoff-altering decision:</strong> ${owner} finished the season tied with ${impact.opponent}, but lost the points-for tiebreaker by ${fmtPts(impact.margin)} points.${swapText}`
     );
+  }
+
+  const trades = (data.tradeImpact && data.tradeImpact[owner]) || [];
+  for (const t of trades) {
+    const away = t.tradedAway.join(" and ");
+    const received = t.receivedInstead.join(" and ");
+    const weeksText = t.flippedWeeks
+      .map((f) => `Week ${f.week} vs ${f.opponent} (${f.swap.in.name} would have outscored ${f.swap.out.name} ${fmtPts(f.swap.in.points)}–${fmtPts(f.swap.out.points)})`)
+      .join("; ");
+    items.push(
+      `<strong>Costly trade:</strong> ${owner} sent ${away} to ${t.tradePartner} in Week ${t.tradeWeek} for ${received}. Keeping ${away} would have flipped ${weeksText} — enough extra wins to move them from ${t.actualRecord} to ${t.wouldBeRecord} and into the playoffs instead of missing them.${bracketImpactSentence(t.bracketImpact)}`
+    );
+  }
+
+  const goodTrades = (data.goodTradeImpact && data.goodTradeImpact[owner]) || [];
+  for (const t of goodTrades) {
+    const received = t.received.join(" and ");
+    const gaveUp = t.gaveUp.join(" and ");
+    const weeksText = t.flippedWeeks
+      .map((f) => `Week ${f.week} vs ${f.opponent} (${f.player.name} put up ${fmtPts(f.player.points)} pts)`)
+      .join("; ");
+    items.push(
+      `<strong>Trade payoff:</strong> ${owner} acquired ${received} from ${t.tradePartner} in Week ${t.tradeWeek} for ${gaveUp}. Without that trade, they'd have lost ${weeksText} — enough to drop them from ${t.actualRecord} to ${t.wouldBeRecord} and out of the playoffs instead of making them.${bracketImpactSentence(t.bracketImpact)}`
+    );
+  }
+
+  // The flip side of both bullets above: a trade this owner made that
+  // mattered for their PARTNER's season, surfaced here too since it was a
+  // decision this owner made even though the playoff swing landed on the
+  // other side of the ledger.
+  for (const [otherOwner, entries] of Object.entries(data.tradeImpact || {})) {
+    for (const t of entries) {
+      if (t.tradePartner !== owner) continue;
+      const sent = t.receivedInstead.join(" and ");
+      const gotBack = t.tradedAway.join(" and ");
+      const weeksText = t.flippedWeeks
+        .map((f) => `Week ${f.week} vs ${f.opponent} (${f.swap.in.name} would have outscored ${f.swap.out.name} ${fmtPts(f.swap.in.points)}–${fmtPts(f.swap.out.points)})`)
+        .join("; ");
+      items.push(
+        `<strong>Trade fallout:</strong> ${owner} sent ${sent} to ${otherOwner} in Week ${t.tradeWeek} for ${gotBack}. Keeping ${sent} instead would have flipped ${weeksText} for ${otherOwner} — enough to move them from ${t.actualRecord} to ${t.wouldBeRecord} and into the playoffs instead of missing them.${bracketImpactSentence(t.bracketImpact)}`
+      );
+    }
+  }
+  for (const [otherOwner, entries] of Object.entries(data.goodTradeImpact || {})) {
+    for (const t of entries) {
+      if (t.tradePartner !== owner) continue;
+      const sent = t.received.join(" and ");
+      const gotBack = t.gaveUp.join(" and ");
+      const weeksText = t.flippedWeeks
+        .map((f) => `Week ${f.week} vs ${f.opponent} (${f.player.name} put up ${fmtPts(f.player.points)} pts)`)
+        .join("; ");
+      items.push(
+        `<strong>Trade fallout:</strong> ${owner} sent ${sent} to ${otherOwner} in Week ${t.tradeWeek} for ${gotBack}. That turned out to be the difference in ${weeksText} for ${otherOwner} — enough to keep them at ${t.actualRecord} instead of dropping to ${t.wouldBeRecord} and out of the playoffs.${bracketImpactSentence(t.bracketImpact)}`
+      );
+    }
   }
 
   return `
