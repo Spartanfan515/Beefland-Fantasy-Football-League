@@ -164,6 +164,17 @@ function bracketImpactSentence(bracketImpact) {
   return s;
 }
 
+// The concrete bottom line every trade-impact bullet needs to end on --
+// mirroring the tiebreak bullet's closing "worth N points, enough by itself
+// to flip it" pattern, this always states the actual/would-be record AND
+// spells out which side of the playoff cutoff line each one sits on, so the
+// sentence never trails off into bracket detail without landing the point.
+function playoffConclusionSentence(subjectOwner, actualRecord, wouldBeRecord, isGood) {
+  return isGood
+    ? ` That swing alone kept ${subjectOwner} at ${actualRecord} instead of dropping to ${wouldBeRecord} — the difference between making the playoffs and missing them entirely.`
+    : ` That swing alone would have moved ${subjectOwner} from ${actualRecord} to ${wouldBeRecord} — the difference between missing the playoffs and making them.`;
+}
+
 // Finds every trade-impact entry (costly or good, any owner) whose
 // hypothetical bracket reseed lands its championship game in `week` --
 // naturally scopes to the actual championship week of whichever season is
@@ -258,7 +269,9 @@ function buildWeekSummary(data, week) {
     const tradeDesc = isGood
       ? `${owner}'s Week ${entry.tradeWeek} trade with ${entry.tradePartner} (getting ${entry.received.join(" and ")} for ${entry.gaveUp.join(" and ")})`
       : `${owner}'s Week ${entry.tradeWeek} trade with ${entry.tradePartner} (sending away ${entry.tradedAway.join(" and ")} for ${entry.receivedInstead.join(" and ")})`;
-    items.push(`<strong>Trade-altered bracket:</strong> ${tradeDesc} decided who held a seed in this championship.${bracketImpactSentence(entry.bracketImpact)}`);
+    items.push(
+      `<strong>Trade-altered bracket:</strong> ${tradeDesc} decided who held a seed in this championship.${bracketImpactSentence(entry.bracketImpact)}${playoffConclusionSentence(owner, entry.actualRecord, entry.wouldBeRecord, isGood)}`
+    );
   }
 
   const note = isPlayoffWeek
@@ -322,7 +335,7 @@ function buildManagerSummary(data, owner) {
       .map((f) => `Week ${f.week} vs ${f.opponent} (${f.swap.in.name} would have outscored ${f.swap.out.name} ${fmtPts(f.swap.in.points)}–${fmtPts(f.swap.out.points)})`)
       .join("; ");
     items.push(
-      `<strong>Costly trade:</strong> ${owner} sent ${away} to ${t.tradePartner} in Week ${t.tradeWeek} for ${received}. Keeping ${away} would have flipped ${weeksText} — enough extra wins to move them from ${t.actualRecord} to ${t.wouldBeRecord} and into the playoffs instead of missing them.${bracketImpactSentence(t.bracketImpact)}`
+      `<strong>Costly trade:</strong> ${owner} sent ${away} to ${t.tradePartner} in Week ${t.tradeWeek} for ${received}. Keeping ${away} would have flipped ${weeksText}.${bracketImpactSentence(t.bracketImpact)}${playoffConclusionSentence(owner, t.actualRecord, t.wouldBeRecord, false)}`
     );
   }
 
@@ -334,7 +347,7 @@ function buildManagerSummary(data, owner) {
       .map((f) => `Week ${f.week} vs ${f.opponent} (${f.player.name} put up ${fmtPts(f.player.points)} pts)`)
       .join("; ");
     items.push(
-      `<strong>Trade payoff:</strong> ${owner} acquired ${received} from ${t.tradePartner} in Week ${t.tradeWeek} for ${gaveUp}. Without that trade, they'd have lost ${weeksText} — enough to drop them from ${t.actualRecord} to ${t.wouldBeRecord} and out of the playoffs instead of making them.${bracketImpactSentence(t.bracketImpact)}`
+      `<strong>Trade payoff:</strong> ${owner} acquired ${received} from ${t.tradePartner} in Week ${t.tradeWeek} for ${gaveUp}. Without that trade, they'd have lost ${weeksText}.${bracketImpactSentence(t.bracketImpact)}${playoffConclusionSentence(owner, t.actualRecord, t.wouldBeRecord, true)}`
     );
   }
 
@@ -351,7 +364,7 @@ function buildManagerSummary(data, owner) {
         .map((f) => `Week ${f.week} vs ${f.opponent} (${f.swap.in.name} would have outscored ${f.swap.out.name} ${fmtPts(f.swap.in.points)}–${fmtPts(f.swap.out.points)})`)
         .join("; ");
       items.push(
-        `<strong>Trade fallout:</strong> ${owner} sent ${sent} to ${otherOwner} in Week ${t.tradeWeek} for ${gotBack}. Keeping ${sent} instead would have flipped ${weeksText} for ${otherOwner} — enough to move them from ${t.actualRecord} to ${t.wouldBeRecord} and into the playoffs instead of missing them.${bracketImpactSentence(t.bracketImpact)}`
+        `<strong>Trade fallout:</strong> ${owner} sent ${sent} to ${otherOwner} in Week ${t.tradeWeek} for ${gotBack}. Keeping ${sent} instead would have flipped ${weeksText} for ${otherOwner}.${bracketImpactSentence(t.bracketImpact)}${playoffConclusionSentence(otherOwner, t.actualRecord, t.wouldBeRecord, false)}`
       );
     }
   }
@@ -364,7 +377,7 @@ function buildManagerSummary(data, owner) {
         .map((f) => `Week ${f.week} vs ${f.opponent} (${f.player.name} put up ${fmtPts(f.player.points)} pts)`)
         .join("; ");
       items.push(
-        `<strong>Trade fallout:</strong> ${owner} sent ${sent} to ${otherOwner} in Week ${t.tradeWeek} for ${gotBack}. That turned out to be the difference in ${weeksText} for ${otherOwner} — enough to keep them at ${t.actualRecord} instead of dropping to ${t.wouldBeRecord} and out of the playoffs.${bracketImpactSentence(t.bracketImpact)}`
+        `<strong>Trade fallout:</strong> ${owner} sent ${sent} to ${otherOwner} in Week ${t.tradeWeek} for ${gotBack}. That turned out to be the difference in ${weeksText} for ${otherOwner}.${bracketImpactSentence(t.bracketImpact)}${playoffConclusionSentence(otherOwner, t.actualRecord, t.wouldBeRecord, true)}`
       );
     }
   }
