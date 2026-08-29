@@ -52,6 +52,20 @@ function avatarColorClass(name) {
   return `avatar--${hash % 5}`;
 }
 
+// Manager photos are opt-in and convention-based: drop a file at
+// images/managers/<slugified-name>.jpg (e.g. "Adam Kahler" ->
+// images/managers/adam-kahler.jpg) and it's picked up automatically, no
+// data-file edit required. If no photo exists at that path yet, the <img>
+// 404s, onerror hides it, and the colored initials underneath show through
+// -- so this is always safe to leave wired up even for managers without a
+// photo yet.
+function photoSlug(name) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
 function renderRecordCard(owner, r) {
   const titlesLabel = r.titles.length
     ? `${r.titles.length} · ${r.titles.join(", ")}`
@@ -65,7 +79,10 @@ function renderRecordCard(owner, r) {
     <div class="${cardClass}">
       <div class="record-card-header">
         <div class="record-owner-group">
-          <div class="record-avatar ${avatarColorClass(owner)}">${initials(owner)}</div>
+          <div class="record-avatar ${avatarColorClass(owner)}">
+            ${initials(owner)}
+            <img class="record-avatar-img" src="images/managers/${photoSlug(owner)}.jpg" alt="" loading="lazy" onerror="this.style.display='none';">
+          </div>
           <div class="record-owner">${owner}${isInactive ? '<span class="record-inactive-tag">No Longer in League</span>' : ""}</div>
         </div>
         <div class="record-years">${yearsLabel(r.years)} <span class="record-years-count">(${r.years.length} ${r.years.length === 1 ? "season" : "seasons"})</span></div>
