@@ -214,14 +214,79 @@ function renderDraftAnalysis(da, owners) {
     );
   }
 
+  const reachSlideBlock = da.biggestReach && da.biggestSlide ? renderReachSlideSection(da) : "";
+
   return `
     <h2 class="bracket-heading">Draft Day Analysis</h2>
-    <p class="draft-analysis-note">Draft Steal &amp; Bust need final end-of-season position ranks, which don't exist yet for a season still in progress -- so here's how this year's draft compared to draft history instead.</p>
+    <p class="draft-analysis-note">Draft Steal &amp; Bust need final end-of-season position ranks, which don't exist yet for a season still in progress -- so here's how this year's draft compared to draft history (and to the market) instead.</p>
+    ${reachSlideBlock}
     <div class="superlatives-grid draft-analysis-grid">
       ${posCards}
       ${runCard}
       ${buildCards.join("")}
     </div>
+  `;
+}
+
+// Reach/Slide -- compares each pick to ESPN's PPR average draft position,
+// so it works even though final Steal/Bust can't be computed yet (ADP is
+// known the moment the season's mocks and live drafts happen; it doesn't
+// need the season to finish). K/D-ST and picks below ESPN's tracked ADP
+// floor are excluded upstream since ADP there is noise, not signal.
+function renderReachSlideSection(da) {
+  const asOf = da.adpAsOf
+    ? new Date(da.adpAsOf + "T00:00:00").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
+    : "";
+  const reachCard = renderReachSlideCard("Biggest Reach", da.biggestReach, "bust", "Reached by");
+  const slideCard = renderReachSlideCard("Biggest Slide", da.biggestSlide, "steal", "Slid");
+
+  const reachRows = (da.topReaches || []).map((r) => renderReachSlideRow(r, "Reached by")).join("");
+  const slideRows = (da.topSlides || []).map((r) => renderReachSlideRow(r, "Slid")).join("");
+
+  return `
+    <div class="steal-bust-grid">
+      ${reachCard}
+      ${slideCard}
+    </div>
+    <div class="reach-slide-tables">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Biggest Reaches</th><th>Pick</th><th>ADP</th><th>Gap</th></tr></thead>
+          <tbody>${reachRows}</tbody>
+        </table>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Biggest Slides</th><th>Pick</th><th>ADP</th><th>Gap</th></tr></thead>
+          <tbody>${slideRows}</tbody>
+        </table>
+      </div>
+    </div>
+    <p class="draft-analysis-note draft-analysis-note--source">ADP: ${da.adpSource || "ESPN PPR"}${asOf ? `, as of ${asOf}` : ""} -- reflects current market consensus, not necessarily a snapshot from this league's actual draft day.</p>
+  `;
+}
+
+function renderReachSlideCard(label, entry, kind, verb) {
+  return `
+    <div class="steal-bust-card steal-bust-card--${kind}">
+      <div class="steal-bust-label">${label}</div>
+      <div class="steal-bust-player">${entry.player}</div>
+      <div class="steal-bust-detail">R${entry.round}.${entry.pick} (#${entry.overall} overall) &middot; ADP ${entry.adp}</div>
+      <div class="steal-bust-rank">${verb} ${entry.diff.toFixed(1)} picks</div>
+      <div class="steal-bust-team">${entry.team}</div>
+      <div class="steal-bust-owner">${entry.owner}</div>
+    </div>
+  `;
+}
+
+function renderReachSlideRow(r, verb) {
+  return `
+    <tr>
+      <td>${r.player} <span class="draft-legend-swatch draft-pos--${r.position}" title="${r.position}"></span></td>
+      <td>R${r.round}.${r.pick}</td>
+      <td>${r.adp}</td>
+      <td>${verb} ${r.diff.toFixed(1)}</td>
+    </tr>
   `;
 }
 
