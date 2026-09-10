@@ -103,8 +103,12 @@ function renderDraft(year) {
   `
     : "";
 
+  const da = data.draftAnalysis;
+  const draftAnalysisBlock = da ? renderDraftAnalysis(da, owners) : "";
+
   content.innerHTML = `
     ${stealBustBlock}
+    ${draftAnalysisBlock}
     <h2 class="bracket-heading">Draft Board</h2>
     <div class="draft-legend">${legend}</div>
     <div class="table-wrap draft-board-wrap">
@@ -125,6 +129,110 @@ function renderStealBustCard(label, entry, kind) {
       <div class="steal-bust-rank">${entry.draftRank} &rarr; ${entry.finalRank}</div>
       <div class="steal-bust-team">${entry.team}</div>
       <div class="steal-bust-owner">${entry.holder}</div>
+    </div>
+  `;
+}
+
+// Draft Day Analysis -- shown in place of Draft Steal/Bust for a season
+// whose final position ranks don't exist yet (e.g. a season still in
+// progress), computed purely from draft-order data instead.
+function renderDraftAnalysis(da, owners) {
+  const ownerTeam = {};
+  Object.entries(owners || {}).forEach(([team, owner]) => {
+    ownerTeam[owner] = team;
+  });
+
+  const posLabels = { QB: "QB", RB: "RB", WR: "WR", TE: "TE", K: "K", DST: "D/ST" };
+  const posOrder = ["QB", "RB", "WR", "TE", "K", "DST"];
+
+  const posCards = posOrder
+    .filter((pos) => da.firstByPosition && da.firstByPosition[pos])
+    .map((pos) => {
+      const e = da.firstByPosition[pos];
+      const avg = e.historicalAvgRound;
+      let note = "";
+      if (typeof avg === "number") {
+        const diff = e.round - avg;
+        const avgLabel = `${avg.toFixed(1)}-round historical average`;
+        if (diff <= -0.75) note = `Well ahead of the ${avgLabel}`;
+        else if (diff >= 0.75) note = `Well behind the ${avgLabel}`;
+        else note = `Right around the ${avgLabel}`;
+      }
+      return renderStatCard({
+        category: `First ${posLabels[pos] || pos} Off the Board`,
+        value: e.player,
+        detail: `Round ${e.round}, Pick ${e.pick} &middot; ${e.team}`,
+        holder: e.owner,
+        note,
+      });
+    })
+    .join("");
+
+  const br = da.biggestRun;
+  const runCard = br
+    ? renderStatCard({
+        category: "Biggest Positional Run",
+        value: `${br.length} Straight ${posLabels[br.position] || br.position}s`,
+        detail: `Round ${br.startRound}, Picks ${br.startPick}&ndash;${br.endPick}`,
+        holder: (br.players || []).join(", "),
+        note: "",
+      })
+    : "";
+
+  const buildCards = [];
+  if (da.mostRbTeam) {
+    buildCards.push(
+      renderStatCard({
+        category: "Most Run-Heavy Build",
+        value: `${da.mostRbTeam.count} Running Backs`,
+        detail: ownerTeam[da.mostRbTeam.owner] || "",
+        holder: da.mostRbTeam.owner,
+        note: "",
+      })
+    );
+  }
+  if (da.mostWrTeam) {
+    buildCards.push(
+      renderStatCard({
+        category: "Most Receiver-Heavy Build",
+        value: `${da.mostWrTeam.count} Wide Receivers`,
+        detail: ownerTeam[da.mostWrTeam.owner] || "",
+        holder: da.mostWrTeam.owner,
+        note: "",
+      })
+    );
+  }
+  if (da.earliestFirstRb && da.latestFirstRb) {
+    buildCards.push(
+      renderStatCard({
+        category: "RB Believer vs. RB Skeptic",
+        value: `Round ${da.earliestFirstRb.round} vs. Round ${da.latestFirstRb.round}`,
+        detail: "Earliest vs. latest first running back off the board",
+        holder: `${da.earliestFirstRb.owner} (early) &middot; ${da.latestFirstRb.owner} (late)`,
+        note: "",
+      })
+    );
+  }
+
+  return `
+    <h2 class="bracket-heading">Draft Day Analysis</h2>
+    <p class="draft-analysis-note">Draft Steal &amp; Bust need final end-of-season position ranks, which don't exist yet for a season still in progress -- so here's how this year's draft compared to draft history instead.</p>
+    <div class="superlatives-grid draft-analysis-grid">
+      ${posCards}
+      ${runCard}
+      ${buildCards.join("")}
+    </div>
+  `;
+}
+
+function renderStatCard({ category, value, detail, holder, note }) {
+  return `
+    <div class="stat-card">
+      <div class="stat-category">${category}</div>
+      <div class="stat-value${String(value).length > 18 ? " stat-value--tight" : ""}">${value}</div>
+      ${detail ? `<div class="stat-value-detail">${detail}</div>` : ""}
+      ${holder ? `<div class="stat-holder">${holder}</div>` : ""}
+      ${note ? `<div class="stat-owner">${note}</div>` : ""}
     </div>
   `;
 }

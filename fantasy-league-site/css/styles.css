@@ -1347,6 +1347,19 @@ tbody tr:last-child .draft-pick-cell { border-bottom: none; }
   border: 1px solid var(--line);
 }
 
+/* Draft Day Analysis (years without a computable Steal/Bust yet) */
+.draft-analysis-note {
+  color: var(--chalk-dim);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: -8px 0 20px;
+  max-width: 62ch;
+}
+
+.draft-analysis-grid {
+  margin-bottom: 32px;
+}
+
 /* ==========================================================================
    Head-to-head grid (Standings page)
    ========================================================================== */

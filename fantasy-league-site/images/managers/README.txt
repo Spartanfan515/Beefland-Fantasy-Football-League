@@ -2,13 +2,12 @@ Manager Photos
 ===============
 
 Drop a photo for each manager in this folder as a .jpg, named like this
-(lowercase, spaces replaced with hyphens, full name as it appears in the
-data -- not a nickname):
+(lowercase, spaces replaced with hyphens):
 
   adam-kahler.jpg
   adam-schon.jpg
   austin-gauss.jpg
-  benjamin-schon.jpg
+  ben-schon.jpg
   blake-beachnau.jpg
   bobby-mowry.jpg
   brent-hurlburt.jpg
@@ -28,6 +27,15 @@ Note: the filename must match exactly, including a lowercase ".jpg"
 extension -- a file saved as ".JPG" or ".jpeg" won't be picked up, since
 the site's hosting is case-sensitive even though it may still open fine
 if you preview it locally on a Mac.
+
+Heads up on Ben Schon specifically: the Managers page (js/records.js)
+lists him as "Ben Schon", but other pages on this site (drafts, trades,
+recap) list the same person as "Benjamin Schon". The photo filename
+always follows whatever name js/records.js uses for that page, so his
+file is "ben-schon.jpg" even though he shows up as "Benjamin Schon"
+elsewhere on the site. This inconsistency predates the photo feature --
+worth reconciling site-wide at some point, but not required for photos
+to work.
 
 This file is just a placeholder to create the folder and isn't used by
 the site -- delete it whenever you like.
