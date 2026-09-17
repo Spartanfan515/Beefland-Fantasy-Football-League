@@ -37,7 +37,7 @@ const EVENTS_2026 = [
     date: "9/15",
     title: "Week 1 Recap",
     desc: "An overview of every Week 1 matchup around the league.",
-    placeholder: true,
+    link: "newspapers/week-1-2026.html",
   },
 ];
 
@@ -56,10 +56,11 @@ function renderCountdown(target) {
 
 grid.innerHTML = EVENTS_2026.map((e) => {
   const cardClass = e.placeholder ? "event-card event-card--placeholder" : "event-card";
+  const title = e.link ? `<a href="${e.link}">${e.title} &rarr;</a>` : e.title;
   return `
     <div class="${cardClass}" ${e.id ? `id="event-${e.id}"` : ""}>
       <div class="event-date">${e.date}${e.countdownLabel ? ` &middot; ${e.countdownLabel}` : ""}</div>
-      <div class="event-title">${e.title}</div>
+      <div class="event-title">${title}</div>
       <div class="event-desc">${e.desc}</div>
       ${e.countdownTo ? renderCountdown(e.countdownTo) : ""}
     </div>

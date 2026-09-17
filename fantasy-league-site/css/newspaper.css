@@ -1,0 +1,303 @@
+/* ==========================================================================
+   Beefland Bulletin — weekly newspaper recap
+   Classic black-and-white newsprint look, deliberately independent of the
+   site's gold/red palette in css/styles.css (load newspaper.css AFTER
+   styles.css — it overrides colors/fonts for everything inside .bulletin).
+   ========================================================================== */
+
+.bulletin {
+  --ink: #1a1a1a;
+  --ink-dim: #4a4a4a;
+  --ink-faint: #7a7a7a;
+  --paper: #f7f5ef;
+  --paper-raised: #eeece3;
+  --rule: #1a1a1a;
+
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px 64px;
+  color: var(--ink);
+  background: var(--paper);
+  background-image: repeating-radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 0, transparent 1px);
+  background-size: 3px 3px;
+  font-family: "Libre Baskerville", "Old Standard TT", Georgia, serif;
+}
+
+.bulletin * { color: var(--ink); }
+
+/* ---- Masthead ---- */
+.bulletin-masthead {
+  border-top: 7px double var(--rule);
+  border-bottom: 3px solid var(--rule);
+  padding: 18px 0 12px;
+  margin-top: 24px;
+  text-align: center;
+}
+.bulletin-kicker {
+  font-family: "Special Elite", "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+.bulletin-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 900;
+  font-style: normal;
+  font-size: clamp(2.6rem, 8vw, 4.8rem);
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  margin: 4px 0;
+  text-transform: none;
+}
+.bulletin-title span { font-style: italic; }
+.bulletin-subtitle {
+  font-family: "Special Elite", "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.82rem;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-top: 1px solid var(--rule);
+  padding-top: 8px;
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* ---- Section headers ---- */
+.bulletin-section { margin-top: 46px; }
+.bulletin-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 2px solid var(--rule);
+  border-bottom: 2px solid var(--rule);
+  padding: 6px 0;
+  margin-bottom: 18px;
+}
+.bulletin-section-head h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 900;
+  font-size: 1.7rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.bulletin-section-eyebrow {
+  font-family: "Special Elite", "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ---- Team of the Week ---- */
+.totw-grid { display: grid; grid-template-columns: 1.1fr 1.4fr; gap: 28px; }
+@media (max-width: 720px) { .totw-grid { grid-template-columns: 1fr; } }
+
+.totw-card {
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  padding: 20px;
+}
+.totw-manager { font-family: "Playfair Display", Georgia, serif; font-weight: 900; font-size: 1.6rem; }
+.totw-team { font-family: "Special Elite", monospace; color: var(--ink-dim); font-size: 0.85rem; margin-bottom: 12px; font-style: italic; }
+.totw-score { font-family: "Playfair Display", Georgia, serif; font-weight: 900; font-size: 2.6rem; line-height: 1; }
+.totw-score-label { font-family: "Special Elite", monospace; font-size: 0.65rem; text-transform: uppercase; color: var(--ink-dim); letter-spacing: 0.1em; }
+.totw-mvp { margin-top: 16px; border-top: 1px dashed var(--rule); padding-top: 14px; }
+.totw-mvp-name { font-weight: 700; }
+.totw-stat-list { list-style: none; margin: 10px 0 0; padding: 0; font-size: 0.9rem; }
+.totw-stat-list li { padding: 6px 0; border-bottom: 1px dotted var(--rule); display: flex; justify-content: space-between; gap: 10px; }
+.totw-stat-list li:last-child { border-bottom: none; }
+.totw-body { columns: 1; }
+.totw-body p { margin: 0 0 12px; line-height: 1.65; text-align: justify; }
+.totw-body p:first-child::first-letter {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 900;
+  font-size: 3.6rem;
+  float: left;
+  line-height: 0.75;
+  margin-right: 8px;
+  padding-top: 4px;
+}
+
+/* ---- Injury Recap ---- */
+.injury-list { display: grid; gap: 12px; }
+.injury-card {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 14px;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-left: 6px solid var(--rule);
+  padding: 14px 16px;
+}
+.injury-status {
+  font-family: "Special Elite", monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--rule);
+  padding: 3px 6px;
+  text-align: center;
+  align-self: start;
+  height: fit-content;
+  background: var(--ink);
+  color: var(--paper);
+}
+.injury-player { font-weight: 700; margin: 0 0 2px; font-family: "Playfair Display", Georgia, serif; font-size: 1.05rem; }
+.injury-meta { font-family: "Special Elite", monospace; font-size: 0.74rem; color: var(--ink-dim); margin: 0 0 6px; }
+.injury-note { margin: 0; font-size: 0.92rem; line-height: 1.5; text-align: justify; }
+
+/* ---- Matchup graphic / scoreboard ---- */
+.scoreboard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+@media (max-width: 720px) { .scoreboard-grid { grid-template-columns: 1fr; } }
+
+.score-card { background: var(--paper-raised); border: 1px solid var(--rule); overflow: hidden; }
+.score-row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; padding: 10px 14px; }
+.score-row + .score-row { border-top: 1px dashed var(--rule); }
+.score-row.is-winner { background: rgba(0,0,0,0.08); }
+.score-row-team { font-weight: 700; font-size: 0.95rem; font-family: "Playfair Display", Georgia, serif; }
+.score-row-manager { font-family: "Special Elite", monospace; font-size: 0.68rem; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.03em; }
+.score-row-pts { font-family: "Playfair Display", Georgia, serif; font-weight: 900; font-size: 1.6rem; }
+.score-card-margin { text-align: center; font-family: "Special Elite", monospace; font-size: 0.66rem; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.06em; padding: 5px 0; border-top: 2px solid var(--rule); }
+
+/* ---- Miracles Come True ---- */
+.miracle-list { display: grid; gap: 16px; }
+.miracle-card { background: var(--paper-raised); border: 1px solid var(--rule); border-left: 6px solid var(--rule); padding: 16px 18px; }
+.miracle-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+.miracle-player { font-family: "Playfair Display", Georgia, serif; font-weight: 900; font-size: 1.15rem; }
+.miracle-vs-proj { font-family: "Special Elite", monospace; font-size: 0.74rem; border: 1px solid var(--rule); padding: 2px 8px; }
+.miracle-note { margin: 0; font-size: 0.92rem; line-height: 1.5; text-align: justify; }
+
+/* ---- Most Wanted ---- */
+.wanted-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+.wanted-poster {
+  background: var(--paper-raised);
+  border: 3px double var(--rule);
+  padding: 16px 16px 20px;
+  text-align: center;
+  position: relative;
+}
+.wanted-heading { font-family: "Playfair Display", Georgia, serif; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; font-size: 1.1rem; margin-bottom: 10px; }
+.wanted-photo-wrap { position: relative; width: 150px; height: 150px; margin: 0 auto 10px; }
+.wanted-photo { width: 150px; height: 150px; object-fit: cover; filter: grayscale(1) contrast(1.15); border: 2px solid var(--rule); display: block; }
+.wanted-photo.is-placeholder {
+  background: #d8d5cb;
+  display: flex; align-items: center; justify-content: center;
+  font-family: "Playfair Display", Georgia, serif; font-weight: 900;
+  font-size: 2.4rem; color: var(--ink-dim);
+}
+.wanted-name { font-weight: 700; margin: 4px 0 2px; font-family: "Playfair Display", Georgia, serif; }
+.wanted-team { font-family: "Special Elite", monospace; font-size: 0.72rem; color: var(--ink-dim); margin-bottom: 10px; font-style: italic; }
+.wanted-sign-wrap { position: relative; margin-top: -34px; }
+.wanted-sign {
+  background: var(--paper);
+  border: 2px solid var(--rule);
+  padding: 8px 10px 10px;
+  transform: rotate(-2deg);
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.25);
+  font-family: "Special Elite", monospace;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.wanted-sign-label { display: block; font-size: 0.6rem; color: var(--ink-dim); margin-bottom: 3px; }
+.wanted-sign-player { font-family: "Playfair Display", Georgia, serif; font-weight: 900; font-size: 1.05rem; text-transform: none; }
+.wanted-hands { display: flex; justify-content: space-between; margin-top: -6px; padding: 0 6px; }
+.wanted-hand { width: 34px; height: 30px; }
+.wanted-caption { margin-top: 10px; font-size: 0.8rem; color: var(--ink-dim); font-style: italic; }
+
+/* ---- Byline / footer ---- */
+.bulletin-byline {
+  font-family: "Special Elite", monospace;
+  font-size: 0.76rem;
+  color: var(--ink-dim);
+  text-align: center;
+  margin-top: 56px;
+  border-top: 3px double var(--rule);
+  padding-top: 14px;
+}
+
+/* ==========================================================================
+   Print — used for PDF export. Only the newspaper itself should print:
+   no site chrome, no colored page margins ("pink borders"), just the
+   black-and-white bulletin content edge to edge on the page.
+   ========================================================================== */
+@media print {
+  html, body {
+    background: #fff !important;
+    background-image: none !important;
+  }
+  .site-header,
+  .site-footer,
+  .page-header {
+    display: none !important;
+  }
+  .bulletin {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    background-image: none;
+  }
+  .bulletin-masthead { margin-top: 0; padding: 10px 0 8px; }
+  .bulletin-title { font-size: 2.8rem; }
+  .bulletin-kicker { margin-bottom: 6px; padding-bottom: 5px; }
+  .bulletin-subtitle { margin-top: 5px; padding-top: 5px; }
+
+  /* Each section (heading + its whole content) stays together on one
+     page — no section is allowed to split across a page break. Spacing
+     throughout is tightened for print so pages carry less dead space. */
+  .bulletin-section { margin-top: 16px; break-inside: avoid-page; }
+  .bulletin-section-head { break-after: avoid-page; margin-bottom: 10px; padding: 4px 0; }
+  .bulletin-section-head h2 { font-size: 1.35rem; }
+  .score-card, .injury-card, .miracle-card, .wanted-poster, .totw-card {
+    break-inside: avoid-page;
+  }
+
+  /* Team of the Week */
+  .totw-card { padding: 12px; }
+  .totw-score { font-size: 2rem; }
+  .totw-mvp { margin-top: 8px; padding-top: 8px; }
+  .totw-stat-list { margin-top: 6px; }
+  .totw-stat-list li { padding: 3px 0; }
+  .totw-body p { margin: 0 0 8px; line-height: 1.4; }
+  .totw-body p:first-child::first-letter { font-size: 2.6rem; }
+
+  /* Injury Recap */
+  .injury-list { gap: 8px; }
+  .injury-card { padding: 10px 12px; gap: 10px; }
+  .injury-player { font-size: 0.95rem; }
+  .injury-meta { margin-bottom: 4px; }
+  .injury-note { line-height: 1.35; }
+
+  /* Week N Results */
+  .scoreboard-grid { gap: 10px; }
+  .score-row { padding: 6px 10px; }
+  .score-row-pts { font-size: 1.3rem; }
+
+  /* Miracles Come True */
+  .miracle-list { gap: 10px; }
+  .miracle-card { padding: 10px 12px; }
+  .miracle-head { margin-bottom: 4px; }
+  .miracle-note { line-height: 1.35; }
+
+  /* Most Wanted */
+  .wanted-grid { gap: 14px; }
+  .wanted-poster { padding: 10px 10px 14px; }
+  .wanted-heading { margin-bottom: 6px; }
+  .wanted-photo-wrap { width: 110px; height: 110px; margin: 0 auto 8px; }
+  .wanted-photo { width: 110px; height: 110px; }
+  .wanted-caption { margin-top: 6px; }
+
+  .bulletin-byline { break-before: avoid-page; margin-top: 16px; padding-top: 10px; }
+}

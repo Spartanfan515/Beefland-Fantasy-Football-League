@@ -63,6 +63,53 @@ const CONFIG = {
   seasons: [2026, 2025, 2024, 2023, 2022, 2021],
   currentSeason: 2026,
 
+  /**
+   * standings2026 -> current-season standings, computed by hand from
+   * Box Scores.xlsx each week (the ESPN live API never worked reliably —
+   * see README). One entry per team: team, owner, wins, losses, pf
+   * (points for), pa (points against). Update every Monday after MNF:
+   * for each matchup, add the winner's +1 win / loser's +1 loss, and add
+   * that week's score to each team's pf, and their opponent's score to
+   * each team's pa. render-standings-2026.js sorts by wins desc, then
+   * pf desc, and renders the table on standings.html.
+   */
+  standings2026: [
+    { team: "Uncle Lamb's", owner: "Brent Hurlburt", wins: 1, losses: 0, pf: 163.42, pa: 155.06 },
+    { team: "Zay it with Flowers", owner: "Zack Rollis", wins: 1, losses: 0, pf: 146.46, pa: 97.40 },
+    { team: "Njigba's in Paris", owner: "Adam Kahler", wins: 1, losses: 0, pf: 140.36, pa: 113.66 },
+    { team: "Gibbs Me Shelter", owner: "Evan Lamb", wins: 1, losses: 0, pf: 138.40, pa: 101.60 },
+    { team: "Geezers n' Beaters", owner: "Jon Hurlburt", wins: 1, losses: 0, pf: 115.10, pa: 97.42 },
+    { team: "Mass Laportations", owner: "Adam Schon", wins: 1, losses: 0, pf: 110.76, pa: 96.86 },
+    { team: "Puka Bites Back", owner: "Austin Gauss", wins: 0, losses: 1, pf: 155.06, pa: 163.42 },
+    { team: "Kareem in my Hunt", owner: "Blake Beachnau", wins: 0, losses: 1, pf: 113.66, pa: 140.36 },
+    { team: "White Men Can't Jump", owner: "Ben Schon", wins: 0, losses: 1, pf: 101.60, pa: 138.40 },
+    { team: "Love Her Big Judkins", owner: "Jack Callahan", wins: 0, losses: 1, pf: 97.42, pa: 115.10 },
+    { team: "What ACL?", owner: "Zach Crook", wins: 0, losses: 1, pf: 97.40, pa: 146.46 },
+    { team: "Costa Rico", owner: "Jacob Ayriss", wins: 0, losses: 1, pf: 96.86, pa: 110.76 },
+  ],
+
+  /**
+   * newspaperIssues2026 -> one entry per published Beefland Bulletin issue,
+   * powers the dropdown on season-2026.html. `file` is the path to that
+   * week's page under fantasy-league-site/. Add a new entry each week
+   * right after publishing newspapers/week-N-2026.html.
+   */
+  newspaperIssues2026: [
+    { week: 1, label: "Week 1", file: "newspapers/week-1-2026.html" },
+  ],
+
+  /**
+   * chugLog2026 -> one entry per chug owed this season (a manager started
+   * an active-roster, non-D/ST player who scored exactly 0). Set
+   * `completed: true` once that manager's video hits the group chat.
+   * Powers the Chug Tracker leaderboard on season-2026.html — a manager
+   * with zero entries here just doesn't appear on the board.
+   */
+  chugLog2026: [
+    { week: 1, owner: "Jacob Ayriss", team: "Costa Rico", player: "Colston Loveland", completed: false },
+    { week: 1, owner: "Adam Schon", team: "Mass Laportations", player: "Kyle Pitts Sr.", completed: false },
+  ],
+
   history: [
     {
       year: 2025,

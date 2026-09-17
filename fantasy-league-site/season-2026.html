@@ -17,10 +17,10 @@
       <ul class="site-nav">
         <li><a href="index.html">Home</a></li>
         <li><a href="season-2026.html" aria-current="page">2026 Season</a></li>
-        <li><a href="standings.html">Standings</a></li>
         <li><a href="managers.html">Managers</a></li>
         <li><a href="draft.html">Draft</a></li>
         <li><a href="trade-center.html">Trade Center</a></li>
+        <li><a href="standings.html">Head-to-Head</a></li>
         <li><a href="recap.html">Recap</a></li>
         <li><a href="rules.html">Rules</a></li>
         <li><a href="punishments.html">Punishments</a></li>
@@ -38,6 +38,40 @@
 
 <section class="section-block">
   <div class="container">
+    <h2>2026 Standings</h2>
+    <p class="section-intro">Updated by hand each week from the box scores — usually up before the ESPN app catches up.</p>
+    <div id="standings-2026-wrap">
+      <p class="loading">Loading standings…</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-block">
+  <div class="container">
+    <h2>The Beefland Bulletin</h2>
+    <p class="section-intro">This season's weekly newspaper recap — pick a week to read it below.</p>
+    <div class="controls">
+      <label for="bulletin-select">Issue</label>
+      <select id="bulletin-select"></select>
+    </div>
+    <div id="bulletin-frame-wrap" class="bulletin-frame-wrap">
+      <iframe id="bulletin-frame" title="Beefland Bulletin issue" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="section-block">
+  <div class="container">
+    <h2>Chug Tracker</h2>
+    <p class="section-intro">Every manager who started a player (active roster, not bench, not D/ST) who scored zero. Owed until a chug video hits the group chat.</p>
+    <div id="chug-tracker-wrap">
+      <p class="loading">Loading chug tracker…</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-block">
+  <div class="container">
     <h2>Upcoming Events</h2>
     <p class="section-intro">Key dates for the 2026 season, updated as they happen.</p>
     <div id="events-grid" class="events-grid"></div>
@@ -49,6 +83,9 @@
 </footer>
 
 <script src="js/config.js"></script>
+<script src="js/render-standings-2026.js"></script>
+<script src="js/render-bulletin-select.js"></script>
+<script src="js/render-chug-tracker.js"></script>
 <script src="js/render-season-2026.js"></script>
 </body>
 </html>
