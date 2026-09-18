@@ -8,6 +8,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;600&family=Work+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital@0;1&family=Special+Elite&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/styles.css" />
 <link rel="stylesheet" href="css/newspaper.css" />
+<script>
+  // Loaded inside the 2026 Season page's Bulletin iframe with ?embed=1 —
+  // hide this page's own site header/nav/footer so readers don't see the
+  // whole site chrome twice (once around the page, once inside the frame).
+  if (new URLSearchParams(location.search).get("embed") === "1") {
+    document.write("<style>.site-header,.site-footer{display:none !important;} body{margin:0;}</style>");
+  }
+</script>
 </head>
 <body>
 
@@ -224,6 +232,39 @@
     </div>
   </section>
 
+  <!-- ================= MIRACLES COME TRUE ================= -->
+  <!-- Players who dramatically outscored projection / a late-game (esp. MNF)
+       score that flipped a matchup result. -->
+  <section class="bulletin-section">
+    <div class="bulletin-section-head">
+      <h2>Miracles Come True</h2>
+    </div>
+    <div class="miracle-list">
+      <div class="miracle-card">
+        <div class="miracle-head">
+          <div class="miracle-player">Jayden Daniels &middot; QB &middot; WAS</div>
+          <div class="miracle-vs-proj">Projected 17.4 &middot; Scored 38.9</div>
+        </div>
+        <p class="miracle-note">
+          Started the week as Ben Schon's flex-adjacent afterthought and closed Monday
+          night with three passing touchdowns and a 22-yard scramble score, single-handedly
+          flipping "Bill! Bill! Bill! Bill!" from a projected loss to a 20-point win.
+        </p>
+      </div>
+      <div class="miracle-card">
+        <div class="miracle-head">
+          <div class="miracle-player">Tank Bigsby &middot; RB &middot; JAX</div>
+          <div class="miracle-vs-proj">Projected 8.1 &middot; Scored 24.6</div>
+        </div>
+        <p class="miracle-note">
+          A waiver-wire flex play for Austin Gauss broke a 61-yard touchdown run late in
+          the fourth quarter, turning a comfortable Adam Schon lead into a 5.15-point
+          nail-biter loss.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= INJURY RECAP ================= -->
   <!-- One card per starter (not bench) hurt during the week's games.
        status: e.g. "OUT ~6 WKS", "QUESTIONABLE", "IR", "DAY-TO-DAY" -->
@@ -254,39 +295,6 @@
             watching on the Wednesday injury report before setting lineups next week.
           </p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= MIRACLES COME TRUE ================= -->
-  <!-- Players who dramatically outscored projection / a late-game (esp. MNF)
-       score that flipped a matchup result. -->
-  <section class="bulletin-section">
-    <div class="bulletin-section-head">
-      <h2>Miracles Come True</h2>
-    </div>
-    <div class="miracle-list">
-      <div class="miracle-card">
-        <div class="miracle-head">
-          <div class="miracle-player">Jayden Daniels &middot; QB &middot; WAS</div>
-          <div class="miracle-vs-proj">Projected 17.4 &middot; Scored 38.9</div>
-        </div>
-        <p class="miracle-note">
-          Started the week as Ben Schon's flex-adjacent afterthought and closed Monday
-          night with three passing touchdowns and a 22-yard scramble score, single-handedly
-          flipping "Bill! Bill! Bill! Bill!" from a projected loss to a 20-point win.
-        </p>
-      </div>
-      <div class="miracle-card">
-        <div class="miracle-head">
-          <div class="miracle-player">Tank Bigsby &middot; RB &middot; JAX</div>
-          <div class="miracle-vs-proj">Projected 8.1 &middot; Scored 24.6</div>
-        </div>
-        <p class="miracle-note">
-          A waiver-wire flex play for Austin Gauss broke a 61-yard touchdown run late in
-          the fourth quarter, turning a comfortable Adam Schon lead into a 5.15-point
-          nail-biter loss.
-        </p>
       </div>
     </div>
   </section>

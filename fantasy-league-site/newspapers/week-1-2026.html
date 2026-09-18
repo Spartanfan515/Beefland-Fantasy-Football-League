@@ -8,6 +8,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;600&family=Work+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital@0;1&family=Special+Elite&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="../css/styles.css" />
 <link rel="stylesheet" href="../css/newspaper.css" />
+<script>
+  // Loaded inside the 2026 Season page's Bulletin iframe with ?embed=1 —
+  // hide this page's own site header/nav/footer so readers don't see the
+  // whole site chrome twice (once around the page, once inside the frame).
+  if (new URLSearchParams(location.search).get("embed") === "1") {
+    document.write("<style>.site-header,.site-footer{display:none !important;} body{margin:0;}</style>");
+  }
+</script>
 </head>
 <body>
 
@@ -74,8 +82,9 @@
           Nobody else was particularly close. Brent Hurlburt's Uncle Lamb's posted the
           league's only 160-plus performance in Week 1, built on the back of a three-headed
           attack — Amon-Ra St. Brown (28.7), Chris Olave (30.2) and Jalen Hurts (25.72) all
-          finished as top options at their position — but it was Raiders rookie Ashton
-          Jeanty who did the heaviest lifting. Facing Miami in the Raiders' opener, Jeanty
+          finished as top options at their position — but it was the Raiders' Ashton
+          Jeanty, entering his second pro season, who did the heaviest lifting. Facing
+          Miami in the Raiders' opener, Jeanty
           touched the ball a staggering 29 times, turning that workload into 147 yards from
           scrimmage, six catches out of the backfield, and two touchdowns. That's a
           bell-cow workload most leagues would kill for, and it landed on the one roster
@@ -195,7 +204,7 @@
         <div class="wanted-name">Jacob Ayriss</div>
         <div class="wanted-team">Costa Rico</div>
         <div class="wanted-caption">
-          The Bears' rookie TE was held to zero catches as a decoy in Chicago's Week 1
+          The Bears' second-year TE was held to zero catches as a decoy in Chicago's Week 1
           offensive eruption — cold comfort for the commissioner. Chug owed before Sunday's
           1:00 PM kickoff.
         </div>
@@ -221,6 +230,45 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ================= MIRACLES COME TRUE ================= -->
+  <section class="bulletin-section">
+    <div class="bulletin-section-head">
+      <h2>Miracles Come True</h2>
+    </div>
+    <div class="miracle-list">
+      <div class="miracle-card">
+        <div class="miracle-head">
+          <div class="miracle-player">Derrick Henry &middot; RB &middot; BAL</div>
+          <div class="miracle-vs-proj">144 Rush Yds &middot; 3 TD</div>
+        </div>
+        <p class="miracle-note">
+          Started for Jon Hurlburt's Geezers n' Beaters and delivered a historic afternoon —
+          144 yards (104 after contact) and three touchdowns against the Colts. Henry
+          passed Marcus Allen for sole possession of 125 career rushing touchdowns and set
+          the all-time NFL record with his 26th career game of 100+ rushing yards and
+          multiple rushing scores, breaking a tie with Jim Brown. A 37.3-point week from a
+          player plenty of leagues wrote off as a name-value RB2 helped push Geezers n'
+          Beaters to a comfortable 17.68-point win.
+        </p>
+      </div>
+      <div class="miracle-card">
+        <div class="miracle-head">
+          <div class="miracle-player">Chris Olave &middot; WR &middot; NO</div>
+          <div class="miracle-vs-proj">30.2 Pts &middot; 47-Yd TD</div>
+        </div>
+        <p class="miracle-note">
+          After an injury-shortened, disappointing 2025, Olave looked like his old self in
+          Week 1 — including a 47-yard touchdown strike that had Brent Hurlburt's group chat
+          buzzing. The Saints themselves lost a wild 31-30 overtime game to Detroit, but for
+          fantasy purposes Olave's bounce-back game was exactly what kept Uncle Lamb's ahead
+          of Puka Bites Back's own huge performances (Kenneth Walker III went for 41.1) in
+          the tightest finish of the week — an 8.36-point win that could easily have gone
+          the other way.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -277,43 +325,20 @@
     </div>
   </section>
 
-  <!-- ================= MIRACLES COME TRUE ================= -->
+  <!-- ================= CORRECTIONS ================= -->
   <section class="bulletin-section">
     <div class="bulletin-section-head">
-      <h2>Miracles Come True</h2>
+      <h2>Corrections</h2>
     </div>
-    <div class="miracle-list">
-      <div class="miracle-card">
-        <div class="miracle-head">
-          <div class="miracle-player">Derrick Henry &middot; RB &middot; BAL</div>
-          <div class="miracle-vs-proj">144 Rush Yds &middot; 3 TD</div>
-        </div>
-        <p class="miracle-note">
-          Started for Jon Hurlburt's Geezers n' Beaters and delivered a historic afternoon —
-          144 yards (104 after contact) and three touchdowns against the Colts. Henry
-          passed Marcus Allen for sole possession of 125 career rushing touchdowns and set
-          the all-time NFL record with his 26th career game of 100+ rushing yards and
-          multiple rushing scores, breaking a tie with Jim Brown. A 37.3-point week from a
-          player plenty of leagues wrote off as a name-value RB2 helped push Geezers n'
-          Beaters to a comfortable 17.68-point win.
-        </p>
-      </div>
-      <div class="miracle-card">
-        <div class="miracle-head">
-          <div class="miracle-player">Chris Olave &middot; WR &middot; NO</div>
-          <div class="miracle-vs-proj">30.2 Pts &middot; 47-Yd TD</div>
-        </div>
-        <p class="miracle-note">
-          After an injury-shortened, disappointing 2025, Olave looked like his old self in
-          Week 1 — including a 47-yard touchdown strike that had Brent Hurlburt's group chat
-          buzzing. The Saints themselves lost a wild 31-30 overtime game to Detroit, but for
-          fantasy purposes Olave's bounce-back game was exactly what kept Uncle Lamb's ahead
-          of Puka Bites Back's own huge performances (Kenneth Walker III went for 41.1) in
-          the tightest finish of the week — an 8.36-point win that could easily have gone
-          the other way.
-        </p>
-      </div>
-    </div>
+    <p class="correction-note">
+      An apology is owed to our readers. In this issue's first printing, we identified
+      both Ashton Jeanty and Colston Loveland as rookies — they are not. Both are
+      entering their second NFL seasons in 2026, having been drafted in 2025, and a paper
+      that builds its whole identity on knowing the roster should know better. The error
+      has been corrected throughout this issue. We thank the reader who caught it before
+      it hardened into group-chat legend, and we'll be checking our notes more closely
+      before next week's edition. &mdash; The Editor
+    </p>
   </section>
 
   <div class="bulletin-byline">

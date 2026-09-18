@@ -2005,7 +2005,7 @@ tbody tr:last-child .h2h-cell { border-bottom: none; }
 #bulletin-frame {
   display: block;
   width: 100%;
-  height: 85vh;
+  height: 600px; /* fallback; JS resizes this to the loaded issue's real height */
   border: none;
 }
 
@@ -2016,4 +2016,14 @@ tbody tr:last-child .h2h-cell { border-bottom: none; }
   font-family: var(--font-mono);
   font-size: 0.78rem;
   color: var(--chalk-dim);
+}
+
+/* ---- 2026 Season page: short summary tables shouldn't use the
+   sitewide sticky thead (that behavior is meant for one long,
+   scroll-within leaderboard). On these short tables it makes the
+   header row overlap the first data row as the page scrolls. ---- */
+#standings-2026-wrap thead th,
+#chug-tracker-wrap thead th {
+  position: static;
+  top: auto;
 }

@@ -57,12 +57,16 @@ function renderCountdown(target) {
 grid.innerHTML = EVENTS_2026.map((e) => {
   const cardClass = e.placeholder ? "event-card event-card--placeholder" : "event-card";
   const title = e.link ? `<a href="${e.link}">${e.title} &rarr;</a>` : e.title;
+  // Once an event's target time has passed, a frozen "0 00 00 00" countdown
+  // just looks broken — show the date/time label only, same as an event
+  // that never had a countdown.
+  const showCountdown = e.countdownTo && new Date(e.countdownTo).getTime() > Date.now();
   return `
     <div class="${cardClass}" ${e.id ? `id="event-${e.id}"` : ""}>
       <div class="event-date">${e.date}${e.countdownLabel ? ` &middot; ${e.countdownLabel}` : ""}</div>
       <div class="event-title">${title}</div>
       <div class="event-desc">${e.desc}</div>
-      ${e.countdownTo ? renderCountdown(e.countdownTo) : ""}
+      ${showCountdown ? renderCountdown(e.countdownTo) : ""}
     </div>
   `;
 }).join("");
