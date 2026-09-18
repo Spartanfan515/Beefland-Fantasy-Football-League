@@ -1,6 +1,11 @@
 document.getElementById("site-title").innerHTML =
   `${CONFIG.leagueName.split(" ").slice(0, -1).join(" ")} <span>${CONFIG.leagueName.split(" ").slice(-1)}</span>`;
 
+// Manager photos have been saved with a mix of extensions (.jpg, .jpeg,
+// .png); the onerror handler on each avatar <img> walks this list in
+// order until one of them actually loads.
+const PHOTO_EXTENSIONS = ["jpg", "jpeg", "png", "webp"];
+
 const grid = document.getElementById("records-grid");
 
 // "Present" means the most recent season that actually shows up in the
@@ -53,10 +58,12 @@ function avatarColorClass(name) {
 }
 
 // Manager photos are opt-in and convention-based: drop a file at
-// images/managers/<slugified-name>.jpg (e.g. "Adam Kahler" ->
-// images/managers/adam-kahler.jpg) and it's picked up automatically, no
-// data-file edit required. If no photo exists at that path yet, the <img>
-// 404s, onerror hides it, and the colored initials underneath show through
+// images/managers/<slugified-name>.<ext> (e.g. "Adam Kahler" ->
+// images/managers/adam-kahler.png) and it's picked up automatically, no
+// data-file edit required. Photos have been saved with a mix of
+// extensions (.jpg, .jpeg, .png), so onerror walks through each candidate
+// extension in turn rather than assuming .jpg; if none of them exist yet,
+// the <img> stays hidden and the colored initials underneath show through
 // -- so this is always safe to leave wired up even for managers without a
 // photo yet.
 function photoSlug(name) {
@@ -64,6 +71,19 @@ function photoSlug(name) {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
+}
+
+function photoOnErrorAttr(slug) {
+  // data-i tracks which extension we're currently trying; on failure, bump
+  // it and retry with the next one, or give up (hide the <img>) once
+  // we've worked through the whole list.
+  const tries = PHOTO_EXTENSIONS.slice(1)
+    .map(
+      (ext, idx) =>
+        `if(Number(this.dataset.i)===${idx}){this.dataset.i='${idx + 1}';this.src='images/managers/${slug}.${ext}';return;}`
+    )
+    .join("");
+  return `${tries}this.style.display='none';`;
 }
 
 function renderRecordCard(owner, r) {
@@ -81,7 +101,7 @@ function renderRecordCard(owner, r) {
         <div class="record-owner-group">
           <div class="record-avatar ${avatarColorClass(owner)}">
             ${initials(owner)}
-            <img class="record-avatar-img" src="images/managers/${photoSlug(owner)}.jpg" alt="" loading="lazy" onerror="this.style.display='none';">
+            <img class="record-avatar-img" src="images/managers/${photoSlug(owner)}.${PHOTO_EXTENSIONS[0]}" alt="" loading="lazy" data-i="0" onerror="${photoOnErrorAttr(photoSlug(owner))}">
           </div>
           <div class="record-owner">${owner}${isInactive ? '<span class="record-inactive-tag">No Longer in League</span>' : ""}</div>
         </div>
