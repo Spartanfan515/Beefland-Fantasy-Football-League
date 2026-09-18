@@ -2,50 +2,85 @@ document.getElementById("site-title").innerHTML =
   `${CONFIG.leagueName.split(" ").slice(0, -1).join(" ")} <span>${CONFIG.leagueName.split(" ").slice(-1)}</span>`;
 
 /**
- * Upcoming Events — 2026 season key dates.
- * Countdown targets are given as ISO strings with an explicit UTC offset
- * for Eastern Time, so the countdown reads correctly for every visitor
- * regardless of their own timezone. Both dates fall during Eastern
- * Daylight Time (UTC-4).
+ * Upcoming Events — recurring weekly reminders for the 2026 season.
+ * These fire every week rather than on one fixed date, so instead of a
+ * hardcoded countdownTo timestamp each event carries a weekday/hour/minute
+ * in America/New_York time; getNextOccurrenceUTC() below finds the next
+ * matching instant (rolling to next week once one passes) and stays
+ * correct across the DST change in November, since it derives the ET
+ * offset fresh from Intl rather than assuming a fixed UTC-4.
  */
 const EVENTS_2026 = [
   {
-    id: "draft-day",
-    date: "9/4",
-    title: "Draft Day",
-    desc: "The 2026 startup draft. Show up on time or your queue does the picking.",
-    countdownTo: "2026-09-04T19:00:00-04:00",
-    countdownLabel: "7:00 PM ET",
+    id: "bulletin-drop",
+    title: "Beefland Bulletin Drop",
+    desc: "This week's issue of the Beefland Bulletin posts to the group chat and the 2026 Season page.",
+    recurring: { weekday: 2, hour: 21, minute: 0 }, // Tuesday, 9:00 PM ET
+    timeLabel: "Every Tuesday · 9:00 PM ET",
   },
   {
-    id: "draft-recap",
-    date: "9/6",
-    title: "2026 Draft Recap",
-    desc: "A full breakdown of the 2026 draft: biggest reach, draft-day steal, team composition analysis, and initial standings.",
-    placeholder: true,
-  },
-  {
-    id: "kickoff",
-    date: "9/9",
-    title: "Season Kickoff",
-    desc: "Countdown to the first NFL game of 2026.",
-    countdownTo: "2026-09-09T20:20:00-04:00",
-    countdownLabel: "8:20 PM ET",
-  },
-  {
-    id: "week1-recap",
-    date: "9/15",
-    title: "Week 1 Recap",
-    desc: "An overview of every Week 1 matchup around the league.",
-    link: "newspapers/week-1-2026.html",
+    id: "waivers",
+    title: "Waivers Clear",
+    desc: "Weekly waiver claims process. Get your bids in before they run.",
+    recurring: { weekday: 3, hour: 3, minute: 0 }, // Wednesday, 3:00 AM ET
+    timeLabel: "Every Wednesday · 3:00 AM ET",
   },
 ];
 
 const grid = document.getElementById("events-grid");
 
-function renderCountdown(target) {
+// Returns the ET (America/New_York) offset from UTC, in minutes, that is
+// in effect at the given instant (e.g. -240 during EDT, -300 during EST).
+function getETOffsetMinutes(date) {
+  const dtf = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    hour12: false,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
+  const parts = dtf.formatToParts(date).reduce((acc, p) => {
+    acc[p.type] = p.value;
+    return acc;
+  }, {});
+  const hour = parts.hour === "24" ? "00" : parts.hour;
+  const asUTC = Date.UTC(parts.year, parts.month - 1, parts.day, hour, parts.minute, parts.second);
+  return Math.round((asUTC - date.getTime()) / 60000);
+}
+
+// Next UTC instant at which it is `weekday`/`hour`/`minute` in ET
+// (weekday: 0=Sun...6=Sat), rolling forward a week if that time already
+// passed today.
+function getNextOccurrenceUTC(weekday, hour, minute) {
+  const now = new Date();
+  const offsetMin = getETOffsetMinutes(now);
+  const etNow = new Date(now.getTime() + offsetMin * 60000);
+
+  let daysAhead = (weekday - etNow.getUTCDay() + 7) % 7;
+  let candidate = new Date(Date.UTC(
+    etNow.getUTCFullYear(), etNow.getUTCMonth(), etNow.getUTCDate() + daysAhead,
+    hour, minute, 0
+  ));
+  // candidate is ET wall time expressed as if it were UTC; convert to real UTC.
+  let targetUTC = new Date(candidate.getTime() - offsetMin * 60000);
+
+  if (targetUTC.getTime() <= now.getTime()) {
+    daysAhead += 7;
+    candidate = new Date(Date.UTC(
+      etNow.getUTCFullYear(), etNow.getUTCMonth(), etNow.getUTCDate() + daysAhead,
+      hour, minute, 0
+    ));
+    targetUTC = new Date(candidate.getTime() - offsetMin * 60000);
+  }
+  return targetUTC;
+}
+
+function renderCountdown(targetISO) {
   return `
-    <div class="event-countdown event-countdown--live" data-countdown="${target}">
+    <div class="event-countdown event-countdown--live" data-countdown="${targetISO}">
       <div class="event-countdown-unit"><div class="event-countdown-value" data-unit="d">--</div><div class="event-countdown-label">Days</div></div>
       <div class="event-countdown-unit"><div class="event-countdown-value" data-unit="h">--</div><div class="event-countdown-label">Hrs</div></div>
       <div class="event-countdown-unit"><div class="event-countdown-value" data-unit="m">--</div><div class="event-countdown-label">Min</div></div>
@@ -55,18 +90,13 @@ function renderCountdown(target) {
 }
 
 grid.innerHTML = EVENTS_2026.map((e) => {
-  const cardClass = e.placeholder ? "event-card event-card--placeholder" : "event-card";
-  const title = e.link ? `<a href="${e.link}">${e.title} &rarr;</a>` : e.title;
-  // Once an event's target time has passed, a frozen "0 00 00 00" countdown
-  // just looks broken — show the date/time label only, same as an event
-  // that never had a countdown.
-  const showCountdown = e.countdownTo && new Date(e.countdownTo).getTime() > Date.now();
+  const target = getNextOccurrenceUTC(e.recurring.weekday, e.recurring.hour, e.recurring.minute);
   return `
-    <div class="${cardClass}" ${e.id ? `id="event-${e.id}"` : ""}>
-      <div class="event-date">${e.date}${e.countdownLabel ? ` &middot; ${e.countdownLabel}` : ""}</div>
-      <div class="event-title">${title}</div>
+    <div class="event-card" id="event-${e.id}" data-recurring-weekday="${e.recurring.weekday}" data-recurring-hour="${e.recurring.hour}" data-recurring-minute="${e.recurring.minute}">
+      <div class="event-date">${e.timeLabel}</div>
+      <div class="event-title">${e.title}</div>
       <div class="event-desc">${e.desc}</div>
-      ${showCountdown ? renderCountdown(e.countdownTo) : ""}
+      ${renderCountdown(target.toISOString())}
     </div>
   `;
 }).join("");
@@ -77,9 +107,26 @@ function pad(n) {
 
 function tick() {
   document.querySelectorAll("[data-countdown]").forEach((el) => {
-    const target = new Date(el.dataset.countdown).getTime();
+    let target = new Date(el.dataset.countdown).getTime();
     const now = Date.now();
     let diff = target - now;
+
+    // A recurring reminder whose moment just passed (e.g. someone left the
+    // page open through 9 PM Tuesday) rolls straight to next week's
+    // occurrence instead of freezing at 0 00 00 00.
+    if (diff <= 0) {
+      const card = el.closest(".event-card");
+      if (card && card.dataset.recurringWeekday !== undefined) {
+        const next = getNextOccurrenceUTC(
+          Number(card.dataset.recurringWeekday),
+          Number(card.dataset.recurringHour),
+          Number(card.dataset.recurringMinute)
+        );
+        el.dataset.countdown = next.toISOString();
+        target = next.getTime();
+        diff = target - now;
+      }
+    }
 
     const dEl = el.querySelector('[data-unit="d"]');
     const hEl = el.querySelector('[data-unit="h"]');
