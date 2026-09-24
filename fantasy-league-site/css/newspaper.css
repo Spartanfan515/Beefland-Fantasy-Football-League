@@ -113,7 +113,7 @@
 .totw-manager-row { display: flex; align-items: center; gap: 12px; }
 .totw-manager { font-family: "Playfair Display", Georgia, serif; font-weight: 900; font-size: 1.6rem; }
 .totw-team { font-family: "Special Elite", monospace; color: var(--ink-dim); font-size: 0.85rem; margin-bottom: 12px; margin-top: 8px; font-style: italic; }
-.totw-score { font-family: "Playfair Display", Georgia, serif; font-weight: 900; font-size: 2.6rem; line-height: 1; }
+.totw-score { font-family: "Playfair Display", Georgia, serif; font-weight: 900; font-size: 2.6rem; line-height: 1.25; margin-bottom: 4px; }
 .totw-score-label { font-family: "Special Elite", monospace; font-size: 0.65rem; text-transform: uppercase; color: var(--ink-dim); letter-spacing: 0.1em; }
 .totw-mvp { margin-top: 16px; border-top: 1px dashed var(--rule); padding-top: 14px; }
 .totw-mvp-name { font-weight: 700; }
@@ -296,7 +296,7 @@
 
   /* Team of the Week */
   .totw-card { padding: 12px; }
-  .totw-score { font-size: 2rem; }
+  .totw-score { font-size: 2rem; margin-bottom: 2px; }
   .totw-mvp { margin-top: 8px; padding-top: 8px; }
   .totw-stat-list { margin-top: 6px; }
   .totw-stat-list li { padding: 3px 0; }
