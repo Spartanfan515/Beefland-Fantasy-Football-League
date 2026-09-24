@@ -104,16 +104,51 @@ const CONFIG = {
   /**
    * chugLog2026 -> one entry per chug owed this season (a manager started
    * an active-roster, non-D/ST player who scored exactly 0). Set
-   * `completed: true` once that manager's video hits the group chat.
+   * `completed: true` once that manager's video hits the group chat, and
+   * add a `video` field (the Google Drive file view URL) once it's been
+   * uploaded to the Chugs folder — the Chug Tracker links directly to
+   * that specific video for each completed entry. The whole Chugs folder
+   * is linked from chugFolderUrl below.
    * Powers the Chug Tracker leaderboard on season-2026.html — a manager
    * with zero entries here just doesn't appear on the board.
    */
   chugLog2026: [
-    { week: 1, owner: "Jacob Ayriss", team: "Costa Rico", player: "Colston Loveland", completed: false },
-    { week: 1, owner: "Adam Schon", team: "Mass Laportations", player: "Kyle Pitts Sr.", completed: false },
-    { week: 2, owner: "Adam Schon", team: "Joshin Around", player: "Mike Gesicki", completed: false },
-    { week: 2, owner: "Austin Gauss", team: "Puka Bites Back", player: "Puka Nacua", completed: false },
+    {
+      week: 1,
+      owner: "Jacob Ayriss",
+      team: "Costa Rico",
+      player: "Colston Loveland",
+      completed: true,
+      video: "https://drive.google.com/file/d/1V_H-CiYJlKT4Z7r9DkwErnchCPjAY10U/view",
+    },
+    {
+      week: 1,
+      owner: "Adam Schon",
+      team: "Mass Laportations",
+      player: "Kyle Pitts Sr.",
+      completed: true,
+      video: "https://drive.google.com/file/d/1cwbmbmmU1lh7HYPphXbuUrgcR4lhgMoF/view",
+    },
+    {
+      week: 2,
+      owner: "Adam Schon",
+      team: "Joshin Around",
+      player: "Mike Gesicki",
+      completed: true,
+      video: "https://drive.google.com/file/d/1etTX9OCjtDXrF23oTZbjX622s50hOyPE/view",
+    },
+    {
+      week: 2,
+      owner: "Austin Gauss",
+      team: "Puka Bites Back",
+      player: "Puka Nacua",
+      completed: true,
+      video: "https://drive.google.com/file/d/166WUrCQhVFsCZWMxxbQqRiyqSAuQoCTl/view",
+    },
   ],
+
+  // Folder holding every chug video — linked from the Chug Tracker section head.
+  chugFolderUrl: "https://drive.google.com/drive/folders/1ZbqD0u8X0dUyvvq7cgQigTDtReNAYmDl",
 
   history: [
     {

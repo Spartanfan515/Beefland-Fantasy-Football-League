@@ -1,5 +1,12 @@
 const chugWrap = document.getElementById("chug-tracker-wrap");
 
+// Show the "watch all chug videos" link if a folder URL is configured.
+const chugFolderLink = document.getElementById("chug-folder-link");
+if (chugFolderLink && CONFIG.chugFolderUrl) {
+  chugFolderLink.href = CONFIG.chugFolderUrl;
+  chugFolderLink.style.display = "";
+}
+
 if (!CONFIG.chugLog2026 || CONFIG.chugLog2026.length === 0) {
   chugWrap.innerHTML = `<p class="loading">No chugs logged yet this season — edit CONFIG.chugLog2026 in js/config.js.</p>`;
 } else {
@@ -26,8 +33,14 @@ if (!CONFIG.chugLog2026 || CONFIG.chugLog2026.length === 0) {
       .map((r) => {
         const outstanding = r.owed - r.completed;
         const detail = r.entries
-          .map((e) => `Wk ${e.week}: ${e.player} (${e.team})${e.completed ? " — done" : " — owed"}`)
-          .join("; ");
+          .map((e) => {
+            const base = `Wk ${e.week}: ${e.player} (${e.team})`;
+            if (e.completed && e.video) {
+              return `<div class="chug-detail-row">${base} — <a class="chug-watch-link" href="${e.video}" target="_blank" rel="noopener">watch &#9654;</a></div>`;
+            }
+            return `<div class="chug-detail-row">${base}${e.completed ? " — done" : " — owed"}</div>`;
+          })
+          .join("");
         return `
           <tr>
             <td class="owner-cell">${r.owner}</td>

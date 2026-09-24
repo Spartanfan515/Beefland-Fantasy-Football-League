@@ -175,7 +175,13 @@
 }
 .injury-player { font-weight: 700; margin: 0 0 2px; font-family: "Playfair Display", Georgia, serif; font-size: 1.05rem; }
 .injury-meta { font-family: "Special Elite", monospace; font-size: 0.74rem; color: var(--ink-dim); margin: 0 0 6px; }
-.injury-note { margin: 0; font-size: 0.92rem; line-height: 1.5; text-align: justify; }
+.injury-note {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  text-align: justify;
+  hyphens: auto;
+}
 
 /* ---- Matchup graphic / scoreboard ---- */
 .scoreboard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
@@ -232,6 +238,19 @@
 .wanted-hands { display: flex; justify-content: space-between; margin-top: -6px; padding: 0 6px; }
 .wanted-hand { width: 34px; height: 30px; }
 .wanted-caption { margin-top: 10px; font-size: 0.8rem; color: var(--ink-dim); font-style: italic; }
+.wanted-watch-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: "Special Elite", monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 4px 10px;
+  text-decoration: none;
+}
+.wanted-watch-link:hover { background: var(--ink); color: var(--paper); }
 
 /* ---- Corrections ---- */
 .correction-note {
@@ -269,7 +288,8 @@
   }
   .site-header,
   .site-footer,
-  .page-header {
+  .page-header,
+  .wanted-watch-link {
     display: none !important;
   }
   .bulletin {

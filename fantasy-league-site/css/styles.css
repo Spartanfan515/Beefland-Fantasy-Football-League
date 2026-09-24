@@ -2017,6 +2017,19 @@ tbody tr:last-child .h2h-cell { border-bottom: none; }
   font-size: 0.78rem;
   color: var(--chalk-dim);
 }
+.chug-detail-row + .chug-detail-row { margin-top: 6px; }
+.chug-watch-link {
+  color: var(--gold);
+  text-decoration: underline;
+  font-weight: 600;
+}
+.chug-watch-link:hover { color: var(--gold-dim); }
+.chug-folder-link {
+  margin-left: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
 
 /* ---- 2026 Season page: short summary tables shouldn't use the
    sitewide sticky thead (that behavior is meant for one long,
