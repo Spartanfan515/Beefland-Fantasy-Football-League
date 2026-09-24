@@ -107,9 +107,12 @@
   background: var(--paper-raised);
   border: 1px solid var(--rule);
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
+.totw-manager-row { display: flex; align-items: center; gap: 12px; }
 .totw-manager { font-family: "Playfair Display", Georgia, serif; font-weight: 900; font-size: 1.6rem; }
-.totw-team { font-family: "Special Elite", monospace; color: var(--ink-dim); font-size: 0.85rem; margin-bottom: 12px; font-style: italic; }
+.totw-team { font-family: "Special Elite", monospace; color: var(--ink-dim); font-size: 0.85rem; margin-bottom: 12px; margin-top: 8px; font-style: italic; }
 .totw-score { font-family: "Playfair Display", Georgia, serif; font-weight: 900; font-size: 2.6rem; line-height: 1; }
 .totw-score-label { font-family: "Special Elite", monospace; font-size: 0.65rem; text-transform: uppercase; color: var(--ink-dim); letter-spacing: 0.1em; }
 .totw-mvp { margin-top: 16px; border-top: 1px dashed var(--rule); padding-top: 14px; }
@@ -117,6 +120,23 @@
 .totw-stat-list { list-style: none; margin: 10px 0 0; padding: 0; font-size: 0.9rem; }
 .totw-stat-list li { padding: 6px 0; border-bottom: 1px dotted var(--rule); display: flex; justify-content: space-between; gap: 10px; }
 .totw-stat-list li:last-child { border-bottom: none; }
+.totw-photo-frame {
+  flex: 1 1 auto;
+  min-height: 160px;
+  margin-top: 16px;
+  border-top: 1px dashed var(--rule);
+  padding-top: 14px;
+  display: flex;
+}
+.totw-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border: 2px solid var(--rule);
+  filter: grayscale(1) contrast(1.15);
+  flex: 1;
+}
 .totw-body { columns: 1; }
 .totw-body p { margin: 0 0 12px; line-height: 1.65; text-align: justify; }
 .totw-body p:first-child::first-letter {
@@ -280,6 +300,7 @@
   .totw-mvp { margin-top: 8px; padding-top: 8px; }
   .totw-stat-list { margin-top: 6px; }
   .totw-stat-list li { padding: 3px 0; }
+  .totw-photo-frame { min-height: 110px; margin-top: 8px; padding-top: 8px; }
   .totw-body p { margin: 0 0 8px; line-height: 1.4; }
   .totw-body p:first-child::first-letter { font-size: 2.6rem; }
 
