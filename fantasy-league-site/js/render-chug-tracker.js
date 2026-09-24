@@ -34,7 +34,7 @@ if (!CONFIG.chugLog2026 || CONFIG.chugLog2026.length === 0) {
         const outstanding = r.owed - r.completed;
         const detail = r.entries
           .map((e) => {
-            const base = `Wk ${e.week}: ${e.player} (${e.team})`;
+            const base = `Wk ${e.week}: ${e.player}`;
             const time = typeof e.chugTimeSeconds === "number" ? ` — <span class="chug-time">${e.chugTimeSeconds}s</span>` : "";
             if (e.completed && e.video) {
               return `<div class="chug-detail-row">${base}${time} — <a class="chug-watch-link" href="${e.video}" target="_blank" rel="noopener">watch &#9654;</a></div>`;
@@ -44,11 +44,11 @@ if (!CONFIG.chugLog2026 || CONFIG.chugLog2026.length === 0) {
           .join("");
         return `
           <tr>
-            <td class="owner-cell">${r.owner}</td>
-            <td>${r.owed}</td>
-            <td>${r.completed}</td>
-            <td class="${outstanding > 0 ? "chug-outstanding" : "chug-clear"}">${outstanding}</td>
-            <td class="chug-detail">${detail}</td>
+            <td class="owner-cell" data-label="Manager">${r.owner}</td>
+            <td data-label="Chugs Owed">${r.owed}</td>
+            <td data-label="Completed">${r.completed}</td>
+            <td class="${outstanding > 0 ? "chug-outstanding" : "chug-clear"}" data-label="Outstanding">${outstanding}</td>
+            <td class="chug-detail" data-label="Detail">${detail}</td>
           </tr>
         `;
       })

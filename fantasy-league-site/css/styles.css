@@ -2035,6 +2035,73 @@ tbody tr:last-child .h2h-cell { border-bottom: none; }
   white-space: nowrap;
 }
 
+/* On narrow screens the 5-column chug table forces horizontal
+   scrolling and hides the Detail column entirely. Reflow each row
+   into a stacked card instead: manager name on top, the three chug
+   counts in a compact row, then the per-chug detail lines below. */
+@media (max-width: 600px) {
+  #chug-tracker-wrap .table-wrap {
+    border: none;
+    overflow: visible;
+  }
+  #chug-tracker-wrap table,
+  #chug-tracker-wrap tbody {
+    display: block;
+    width: 100%;
+  }
+  #chug-tracker-wrap thead {
+    display: none;
+  }
+  #chug-tracker-wrap tr {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    margin-bottom: 14px;
+    padding: 14px 16px;
+  }
+  #chug-tracker-wrap tr:last-child {
+    margin-bottom: 0;
+  }
+  #chug-tracker-wrap td {
+    border-bottom: none;
+    padding: 0;
+  }
+  #chug-tracker-wrap td.owner-cell {
+    flex: 0 0 100%;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  #chug-tracker-wrap td:not(.owner-cell):not(.chug-detail) {
+    flex: 1 1 33%;
+  }
+  #chug-tracker-wrap td:not(.owner-cell)::before {
+    content: attr(data-label);
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    color: var(--chalk-dim);
+    margin-bottom: 3px;
+  }
+  #chug-tracker-wrap td.chug-detail {
+    flex: 0 0 100%;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+  }
+  #chug-tracker-wrap td.chug-detail::before {
+    margin-bottom: 6px;
+  }
+}
+
 /* ---- 2026 Season page: short summary tables shouldn't use the
    sitewide sticky thead (that behavior is meant for one long,
    scroll-within leaderboard). On these short tables it makes the

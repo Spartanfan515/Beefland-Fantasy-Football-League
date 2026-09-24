@@ -183,6 +183,28 @@
   hyphens: auto;
 }
 
+/* On narrow screens, a fixed 100px status column crowds the text into a
+   cramped strip. Stack the status badge above the name/text instead so
+   the copy gets the card's full width. */
+@media (max-width: 600px) {
+  .injury-card {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .injury-status {
+    justify-self: start;
+  }
+
+  /* A long eyebrow (e.g. "Chug Clause Violators — League Rule, Sec.
+     'Other'") fighting the heading for space on one line forces the
+     heading to wrap mid-word. Stack heading above eyebrow instead. */
+  .bulletin-section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
 /* ---- Matchup graphic / scoreboard ---- */
 .scoreboard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 @media (max-width: 720px) { .scoreboard-grid { grid-template-columns: 1fr; } }
