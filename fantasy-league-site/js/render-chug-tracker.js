@@ -35,10 +35,11 @@ if (!CONFIG.chugLog2026 || CONFIG.chugLog2026.length === 0) {
         const detail = r.entries
           .map((e) => {
             const base = `Wk ${e.week}: ${e.player} (${e.team})`;
+            const time = typeof e.chugTimeSeconds === "number" ? ` — <span class="chug-time">${e.chugTimeSeconds}s</span>` : "";
             if (e.completed && e.video) {
-              return `<div class="chug-detail-row">${base} — <a class="chug-watch-link" href="${e.video}" target="_blank" rel="noopener">watch &#9654;</a></div>`;
+              return `<div class="chug-detail-row">${base}${time} — <a class="chug-watch-link" href="${e.video}" target="_blank" rel="noopener">watch &#9654;</a></div>`;
             }
-            return `<div class="chug-detail-row">${base}${e.completed ? " — done" : " — owed"}</div>`;
+            return `<div class="chug-detail-row">${base}${time}${e.completed ? " — done" : " — owed"}</div>`;
           })
           .join("");
         return `

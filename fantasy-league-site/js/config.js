@@ -108,7 +108,9 @@ const CONFIG = {
    * add a `video` field (the Google Drive file view URL) once it's been
    * uploaded to the Chugs folder — the Chug Tracker links directly to
    * that specific video for each completed entry. The whole Chugs folder
-   * is linked from chugFolderUrl below.
+   * is linked from chugFolderUrl below. `chugTimeSeconds` is the timed
+   * chug itself (grab it from the video when it's uploaded) and shows up
+   * next to that entry's watch link on the Chug Tracker.
    * Powers the Chug Tracker leaderboard on season-2026.html — a manager
    * with zero entries here just doesn't appear on the board.
    */
@@ -120,6 +122,7 @@ const CONFIG = {
       player: "Colston Loveland",
       completed: true,
       video: "https://drive.google.com/file/d/1V_H-CiYJlKT4Z7r9DkwErnchCPjAY10U/view",
+      chugTimeSeconds: 10,
     },
     {
       week: 1,
@@ -128,6 +131,7 @@ const CONFIG = {
       player: "Kyle Pitts Sr.",
       completed: true,
       video: "https://drive.google.com/file/d/1cwbmbmmU1lh7HYPphXbuUrgcR4lhgMoF/view",
+      chugTimeSeconds: 26,
     },
     {
       week: 2,
@@ -136,6 +140,7 @@ const CONFIG = {
       player: "Mike Gesicki",
       completed: true,
       video: "https://drive.google.com/file/d/1etTX9OCjtDXrF23oTZbjX622s50hOyPE/view",
+      chugTimeSeconds: 25,
     },
     {
       week: 2,
@@ -144,6 +149,7 @@ const CONFIG = {
       player: "Puka Nacua",
       completed: true,
       video: "https://drive.google.com/file/d/166WUrCQhVFsCZWMxxbQqRiyqSAuQoCTl/view",
+      chugTimeSeconds: 18,
     },
   ],
 
