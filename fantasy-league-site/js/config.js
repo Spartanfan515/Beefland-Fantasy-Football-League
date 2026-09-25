@@ -103,7 +103,8 @@ const CONFIG = {
 
   /**
    * chugLog2026 -> one entry per chug owed this season (a manager started
-   * an active-roster, non-D/ST player who scored exactly 0). Set
+   * an active-roster, non-D/ST player who scored zero or fewer points —
+   * negative scores count too). Set
    * `completed: true` once that manager's video hits the group chat, and
    * add a `video` field (the Google Drive file view URL) once it's been
    * uploaded to the Chugs folder — the Chug Tracker links directly to
@@ -150,6 +151,13 @@ const CONFIG = {
       completed: true,
       video: "https://drive.google.com/file/d/166WUrCQhVFsCZWMxxbQqRiyqSAuQoCTl/view",
       chugTimeSeconds: 18,
+    },
+    {
+      week: 2,
+      owner: "Evan Lamb",
+      team: "Gibbs Me Shelter",
+      player: "DJ Moore",
+      completed: false,
     },
   ],
 
@@ -546,7 +554,7 @@ const CONFIG = {
     {
       section: "Other League Rules",
       items: [
-        "Any team that plays a player who ends a game with zero (0) points must send a video of themselves chugging a beer to the league group chat before the start of the following week's 8:20 PM game. Some leeway is given for those away on business or otherwise busy. Not enforced for playoff consolation games, but still encouraged.",
+        "Any team that plays a player who ends a game with zero (0) or fewer points must send a video of themselves chugging a beer to the league group chat before the start of the following week's 8:20 PM game. Some leeway is given for those away on business or otherwise busy. Not enforced for playoff consolation games, but still encouraged.",
       ],
     },
   ],
