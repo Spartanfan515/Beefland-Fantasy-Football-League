@@ -76,18 +76,18 @@ const CONFIG = {
   standings2026: [
     // Note: Adam Schon renamed "Mass Laportations" to "Joshin Around"
     // between Week 1 and Week 2.
-    { team: "Geezers n' Beaters", owner: "Jon Hurlburt", wins: 2, losses: 0, pf: 290.98, pa: 235.48 },
-    { team: "Njigba's in Paris", owner: "Adam Kahler", wins: 2, losses: 0, pf: 264.24, pa: 199.88 },
-    { team: "Uncle Lamb's", owner: "Brent Hurlburt", wins: 1, losses: 1, pf: 301.48, pa: 330.94 },
-    { team: "Joshin Around", owner: "Adam Schon", wins: 1, losses: 1, pf: 247.28, pa: 244.22 },
-    { team: "Zay it with Flowers", owner: "Zack Rollis", wins: 1, losses: 1, pf: 245.08, pa: 208.30 },
-    { team: "What ACL?", owner: "Zach Crook", wins: 1, losses: 1, pf: 244.76, pa: 282.98 },
-    { team: "Puka Bites Back", owner: "Austin Gauss", wins: 1, losses: 1, pf: 241.20, pa: 237.02 },
-    { team: "Kareem in my Hunt", owner: "Blake Beachnau", wins: 1, losses: 1, pf: 224.56, pa: 238.98 },
-    { team: "Gibbs Me Shelter", owner: "Evan Lamb", wins: 1, losses: 1, pf: 212.00, pa: 187.74 },
-    { team: "White Men Can't Jump", owner: "Ben Schon", wins: 1, losses: 1, pf: 204.12, pa: 229.08 },
-    { team: "Costa Rico", owner: "Jacob Ayriss", wins: 0, losses: 2, pf: 187.54, pa: 213.28 },
-    { team: "Love Her Big Judkins", owner: "Jack Callahan", wins: 0, losses: 2, pf: 183.64, pa: 238.98 },
+    { team: "Geezers n' Beaters", owner: "Jon Hurlburt", wins: 3, losses: 0, pf: 422.98, pa: 346.46 },
+    { team: "Njigba's in Paris", owner: "Adam Kahler", wins: 3, losses: 0, pf: 401.08, pa: 314.50 },
+    { team: "What ACL?", owner: "Zach Crook", wins: 2, losses: 1, pf: 387.60, pa: 352.72 },
+    { team: "Puka Bites Back", owner: "Austin Gauss", wins: 2, losses: 1, pf: 370.86, pa: 352.36 },
+    { team: "Zay it with Flowers", owner: "Zack Rollis", wins: 2, losses: 1, pf: 367.12, pa: 301.26 },
+    { team: "Joshin Around", owner: "Adam Schon", wins: 2, losses: 1, pf: 364.64, pa: 341.50 },
+    { team: "Uncle Lamb's", owner: "Brent Hurlburt", wins: 1, losses: 2, pf: 416.10, pa: 467.78 },
+    { team: "Gibbs Me Shelter", owner: "Evan Lamb", wins: 1, losses: 2, pf: 322.98, pa: 319.74 },
+    { team: "White Men Can't Jump", owner: "Ben Schon", wins: 1, losses: 2, pf: 301.40, pa: 346.44 },
+    { team: "Kareem in my Hunt", owner: "Blake Beachnau", wins: 1, losses: 2, pf: 294.30, pa: 381.82 },
+    { team: "Costa Rico", owner: "Jacob Ayriss", wins: 0, losses: 3, pf: 302.88, pa: 342.94 },
+    { team: "Love Her Big Judkins", owner: "Jack Callahan", wins: 0, losses: 3, pf: 276.60, pa: 361.02 },
   ],
 
   /**
@@ -99,6 +99,7 @@ const CONFIG = {
   newspaperIssues2026: [
     { week: 1, label: "Week 1", file: "newspapers/week-1-2026.html" },
     { week: 2, label: "Week 2", file: "newspapers/week-2-2026.html" },
+    { week: 3, label: "Week 3", file: "newspapers/week-3-2026.html" },
   ],
 
   /**
@@ -157,6 +158,15 @@ const CONFIG = {
       owner: "Evan Lamb",
       team: "Gibbs Me Shelter",
       player: "DJ Moore",
+      completed: true,
+      video: "https://drive.google.com/file/d/1LQzYtkhAFLDtcmvaThjX1asXyLh3Q3no/view",
+      chugTimeSeconds: 28,
+    },
+    {
+      week: 3,
+      owner: "Jack Callahan",
+      team: "Love Her Big Judkins",
+      player: "Oronde Gadsden",
       completed: false,
     },
   ],

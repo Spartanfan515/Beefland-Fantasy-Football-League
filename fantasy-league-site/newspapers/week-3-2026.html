@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Week 3 Recap — The Beefland Bulletin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;600&family=Work+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital@0;1&family=Special+Elite&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/styles.css" />
+<link rel="stylesheet" href="../css/newspaper.css" />
+<script>
+  // Loaded inside the 2026 Season page's Bulletin iframe with ?embed=1 —
+  // hide this page's own site header/nav/footer so readers don't see the
+  // whole site chrome twice (once around the page, once inside the frame).
+  if (new URLSearchParams(location.search).get("embed") === "1") {
+    document.write("<style>.site-header,.site-footer{display:none !important;} body{margin:0;}</style>");
+  }
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="site-title" id="site-title">The <span>League</span></div>
+    <nav>
+      <ul class="site-nav">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../season-2026.html" aria-current="page">2026 Season</a></li>
+        <li><a href="../managers.html">Managers</a></li>
+        <li><a href="../draft.html">Draft</a></li>
+        <li><a href="../trade-center.html">Trade Center</a></li>
+        <li><a href="../standings.html">Head-to-Head</a></li>
+        <li><a href="../recap.html">Recap</a></li>
+        <li><a href="../rules.html">Rules</a></li>
+        <li><a href="../punishments.html">Punishments</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="bulletin">
+
+  <div class="bulletin-masthead">
+    <div class="bulletin-kicker">
+      <span>Vol. 6, No. 3 &middot; Est. 2021</span>
+      <span>Price: One Chug</span>
+    </div>
+    <div class="bulletin-title">The Beefland <span>Bulletin</span></div>
+    <div class="bulletin-subtitle">
+      <span>Week 3 &middot; 2026 Season</span>
+      <span>Twelve Teams. Zero Mercy.</span>
+    </div>
+  </div>
+
+  <!-- ================= TEAM OF THE WEEK ================= -->
+  <section class="bulletin-section">
+    <div class="bulletin-section-head">
+      <h2>Team of the Week</h2>
+    </div>
+    <div class="totw-grid">
+      <div class="totw-card">
+        <div class="totw-manager-row">
+          <div class="totw-manager">Zach Crook</div>
+        </div>
+        <div class="totw-team">What ACL?</div>
+        <div class="totw-score">142.84</div>
+        <div class="totw-score-label">Total Points &middot; League High</div>
+
+        <div class="totw-mvp">
+          <div class="bulletin-section-eyebrow">MVP of the Week</div>
+          <div class="totw-mvp-name">Drake London &middot; WR &middot; ATL</div>
+          <ul class="totw-stat-list">
+            <li><span>Fantasy Points</span><strong>30.40</strong></li>
+            <li><span>Receptions</span><strong>9</strong></li>
+            <li><span>Targets</span><strong>10</strong></li>
+            <li><span>Receiving Yards</span><strong>194</strong></li>
+            <li><span>Touchdowns</span><strong>0</strong></li>
+          </ul>
+        </div>
+
+        <div class="totw-photo-frame">
+          <img src="../images/managers/zach-crook.png" alt="Zach Crook" />
+        </div>
+      </div>
+
+      <div class="totw-body">
+        <p>
+          Zach Crook's What ACL? was the only team in Beefland to clear 140 points, and
+          Drake London did it without even finding the end zone — 9 catches on 10 targets
+          for a career-high 194 yards as Atlanta stunned Green Bay on the road, 35-14.
+          George Kittle (26.2), Christian McCaffrey (21.6) and Deebo Samuel Sr. (20.4) all
+          padded the total further, and What ACL? didn't need to sweat it: the 142.84
+          demolished Blake Beachnau's Kareem in my Hunt 142.84-69.74, the widest margin of
+          the week by a mile. Beachnau's lineup ran straight into a buzzsaw of real-world
+          injury news — Justin Jefferson and De'Von Achane both left their games early
+          (full details below in Injury Recap).
+        </p>
+        <p>
+          The highest score of any team that still lost this week belonged to Jacob
+          Ayriss's Costa Rico, whose 115.34 — led by Bijan Robinson's 37.3 — wasn't quite
+          enough to catch Austin Gauss's Puka Bites Back in the tightest game of the week,
+          a 14.32-point final. Full breakdown below in Miracles Come True.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MATCHUP GRAPHIC ================= -->
+  <section class="bulletin-section">
+    <div class="bulletin-section-head">
+      <h2>Week 3 Results</h2>
+    </div>
+    <div class="scoreboard-grid">
+
+      <div class="score-card">
+        <div class="score-row is-winner">
+          <div><div class="score-row-team">Puka Bites Back</div><div class="score-row-manager">Austin Gauss</div></div>
+          <div class="score-row-pts">129.66</div>
+        </div>
+        <div class="score-row">
+          <div><div class="score-row-team">Costa Rico</div><div class="score-row-manager">Jacob Ayriss</div></div>
+          <div class="score-row-pts">115.34</div>
+        </div>
+        <div class="score-card-margin">Margin: 14.32 &middot; Closest Game of the Week</div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-row">
+          <div><div class="score-row-team">White Men Can't Jump</div><div class="score-row-manager">Ben Schon</div></div>
+          <div class="score-row-pts">97.28</div>
+        </div>
+        <div class="score-row is-winner">
+          <div><div class="score-row-team">Joshin Around</div><div class="score-row-manager">Adam Schon</div></div>
+          <div class="score-row-pts">117.36</div>
+        </div>
+        <div class="score-card-margin">Margin: 20.08</div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-row is-winner">
+          <div><div class="score-row-team">Geezers n' Beaters</div><div class="score-row-manager">Jon Hurlburt</div></div>
+          <div class="score-row-pts">132.00</div>
+        </div>
+        <div class="score-row">
+          <div><div class="score-row-team">Gibbs Me Shelter</div><div class="score-row-manager">Evan Lamb</div></div>
+          <div class="score-row-pts">110.98</div>
+        </div>
+        <div class="score-card-margin">Margin: 21.02</div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-row">
+          <div><div class="score-row-team">Uncle Lamb's</div><div class="score-row-manager">Brent Hurlburt</div></div>
+          <div class="score-row-pts">114.62</div>
+        </div>
+        <div class="score-row is-winner">
+          <div><div class="score-row-team">Njigba's in Paris</div><div class="score-row-manager">Adam Kahler</div></div>
+          <div class="score-row-pts">136.84</div>
+        </div>
+        <div class="score-card-margin">Margin: 22.22</div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-row">
+          <div><div class="score-row-team">Love Her Big Judkins</div><div class="score-row-manager">Jack Callahan</div></div>
+          <div class="score-row-pts">92.96</div>
+        </div>
+        <div class="score-row is-winner">
+          <div><div class="score-row-team">Zay it with Flowers</div><div class="score-row-manager">Zack Rollis</div></div>
+          <div class="score-row-pts">122.04</div>
+        </div>
+        <div class="score-card-margin">Margin: 29.08</div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-row is-winner">
+          <div><div class="score-row-team">What ACL?</div><div class="score-row-manager">Zach Crook</div></div>
+          <div class="score-row-pts">142.84</div>
+        </div>
+        <div class="score-row">
+          <div><div class="score-row-team">Kareem in my Hunt</div><div class="score-row-manager">Blake Beachnau</div></div>
+          <div class="score-row-pts">69.74</div>
+        </div>
+        <div class="score-card-margin">Margin: 73.10 &middot; Blowout of the Week</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= MOST WANTED ================= -->
+  <section class="bulletin-section">
+    <div class="bulletin-section-head">
+      <h2>Most Wanted</h2>
+      <span class="bulletin-section-eyebrow">Chug Clause Violators — League Rule, Sec. "Other"</span>
+    </div>
+    <div class="wanted-grid">
+
+      <div class="wanted-poster">
+        <div class="wanted-heading">Wanted</div>
+        <div class="wanted-photo-wrap">
+          <img class="wanted-photo" src="../images/managers/jack-callahan.png" alt="Jack Callahan" />
+        </div>
+        <div class="wanted-sign-wrap">
+          <svg class="wanted-hand" style="float:left; margin-left:8px;" viewBox="0 0 34 30" fill="none"><path d="M4 24c0-6 2-10 2-14 0-2 2-3 3-1 1-2 3-2 4 0 1-2 3-1 3 1 1-1 3-1 3 1 4 1 5 5 5 9 0 3-2 6-6 6H10c-3 0-6-1-6-2z" fill="#eeece3" stroke="#1a1a1a" stroke-width="1.2"/></svg>
+          <svg class="wanted-hand" style="float:right; margin-right:8px;" viewBox="0 0 34 30" fill="none"><path d="M30 24c0-6-2-10-2-14 0-2-2-3-3-1-1-2-3-2-4 0-1-2-3-1-3 1-1-1-3-1-3 1-4 1-5 5-5 9 0 3 2 6 6 6h10c3 0 6-1 6-2z" fill="#eeece3" stroke="#1a1a1a" stroke-width="1.2"/></svg>
+          <div class="wanted-sign">
+            <span class="wanted-sign-player">Oronde Gadsden</span>
+          </div>
+        </div>
+        <div class="wanted-name">Jack Callahan</div>
+        <div class="wanted-team">Love Her Big Judkins</div>
+        <div class="wanted-caption">
+          Gadsden saw three targets in the Chargers' loss to Buffalo and couldn't bring in
+          a single one — zero catches, zero yards, zero help. Chug owed before Sunday's
+          1:00 PM kickoff.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= MIRACLES COME TRUE ================= -->
+  <section class="bulletin-section">
+    <div class="bulletin-section-head">
+      <h2>Miracles Come True</h2>
+    </div>
+    <div class="miracle-list">
+      <div class="miracle-card">
+        <div class="miracle-head">
+          <div class="miracle-player">Jahmyr Gibbs &middot; RB &middot; DET</div>
+          <div class="miracle-vs-proj">164 Total Yds &middot; 3 TD</div>
+        </div>
+        <p class="miracle-note">
+          Started for Evan Lamb's Gibbs Me Shelter and turned in the single best individual
+          performance in Beefland this week — 99 yards and two touchdowns on the ground,
+          plus 65 yards and a third score through the air, as Detroit beat the Jets 31-24.
+          It wasn't enough to save the matchup, though: Jon Hurlburt's Geezers n' Beaters
+          still won by 21.02 to move to a perfect 3-0 on the season.
+        </p>
+      </div>
+      <div class="miracle-card">
+        <div class="miracle-head">
+          <div class="miracle-player">Jaxon Smith-Njigba &middot; WR &middot; SEA</div>
+          <div class="miracle-vs-proj">128 Rec Yds &middot; 2 TD</div>
+        </div>
+        <p class="miracle-note">
+          Adam Kahler's Njigba's in Paris got another monster week from its namesake — 10
+          catches for 128 yards and two touchdowns in a 33-31 shootout loss to Washington,
+          Smith-Njigba's second straight 35-plus-point fantasy week after his 49.5-point
+          explosion in Week 2. Njigba's in Paris is 3-0 to start the season, cruising to a
+          22.22-point win over Uncle Lamb's this week.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INJURY RECAP ================= -->
+  <section class="bulletin-section">
+    <div class="bulletin-section-head">
+      <h2>Injury Recap</h2>
+    </div>
+    <div class="injury-list">
+      <div class="injury-card">
+        <div class="injury-status">IR &middot; Season-Ending</div>
+        <div>
+          <p class="injury-player">De'Von Achane</p>
+          <p class="injury-meta">RB &middot; MIA &middot; Started by Kareem in my Hunt (Blake Beachnau)</p>
+          <p class="injury-note">
+            Achane's leg gave out on a non-contact cutback less than five minutes into
+            Miami's loss to Kansas City, tearing his ACL. He walked off under his own
+            power, finishing at 1.7 points, but the Dolphins have already ruled him out
+            for the rest of the 2026 season.
+          </p>
+        </div>
+      </div>
+      <div class="injury-card">
+        <div class="injury-status">OUT &middot; 3+ Weeks</div>
+        <div>
+          <p class="injury-player">Baker Mayfield</p>
+          <p class="injury-meta">QB &middot; TB &middot; Started by Gibbs Me Shelter (Evan Lamb)</p>
+          <p class="injury-note">
+            Mayfield dislocated his throwing-hand thumb in Tampa Bay's loss to Minnesota
+            and didn't return, finishing with 12.28 points already banked. Head coach Todd
+            Bowles confirmed he's out a minimum of three weeks, with rookie Jalon Daniels
+            stepping in under center.
+          </p>
+        </div>
+      </div>
+      <div class="injury-card">
+        <div class="injury-status">QUESTIONABLE &middot; Week-to-Week</div>
+        <div>
+          <p class="injury-player">Breece Hall</p>
+          <p class="injury-meta">RB &middot; NYJ &middot; Started by Joshin Around (Adam Schon)</p>
+          <p class="injury-note">
+            Hall planted awkwardly on a tackle in the fourth quarter of the Jets' 31-24
+            loss to Detroit and grabbed his thigh on the way to the sideline. He finished
+            with just 32 yards on 13 carries, and the team is calling it a quad injury and
+            labeling him week-to-week — Braelon Allen is next up if he can't go.
+          </p>
+        </div>
+      </div>
+      <div class="injury-card">
+        <div class="injury-status">QUESTIONABLE &middot; Awaiting Update</div>
+        <div>
+          <p class="injury-player">Terrance Ferguson</p>
+          <p class="injury-meta">TE &middot; LAR &middot; Started by Costa Rico (Jacob Ayriss)</p>
+          <p class="injury-note">
+            Ferguson's ankle sent him to the sideline twice against Denver — he tried to
+            play through it, came back, then was pulled again in the second quarter and
+            taken for X-rays. He finished with a season-low 1.9 points, and the Rams
+            haven't yet said whether he'll be limited heading into Week 4.
+          </p>
+        </div>
+      </div>
+      <div class="injury-card">
+        <div class="injury-status">QUESTIONABLE &middot; Week 4</div>
+        <div>
+          <p class="injury-player">Justin Jefferson</p>
+          <p class="injury-meta">WR &middot; MIN &middot; Started by Kareem in my Hunt (Blake Beachnau)</p>
+          <p class="injury-note">
+            Jefferson lasted just six offensive snaps before an ankle sprain sent him to
+            the locker room in Minnesota's 23-16 win over Tampa Bay, finishing with two
+            catches for 32 yards and 5.2 points. Kevin O'Connell called it a straightforward
+            sprain with "nothing long-term" — swelling will decide his Week 4 workload.
+          </p>
+        </div>
+      </div>
+      <div class="injury-card">
+        <div class="injury-status">QUESTIONABLE &middot; Week 4</div>
+        <div>
+          <p class="injury-player">Travis Etienne Jr.</p>
+          <p class="injury-meta">RB &middot; NO &middot; Started by Njigba's in Paris (Adam Kahler)</p>
+          <p class="injury-note">
+            Etienne pulled up grabbing his hamstring on a 16-yard run midway through the
+            third quarter against Las Vegas — an aggravation of an issue that had limited
+            him in practice all week. He was ruled questionable to return and never went
+            back in, finishing with 9 points.
+          </p>
+        </div>
+      </div>
+      <div class="injury-card">
+        <div class="injury-status">QUESTIONABLE &middot; Week 4</div>
+        <div>
+          <p class="injury-player">Jalen Coker</p>
+          <p class="injury-meta">WR &middot; CAR &middot; Started by White Men Can't Jump (Ben Schon)</p>
+          <p class="injury-note">
+            Coker left Carolina's game at Cleveland early with a quad injury after catching
+            2 of 4 targets for 18 yards. NFL Network's Ian Rapoport called it a minor
+            strain, and the Panthers are optimistic he'll be good to go for Week 4 against
+            Detroit.
+          </p>
+        </div>
+      </div>
+      <div class="injury-card">
+        <div class="injury-status">CLEARED &middot; No Time Missed</div>
+        <div>
+          <p class="injury-player">Pat Freiermuth</p>
+          <p class="injury-meta">TE &middot; PIT &middot; Started by Gibbs Me Shelter (Evan Lamb)</p>
+          <p class="injury-note">
+            Freiermuth was briefly checked for a left arm/shoulder injury against
+            Cincinnati but missed only one series, returning to finish with 2 catches for
+            30 yards. More of a scare than a setback — no long-term concern heading into
+            Week 4.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="bulletin-byline">
+    The Beefland Bulletin &middot; Week 3, 2026
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">Historical results available on the Recap page.</div>
+</footer>
+
+<script>
+  document.getElementById("site-title").innerHTML =
+    "Beefland <span>Bulletin</span>";
+</script>
+</body>
+</html>
