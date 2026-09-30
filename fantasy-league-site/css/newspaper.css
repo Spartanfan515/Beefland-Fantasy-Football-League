@@ -246,7 +246,9 @@
 }
 .wanted-name { font-weight: 700; margin: 4px 0 2px; font-family: "Playfair Display", Georgia, serif; }
 .wanted-team { font-family: "Special Elite", monospace; font-size: 0.72rem; color: var(--ink-dim); margin-bottom: 10px; font-style: italic; }
-.wanted-sign-wrap { position: relative; margin-top: -18px; }
+/* Sized to match the photo above it (not the card), so a lone poster in
+   an otherwise-empty grid row doesn't stretch the nameplate wide. */
+.wanted-sign-wrap { position: relative; width: 150px; margin: -18px auto 0; }
 .wanted-sign {
   background: var(--paper);
   border: 2px solid var(--rule);
@@ -370,6 +372,7 @@
   .wanted-heading { margin-bottom: 6px; }
   .wanted-photo-wrap { width: 110px; height: 110px; margin: 0 auto 8px; }
   .wanted-photo { width: 110px; height: 110px; }
+  .wanted-sign-wrap { width: 110px; }
   .wanted-caption { margin-top: 6px; }
 
   /* Corrections */
