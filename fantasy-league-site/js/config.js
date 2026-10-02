@@ -167,7 +167,9 @@ const CONFIG = {
       owner: "Jack Callahan",
       team: "Love Her Big Judkins",
       player: "Oronde Gadsden",
-      completed: false,
+      completed: true,
+      video: "https://drive.google.com/file/d/1aYVzYku9KMKz85U6cM4nu7e6NKRCm89H/view",
+      chugTimeSeconds: 36,
     },
   ],
 
