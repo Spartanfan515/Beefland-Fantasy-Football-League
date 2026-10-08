@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Week 4 Recap — The Beefland Bulletin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;600&family=Work+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital@0;1&family=Special+Elite&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/styles.css" />
+<link rel="stylesheet" href="../css/newspaper.css" />
+<script>
+  // Loaded inside the 2026 Season page's Bulletin iframe with ?embed=1 —
+  // hide this page's own site header/nav/footer so readers don't see the
+  // whole site chrome twice (once around the page, once inside the frame).
+  if (new URLSearchParams(location.search).get("embed") === "1") {
+    document.write("<style>.site-header,.site-footer{display:none !important;} body{margin:0;}</style>");
+  }
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="site-title" id="site-title">The <span>League</span></div>
+    <nav>
+      <ul class="site-nav">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../season-2026.html" aria-current="page">2026 Season</a></li>
+        <li><a href="../managers.html">Managers</a></li>
+        <li><a href="../draft.html">Draft</a></li>
+        <li><a href="../trade-center.html">Trade Center</a></li>
+        <li><a href="../standings.html">Head-to-Head</a></li>
+        <li><a href="../recap.html">Recap</a></li>
+        <li><a href="../rules.html">Rules</a></li>
+        <li><a href="../punishments.html">Punishments</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="bulletin">
+
+  <div class="bulletin-masthead">
+    <div class="bulletin-kicker">
+      <span>Vol. 6, No. 4 &middot; Est. 2021</span>
+      <span>Price: One Chug</span>
+    </div>
+    <div class="bulletin-title">The Beefland <span>Bulletin</span></div>
+    <div class="bulletin-subtitle">
+      <span>Week 4 &middot; 2026 Season</span>
+      <span>Twelve Teams. Zero Mercy.</span>
+    </div>
+  </div>
+
+  <!-- ================= TEAM OF THE WEEK ================= -->
+  <section class="bulletin-section">
+    <div class="bulletin-section-head">
+      <h2>Team of the Week</h2>
+    </div>
+    <div class="totw-grid">
+      <div class="totw-card">
+        <div class="totw-manager-row">
+          <div class="totw-manager">Zack Rollis</div>
+        </div>
+        <div class="totw-team">Zay it with Flowers</div>
+        <div class="totw-score">179.76</div>
+        <div class="totw-score-label">Total Points &middot; League High</div>
+
+        <div class="totw-mvp">
+          <div class="bulletin-section-eyebrow">MVP of the Week</div>
+          <div class="totw-mvp-name">Kyren Williams &middot; RB &middot; LAR</div>
+          <ul class="totw-stat-list">
+            <li><span>Fantasy Points</span><strong>36.70</strong></li>
+            <li><span>Rushing Yards</span><strong>80</strong></li>
+            <li><span>Rushing TDs</span><strong>2</strong></li>
+            <li><span>Receptions</span><strong>10</strong></li>
+            <li><span>Receiving Yards</span><strong>67</strong></li>
+          </ul>
+        </div>
+
+        <div class="totw-photo-frame">
+          <img src="../images/managers/zack-rollis.png" alt="Zack Rollis" />
+        </div>
+      </div>
+
+      <div class="totw-body">
+        <p>
+          Zack Rollis's Zay it with Flowers was the only team in Beefland to clear 170
+          points, and Kyren Williams was the engine — 16 carries for 80 yards and two
+          fourth-quarter touchdowns (a 4-yard plunge and a 7-yard burst) plus 10 catches for
+          67 yards, leading the Rams back from a 20-10 deficit to stun Philadelphia 24-20.
+          Nico Collins (32.8) and Zay Flowers (27.8) combined for over 60 points of their
+          own, and Bryce Young chipped in 22.46 through the air, as the 179.76 blew out
+          Brent Hurlburt's Uncle Lamb's 179.76-114.92 — the widest margin of the week by a
+          mile. The Eagles weren't so lucky on the other side of that same Rams win: Saquon
+          Barkley left early with a hamstring injury (full details below in Injury Recap).
+        </p>
+        <p>
+          The highest score of any team that still lost this week belonged to Adam Schon's
+          Joshin Around, whose 126.22 — led by a jaw-dropping 43.3 from CeeDee Lamb in
+          Dallas's 34-30 shootout win over Houston — wasn't enough to touch Austin Gauss's
+          Puka Bites Back, which rolled to 164.02 behind Kenneth Walker III (32.9) and Puka
+          Nacua (29.7). Making matters worse, Joshin Around got hit by two real-world
+          hamstring injuries in the same week — Terry McLaurin and Saquon Barkley both went
+          down (see Most Wanted and Injury Recap below).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MATCHUP GRAPHIC ================= -->
+  <section class="bulletin-section">
+    <div class="bulletin-section-head">
+      <h2>Week 4 Results</h2>
+    </div>
+    <div class="scoreboard-grid">
+
+      <div class="score-card">
+        <div class="score-row">
+          <div><div class="score-row-team">Love Her Big Judkins</div><div class="score-row-manager">Jack Callahan</div></div>
+          <div class="score-row-pts">117.06</div>
+        </div>
+        <div class="score-row is-winner">
+          <div><div class="score-row-team">Kareem in my Hunt</div><div class="score-row-manager">Blake Beachnau</div></div>
+          <div class="score-row-pts">135.08</div>
+        </div>
+        <div class="score-card-margin">Margin: 18.02 &middot; Closest Game of the Week</div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-row is-winner">
+          <div><div class="score-row-team">Gibbs Me Shelter</div><div class="score-row-manager">Evan Lamb</div></div>
+          <div class="score-row-pts">117.14</div>
+        </div>
+        <div class="score-row">
+          <div><div class="score-row-team">Njigba's in Paris</div><div class="score-row-manager">Adam Kahler</div></div>
+          <div class="score-row-pts">96.82</div>
+        </div>
+        <div class="score-card-margin">Margin: 20.32</div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-row">
+          <div><div class="score-row-team">Geezers n' Beaters</div><div class="score-row-manager">Jon Hurlburt</div></div>
+          <div class="score-row-pts">91.28</div>
+        </div>
+        <div class="score-row is-winner">
+          <div><div class="score-row-team">Costa Rico</div><div class="score-row-manager">Jacob Ayriss</div></div>
+          <div class="score-row-pts">116.84</div>
+        </div>
+        <div class="score-card-margin">Margin: 25.56</div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-row is-winner">
+          <div><div class="score-row-team">What ACL?</div><div class="score-row-manager">Zach Crook</div></div>
+          <div class="score-row-pts">115.60</div>
+        </div>
+        <div class="score-row">
+          <div><div class="score-row-team">White Men Can't Jump</div><div class="score-row-manager">Ben Schon</div></div>
+          <div class="score-row-pts">86.88</div>
+        </div>
+        <div class="score-card-margin">Margin: 28.72</div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-row is-winner">
+          <div><div class="score-row-team">Puka Bites Back</div><div class="score-row-manager">Austin Gauss</div></div>
+          <div class="score-row-pts">164.02</div>
+        </div>
+        <div class="score-row">
+          <div><div class="score-row-team">Joshin Around</div><div class="score-row-manager">Adam Schon</div></div>
+          <div class="score-row-pts">126.22</div>
+        </div>
+        <div class="score-card-margin">Margin: 37.80</div>
+      </div>
+
+      <div class="score-card">
+        <div class="score-row">
+          <div><div class="score-row-team">Uncle Lamb's</div><div class="score-row-manager">Brent Hurlburt</div></div>
+          <div class="score-row-pts">114.92</div>
+        </div>
+        <div class="score-row is-winner">
+          <div><div class="score-row-team">Zay it with Flowers</div><div class="score-row-manager">Zack Rollis</div></div>
+          <div class="score-row-pts">179.76</div>
+        </div>
+        <div class="score-card-margin">Margin: 64.84 &middot; Blowout of the Week</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= MOST WANTED ================= -->
+  <section class="bulletin-section">
+    <div class="bulletin-section-head">
+      <h2>Most Wanted</h2>
+      <span class="bulletin-section-eyebrow">Chug Clause Violators — League Rule, Sec. "Other"</span>
+    </div>
+    <div class="wanted-grid">
+
+      <div class="wanted-poster">
+        <div class="wanted-heading">Wanted</div>
+        <div class="wanted-photo-wrap">
+          <img class="wanted-photo" src="../images/managers/ben-schon.jpg" alt="Ben Schon" />
+        </div>
+        <div class="wanted-sign-wrap">
+          <svg class="wanted-hand" style="float:left; margin-left:8px;" viewBox="0 0 34 30" fill="none"><path d="M4 24c0-6 2-10 2-14 0-2 2-3 3-1 1-2 3-2 4 0 1-2 3-1 3 1 1-1 3-1 3 1 4 1 5 5 5 9 0 3-2 6-6 6H10c-3 0-6-1-6-2z" fill="#eeece3" stroke="#1a1a1a" stroke-width="1.2"/></svg>
+          <svg class="wanted-hand" style="float:right; margin-right:8px;" viewBox="0 0 34 30" fill="none"><path d="M30 24c0-6-2-10-2-14 0-2-2-3-3-1-1-2-3-2-4 0-1-2-3-1-3 1-1-1-3-1-3 1-4 1-5 5-5 9 0 3 2 6 6 6h10c3 0 6-1 6-2z" fill="#eeece3" stroke="#1a1a1a" stroke-width="1.2"/></svg>
+          <div class="wanted-sign">
+            <span class="wanted-sign-player">Ladd McConkey</span>
+          </div>
+        </div>
+        <div class="wanted-name">Ben Schon</div>
+        <div class="wanted-team">White Men Can't Jump</div>
+        <div class="wanted-caption">
+          McConkey went down with a foot injury and was questionable to return against
+          Seattle, finishing scoreless in a 23-30 loss. Chug owed before Sunday's 1:00 PM
+          kickoff.
+        </div>
+      </div>
+
+      <div class="wanted-poster">
+        <div class="wanted-heading">Wanted</div>
+        <div class="wanted-photo-wrap">
+          <img class="wanted-photo" src="../images/managers/jack-callahan.png" alt="Jack Callahan" />
+        </div>
+        <div class="wanted-sign-wrap">
+          <svg class="wanted-hand" style="float:left; margin-left:8px;" viewBox="0 0 34 30" fill="none"><path d="M4 24c0-6 2-10 2-14 0-2 2-3 3-1 1-2 3-2 4 0 1-2 3-1 3 1 1-1 3-1 3 1 4 1 5 5 5 9 0 3-2 6-6 6H10c-3 0-6-1-6-2z" fill="#eeece3" stroke="#1a1a1a" stroke-width="1.2"/></svg>
+          <svg class="wanted-hand" style="float:right; margin-right:8px;" viewBox="0 0 34 30" fill="none"><path d="M30 24c0-6-2-10-2-14 0-2-2-3-3-1-1-2-3-2-4 0-1-2-3-1-3 1-1-1-3-1-3 1-4 1-5 5-5 9 0 3 2 6 6 6h10c3 0 6-1 6-2z" fill="#eeece3" stroke="#1a1a1a" stroke-width="1.2"/></svg>
+          <div class="wanted-sign">
+            <span class="wanted-sign-player">Rashee Rice</span>
+          </div>
+        </div>
+        <div class="wanted-name">Jack Callahan</div>
+        <div class="wanted-team">Love Her Big Judkins</div>
+        <div class="wanted-caption">
+          Rice tweaked his hamstring and was downgraded to doubtful to return against Las
+          Vegas, finishing at zero even though Kansas City survived 30-27. Second straight
+          week Callahan's owed a chug.
+        </div>
+      </div>
+
+      <div class="wanted-poster">
+        <div class="wanted-heading">Wanted</div>
+        <div class="wanted-photo-wrap">
+          <img class="wanted-photo" src="../images/managers/adam-schon.png" alt="Adam Schon" />
+        </div>
+        <div class="wanted-sign-wrap">
+          <svg class="wanted-hand" style="float:left; margin-left:8px;" viewBox="0 0 34 30" fill="none"><path d="M4 24c0-6 2-10 2-14 0-2 2-3 3-1 1-2 3-2 4 0 1-2 3-1 3 1 1-1 3-1 3 1 4 1 5 5 5 9 0 3-2 6-6 6H10c-3 0-6-1-6-2z" fill="#eeece3" stroke="#1a1a1a" stroke-width="1.2"/></svg>
+          <svg class="wanted-hand" style="float:right; margin-right:8px;" viewBox="0 0 34 30" fill="none"><path d="M30 24c0-6-2-10-2-14 0-2-2-3-3-1-1-2-3-2-4 0-1-2-3-1-3 1-1-1-3-1-3 1-4 1-5 5-5 9 0 3 2 6 6 6h10c3 0 6-1 6-2z" fill="#eeece3" stroke="#1a1a1a" stroke-width="1.2"/></svg>
+          <div class="wanted-sign">
+            <span class="wanted-sign-player">Terry McLaurin</span>
+          </div>
+        </div>
+        <div class="wanted-name">Adam Schon</div>
+        <div class="wanted-team">Joshin Around</div>
+        <div class="wanted-caption">
+          McLaurin was ruled inactive with a hamstring injury and never suited up as
+          Washington was routed 13-30 in London — Schon started him anyway and ate the
+          zero. Harsh, but the rule doesn't care why.
+        </div>
+      </div>
+
+      <div class="wanted-poster">
+        <div class="wanted-heading">Wanted</div>
+        <div class="wanted-photo-wrap">
+          <img class="wanted-photo" src="../images/managers/jacob-ayriss.jpg" alt="Jacob Ayriss" />
+        </div>
+        <div class="wanted-sign-wrap">
+          <svg class="wanted-hand" style="float:left; margin-left:8px;" viewBox="0 0 34 30" fill="none"><path d="M4 24c0-6 2-10 2-14 0-2 2-3 3-1 1-2 3-2 4 0 1-2 3-1 3 1 1-1 3-1 3 1 4 1 5 5 5 9 0 3-2 6-6 6H10c-3 0-6-1-6-2z" fill="#eeece3" stroke="#1a1a1a" stroke-width="1.2"/></svg>
+          <svg class="wanted-hand" style="float:right; margin-right:8px;" viewBox="0 0 34 30" fill="none"><path d="M30 24c0-6-2-10-2-14 0-2-2-3-3-1-1-2-3-2-4 0-1-2-3-1-3 1-1-1-3-1-3 1-4 1-5 5-5 9 0 3 2 6 6 6h10c3 0 6-1 6-2z" fill="#eeece3" stroke="#1a1a1a" stroke-width="1.2"/></svg>
+          <div class="wanted-sign">
+            <span class="wanted-sign-player">Kenyon Sadiq</span>
+          </div>
+        </div>
+        <div class="wanted-name">Jacob Ayriss</div>
+        <div class="wanted-team">Costa Rico</div>
+        <div class="wanted-caption">
+          Sadiq played through a questionable back tag but was held to four targets and
+          zero catches as the Jets' offense stalled in a 23-12 loss to Chicago. The
+          commissioner is not exempt from the rule.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= MIRACLES COME TRUE ================= -->
+  <section class="bulletin-section">
+    <div class="bulletin-section-head">
+      <h2>Miracles Come True</h2>
+    </div>
+    <div class="miracle-list">
+      <div class="miracle-card">
+        <div class="miracle-head">
+          <div class="miracle-player">Tetairoa McMillan &middot; WR &middot; CAR</div>
+          <div class="miracle-vs-proj">14 Rec, 192 Yds &middot; 2 TD</div>
+        </div>
+        <p class="miracle-note">
+          Started for Blake Beachnau's Kareem in my Hunt and put together the best game in
+          the league this week — 14 catches for a career-high 192 yards and two touchdowns
+          as Carolina beat Detroit 32-26 on Sunday night. It was exactly the kind of lift
+          Kareem in my Hunt needed in the tightest game of the week, an 18.02-point escape
+          over Love Her Big Judkins.
+        </p>
+      </div>
+      <div class="miracle-card">
+        <div class="miracle-head">
+          <div class="miracle-player">Emanuel Wilson &middot; RB &middot; SEA</div>
+          <div class="miracle-vs-proj">21 Car, 81 Yds &middot; 3 Rec, 39 Yds &middot; 2 TD</div>
+        </div>
+        <p class="miracle-note">
+          Beachnau's second miracle of the week came from a different game entirely —
+          Wilson handled a workhorse 21 carries for 81 yards and a score, then added three
+          catches for 39 yards and a second touchdown through the air, as Seattle beat the
+          Chargers 30-23 (and knocked Ladd McConkey out in the process — see Most Wanted).
+          Two separate real-world blowups on the same fantasy roster is how Kareem in my
+          Hunt survives a 135.08-117.06 nail-biter.
+        </p>
+      </div>
+      <div class="miracle-card">
+        <div class="miracle-head">
+          <div class="miracle-player">Javonte Williams &middot; RB &middot; DAL</div>
+          <div class="miracle-vs-proj">19 Car, 62 Yds &middot; 3 TD</div>
+        </div>
+        <p class="miracle-note">
+          Started for Jacob Ayriss's Costa Rico and punched in three rushing touchdowns on
+          19 carries, adding 5 catches for 21 yards, as Dallas outlasted Houston 34-30 — the
+          same shootout that produced CeeDee Lamb's 43.3-point day for Joshin Around (who
+          still lost, see Team of the Week). Williams's hat trick was the difference-maker
+          in Costa Rico's 116.84-91.28 win over Geezers n' Beaters.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INJURY RECAP ================= -->
+  <section class="bulletin-section">
+    <div class="bulletin-section-head">
+      <h2>Injury Recap</h2>
+    </div>
+    <div class="injury-list">
+      <div class="injury-card">
+        <div class="injury-status">QUESTIONABLE &middot; Week-to-Week</div>
+        <div>
+          <p class="injury-player">Saquon Barkley</p>
+          <p class="injury-meta">RB &middot; PHI &middot; Started by Joshin Around (Adam Schon)</p>
+          <p class="injury-note">
+            Barkley left early with a hamstring injury as the Eagles blew a 20-10
+            fourth-quarter lead and fell to the Rams 24-20. He finished with just 2.0
+            points, and Philadelphia hasn't yet said whether he'll be limited heading into
+            Week 5.
+          </p>
+        </div>
+      </div>
+      <div class="injury-card">
+        <div class="injury-status">DOUBTFUL &middot; Week 4</div>
+        <div>
+          <p class="injury-player">DJ Moore</p>
+          <p class="injury-meta">WR &middot; BUF &middot; Started by Gibbs Me Shelter (Evan Lamb)</p>
+          <p class="injury-note">
+            Moore left late in the second quarter against New England with a shoulder
+            injury — his second shoulder-related exit this season after Week 2 against
+            Detroit — and was downgraded to doubtful to return. He finished with 2.7
+            points, and Buffalo lost 29-26 for its first defeat of 2026.
+          </p>
+        </div>
+      </div>
+      <div class="injury-card">
+        <div class="injury-status">QUESTIONABLE &middot; Week 4</div>
+        <div>
+          <p class="injury-player">Ladd McConkey</p>
+          <p class="injury-meta">WR &middot; LAC &middot; Started by White Men Can't Jump (Ben Schon)</p>
+          <p class="injury-note">
+            McConkey went down with a foot injury and was listed questionable to return in
+            the Chargers' 23-30 loss to Seattle, finishing scoreless. The Chargers haven't
+            given a timeline yet.
+          </p>
+        </div>
+      </div>
+      <div class="injury-card">
+        <div class="injury-status">INACTIVE &middot; Did Not Play</div>
+        <div>
+          <p class="injury-player">Terry McLaurin</p>
+          <p class="injury-meta">WR &middot; WAS &middot; Started by Joshin Around (Adam Schon)</p>
+          <p class="injury-note">
+            McLaurin was ruled out with a hamstring injury suffered at practice during the
+            week and never took the field as Washington was routed 13-30 by Indianapolis in
+            London. Schon's lineup had him starting anyway, finishing at zero.
+          </p>
+        </div>
+      </div>
+      <div class="injury-card">
+        <div class="injury-status">DOUBTFUL &middot; Week 4</div>
+        <div>
+          <p class="injury-player">Rashee Rice</p>
+          <p class="injury-meta">WR &middot; KC &middot; Started by Love Her Big Judkins (Jack Callahan)</p>
+          <p class="injury-note">
+            Rice aggravated his hamstring and was downgraded to doubtful to return against
+            Las Vegas, finishing with zero points. Kansas City survived anyway, 30-27, and
+            the Chiefs will update his status ahead of Week 5.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="bulletin-byline">
+    The Beefland Bulletin &middot; Week 4, 2026
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">Historical results available on the Recap page.</div>
+</footer>
+
+<script>
+  document.getElementById("site-title").innerHTML =
+    "Beefland <span>Bulletin</span>";
+</script>
+</body>
+</html>
