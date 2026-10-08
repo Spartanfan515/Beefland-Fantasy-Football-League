@@ -177,7 +177,9 @@ const CONFIG = {
       owner: "Ben Schon",
       team: "White Men Can't Jump",
       player: "Ladd McConkey",
-      completed: false,
+      completed: true,
+      video: "https://drive.google.com/file/d/1_CI_7xuh7DWc5Ed8pWX0nZSSXjBMBP1E/view",
+      chugTimeSeconds: 19,
     },
     {
       week: 4,
