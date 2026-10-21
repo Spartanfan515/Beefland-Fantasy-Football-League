@@ -32,8 +32,8 @@
  *                { text, subitems: [...] } for nested sub-rules — subitems
  *                can nest again the same way if you need a third level.
  *
- *  superlativesCurrent -> Career awards computed from only the last two
- *                  seasons (2024-2025), since that's when the league grew
+ *  superlativesCurrent -> Career awards computed from only the 12-team era
+ *                  (2024-present), since that's when the league grew
  *                  to its current 12-team size — stats from the 8- and
  *                  10-team years aren't really apples-to-apples with today.
  *
@@ -76,18 +76,18 @@ const CONFIG = {
   standings2026: [
     // Note: Adam Schon renamed "Mass Laportations" to "Joshin Around"
     // between Week 1 and Week 2.
-    { team: "Zay it with Flowers", owner: "Zack Rollis", wins: 4, losses: 1, pf: 709.98, pa: 573.68 },
-    { team: "Puka Bites Back", owner: "Austin Gauss", wins: 4, losses: 1, pf: 674.54, pa: 611.90 },
-    { team: "Geezers n' Beaters", owner: "Jon Hurlburt", wins: 4, losses: 1, pf: 656.30, pa: 600.30 },
-    { team: "Njigba's in Paris", owner: "Adam Kahler", wins: 4, losses: 1, pf: 656.30, pa: 553.62 },
-    { team: "What ACL?", owner: "Zach Crook", wins: 3, losses: 2, pf: 588.14, pa: 545.56 },
-    { team: "Kareem in my Hunt", owner: "Blake Beachnau", wins: 3, losses: 2, pf: 557.14, pa: 587.48 },
-    { team: "Joshin Around", owner: "Adam Schon", wins: 2, losses: 3, pf: 627.86, pa: 647.56 },
-    { team: "Gibbs Me Shelter", owner: "Evan Lamb", wins: 2, losses: 3, pf: 597.62, pa: 579.66 },
-    { team: "Uncle Lamb's", owner: "Brent Hurlburt", wins: 1, losses: 4, pf: 619.62, pa: 775.30 },
-    { team: "Costa Rico", owner: "Jacob Ayriss", wins: 1, losses: 4, pf: 541.70, pa: 592.62 },
-    { team: "White Men Can't Jump", owner: "Ben Schon", wins: 1, losses: 4, pf: 521.60, pa: 601.70 },
-    { team: "Love Her Big Judkins", owner: "Jack Callahan", wins: 1, losses: 4, pf: 499.62, pa: 581.04 },
+    { team: "Zay it with Flowers", owner: "Zack Rollis", wins: 5, losses: 1, pf: 836.42, pa: 658.30 },
+    { team: "Puka Bites Back", owner: "Austin Gauss", wins: 5, losses: 1, pf: 803.54, pa: 736.22 },
+    { team: "Njigba's in Paris", owner: "Adam Kahler", wins: 5, losses: 1, pf: 758.38, pa: 653.02 },
+    { team: "Geezers n' Beaters", owner: "Jon Hurlburt", wins: 5, losses: 1, pf: 746.98, pa: 690.14 },
+    { team: "What ACL?", owner: "Zach Crook", wins: 3, losses: 3, pf: 712.46, pa: 674.56 },
+    { team: "Gibbs Me Shelter", owner: "Evan Lamb", wins: 3, losses: 3, pf: 700.90, pa: 675.02 },
+    { team: "Kareem in my Hunt", owner: "Blake Beachnau", wins: 3, losses: 3, pf: 652.50, pa: 690.76 },
+    { team: "Uncle Lamb's", owner: "Brent Hurlburt", wins: 2, losses: 4, pf: 748.08, pa: 892.74 },
+    { team: "Joshin Around", owner: "Adam Schon", wins: 2, losses: 4, pf: 727.26, pa: 749.64 },
+    { team: "Costa Rico", owner: "Jacob Ayriss", wins: 1, losses: 5, pf: 626.32, pa: 719.06 },
+    { team: "Love Her Big Judkins", owner: "Jack Callahan", wins: 1, losses: 5, pf: 617.06, pa: 709.50 },
+    { team: "White Men Can't Jump", owner: "Ben Schon", wins: 1, losses: 5, pf: 611.44, pa: 692.38 },
   ],
 
   /**
@@ -102,6 +102,7 @@ const CONFIG = {
     { week: 3, label: "Week 3", file: "newspapers/week-3-2026.html" },
     { week: 4, label: "Week 4", file: "newspapers/week-4-2026.html" },
     { week: 5, label: "Week 5", file: "newspapers/week-5-2026.html" },
+    { week: 6, label: "Week 6", file: "newspapers/week-6-2026.html" },
   ],
 
   /**
@@ -215,6 +216,27 @@ const CONFIG = {
       owner: "Zach Crook",
       team: "What ACL?",
       player: "Roman Wilson",
+      completed: false,
+    },
+    {
+      week: 6,
+      owner: "Ben Schon",
+      team: "White Men Can't Jump",
+      player: "Cam Skattebo",
+      completed: false,
+    },
+    {
+      week: 6,
+      owner: "Adam Schon",
+      team: "Joshin Around",
+      player: "Saquon Barkley",
+      completed: false,
+    },
+    {
+      week: 6,
+      owner: "Austin Gauss",
+      team: "Puka Bites Back",
+      player: "Juwan Johnson",
       completed: false,
     },
   ],
@@ -412,10 +434,10 @@ const CONFIG = {
     },
     {
       category: "Most Chugs",
-      holder: "Evan Lamb",
-      team: "Kelce Krushed my Worthy",
-      value: "9 Chugs",
-      note: "tied with Adam Schon, 2024–2025",
+      holder: "Adam Schon",
+      team: "Joshin Around",
+      value: "13 Chugs",
+      note: "2024–2026",
     },
   ],
 
@@ -428,15 +450,15 @@ const CONFIG = {
     },
     {
       category: "Best Win %",
-      holder: "Jack Callahan",
-      team: "Bijan al Gaib",
-      value: "61.1% (44-28)",
+      holder: "Jon Hurlburt",
+      team: "Geezers n' Beaters",
+      value: "60.3% (47-31)",
     },
     {
       category: "Highest Career PPG",
       holder: "Ben Schon",
       team: "Bill! Bill! Bill! Bill!",
-      value: "130.7 PPG",
+      value: "128.5 PPG",
     },
     {
       category: "Best Regular Season",
@@ -468,10 +490,10 @@ const CONFIG = {
     },
     {
       category: "Most Chugs",
-      holder: "Brent Hurlburt",
-      team: "Uncle Lamb's",
-      value: "13 Chugs",
-      note: "2023–2025",
+      holder: "Adam Schon",
+      team: "Joshin Around",
+      value: "15 Chugs",
+      note: "2023–2026",
     },
   ],
 
@@ -612,7 +634,7 @@ const CONFIG = {
     {
       section: "Other League Rules",
       items: [
-        "Any team that plays a player who ends a game with zero (0) or fewer points must send a video of themselves chugging a beer to the league group chat before the start of the following week's 8:20 PM game. Some leeway is given for those away on business or otherwise busy. Not enforced for playoff consolation games, but still encouraged.",
+        "Any team that plays a player who ends a game with zero (0) or fewer points must send a video of themselves chugging a beer to the league group chat before the start of the following week's 1:00 PM Sunday games. Some leeway is given for those away on business or otherwise busy. Not enforced for playoff consolation games, but still encouraged.",
       ],
     },
   ],
