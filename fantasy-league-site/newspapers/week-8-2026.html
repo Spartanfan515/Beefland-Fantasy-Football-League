@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Week 8 Recap — The Beefland Bulletin</title>
+<title>Week 8 Recap — The Beefland Bulletin (Halloween Special Edition)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;600&family=Work+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital@0;1&family=Special+Elite&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="../css/styles.css" />
@@ -16,8 +16,44 @@
     document.write("<style>.site-header,.site-footer{display:none !important;} body{margin:0;}</style>");
   }
 </script>
+<style id="halloween-edition">
+/* ===== HALLOWEEN SPECIAL EDITION — scoped to body.halloween ===== */
+@keyframes hw-flicker{0%,18%,22%,25%,53%,57%,100%{opacity:1;text-shadow:0 0 6px #ff7a1a,0 0 18px #ff5a00}20%,24%,55%{opacity:.55;text-shadow:none}}
+@keyframes hw-float{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-8px) rotate(4deg)}}
+body.halloween{background:#0d0912}
+body.halloween main.bulletin{background:radial-gradient(ellipse at 50% 0%,#2a1740 0%,#140d1f 45%,#0b0710 100%);color:#e9e1d3;position:relative;padding-bottom:40px}
+body.halloween main.bulletin p,body.halloween main.bulletin div,body.halloween main.bulletin span,body.halloween main.bulletin li,body.halloween main.bulletin strong{color:#e9e1d3}
+body.halloween .bulletin-masthead{border-color:#ff7a1a !important;background:transparent !important}
+body.halloween .bulletin-title,body.halloween .bulletin-title span{color:#ff7a1a !important;animation:hw-flicker 5s infinite;letter-spacing:.02em}
+body.halloween .bulletin-kicker span,body.halloween .bulletin-subtitle span{color:#b98cff !important}
+body.halloween .hw-banner{text-align:center;font-family:'Special Elite',monospace;color:#9bff6a !important;font-size:15px;letter-spacing:.28em;text-transform:uppercase;margin:10px 0 0}
+body.halloween .bulletin-section-head{border-color:#6b3fa0 !important}
+body.halloween .bulletin-section-head h2{color:#ff7a1a !important;text-shadow:0 0 10px rgba(255,122,26,.45)}
+body.halloween .bulletin-section-head h2::before{content:"\1F383  "}
+body.halloween .bulletin-section-eyebrow{color:#9bff6a !important}
+body.halloween .totw-card,body.halloween .score-card,body.halloween .wanted-poster,body.halloween .miracle-card,body.halloween .injury-card{background:#1b1229 !important;border:1px solid #5b3a8c !important;box-shadow:0 0 18px rgba(138,77,255,.22)}
+body.halloween .totw-score,body.halloween .score-row-pts,body.halloween .totw-mvp-name,body.halloween .miracle-player,body.halloween .injury-player{color:#ff9a3d !important}
+body.halloween .totw-team,body.halloween .totw-manager{color:#f3ecff !important}
+body.halloween .totw-score-label,body.halloween .score-row-manager,body.halloween .injury-meta,body.halloween .miracle-vs-proj{color:#b5a6cf !important}
+body.halloween .totw-stat-list li{border-color:#4a3070 !important}
+body.halloween .score-row.is-winner{background:rgba(155,255,106,.12) !important}
+body.halloween .score-row.is-winner .score-row-pts,body.halloween .score-row.is-winner .score-row-team{color:#9bff6a !important}
+body.halloween .score-card-margin{color:#ff9a3d !important}
+body.halloween .wanted-poster{background:#241a14 !important;border-color:#ff7a1a !important}
+body.halloween .wanted-heading,body.halloween .wanted-name{color:#ff7a1a !important}
+body.halloween .wanted-photo{filter:grayscale(.6) contrast(1.1) sepia(.35)}
+body.halloween .wanted-sign{background:#0d0912 !important}
+body.halloween .wanted-sign-player{color:#9bff6a !important}
+body.halloween .injury-status{background:#3a1a55 !important;color:#ffb36b !important;border-color:#8a4dff !important}
+body.halloween .bulletin-byline{color:#b98cff !important;border-color:#6b3fa0 !important}
+body.halloween .hw-bat{position:absolute;font-size:30px;animation:hw-float 4s ease-in-out infinite;pointer-events:none;color:#000}
+body.halloween .hw-web{position:absolute;top:0;width:90px;height:90px;pointer-events:none;opacity:.55}
+body.halloween .hw-web.l{left:0}body.halloween .hw-web.r{right:0;transform:scaleX(-1)}
+@media (max-width:640px){body.halloween .hw-bat,body.halloween .hw-web{display:none}}
+@media (prefers-reduced-motion:reduce){body.halloween *{animation:none !important}}
+</style>
 </head>
-<body>
+<body class="halloween">
 
 <header class="site-header">
   <div class="container">
@@ -39,23 +75,26 @@
 </header>
 
 <main class="bulletin">
+  <svg class="hw-web l" viewBox="0 0 90 90" fill="none" stroke="#cfc3e6" stroke-width="1"><path d="M0 0L90 0M0 0L0 90M0 0L80 80M0 0L55 90M0 0L90 55"/><path d="M18 0Q16 16 0 18M36 0Q32 32 0 36M54 0Q48 48 0 54M72 0Q64 64 0 72"/></svg><svg class="hw-web r" viewBox="0 0 90 90" fill="none" stroke="#cfc3e6" stroke-width="1"><path d="M0 0L90 0M0 0L0 90M0 0L80 80M0 0L55 90M0 0L90 55"/><path d="M18 0Q16 16 0 18M36 0Q32 32 0 36M54 0Q48 48 0 54M72 0Q64 64 0 72"/></svg>
+  <span class="hw-bat" style="left:12%;top:18px">&#129415;</span><span class="hw-bat" style="right:14%;top:60px;animation-delay:1.3s">&#129415;</span>
 
   <div class="bulletin-masthead">
     <div class="bulletin-kicker">
-      <span>Vol. 6, No. 8 &middot; Est. 2021</span>
-      <span>Price: One Chug</span>
+      <span>Vol. 6, No. 8 &middot; Est. 1921 (Allegedly)</span>
+      <span>Price: One Chug &amp; Your Soul</span>
     </div>
     <div class="bulletin-title">The Beefland <span>Bulletin</span></div>
     <div class="bulletin-subtitle">
-      <span>Week 8 &middot; 2026 Season</span>
-      <span>Twelve Teams. Zero Mercy.</span>
+      <span>Week 8 &middot; Halloween Special Edition</span>
+      <span>Twelve Teams. Zero Mercy. Zero Souls.</span>
     </div>
+    <p class="hw-banner">&#129415; Rise From Your Graves &middot; Week 8 &#129415;</p>
   </div>
 
   <!-- ================= TEAM OF THE WEEK ================= -->
   <section class="bulletin-section">
     <div class="bulletin-section-head">
-      <h2>Team of the Week</h2>
+      <h2>Team of the Week: Risen From the Dead</h2>
     </div>
     <div class="totw-grid">
       <div class="totw-card">
@@ -64,7 +103,7 @@
         </div>
         <div class="totw-team">Njigba's in Paris</div>
         <div class="totw-score">193.68</div>
-        <div class="totw-score-label">Total Points &middot; League High</div>
+        <div class="totw-score-label">Total Points &middot; League High &middot; Scariest Score of the Year</div>
 
         <div class="totw-mvp">
           <div class="bulletin-section-eyebrow">MVP of the Week</div>
@@ -77,7 +116,7 @@
         </div>
 
         <div class="totw-photo-frame">
-          <img src="../images/managers/adam-kahler.png" alt="Adam Kahler" onerror="if(!this.dataset.t){this.dataset.t=1;this.src=this.src.replace(/\.png$/,'.jpg');}" />
+          <img src="../images/managers/adam-kahler.jpg" alt="Adam Kahler" onerror="if(!this.dataset.t){this.dataset.t=1;this.src=this.src.replace(/\.png$/,'.jpg');}" />
         </div>
       </div>
 
@@ -95,7 +134,7 @@
   <!-- ================= MATCHUP GRAPHIC ================= -->
   <section class="bulletin-section">
     <div class="bulletin-section-head">
-      <h2>Week 8 Results</h2>
+      <h2>Week 8 Graveyard Report</h2>
     </div>
     <div class="scoreboard-grid">
 
@@ -172,8 +211,8 @@
   <!-- ================= MOST WANTED ================= -->
   <section class="bulletin-section">
     <div class="bulletin-section-head">
-      <h2>Most Wanted</h2>
-      <span class="bulletin-section-eyebrow">Chug Clause Violators &mdash; League Rule, Sec. "Other"</span>
+      <h2>Most Haunted</h2>
+      <span class="bulletin-section-eyebrow">Cursed Chug Clause Violators &mdash; Pay Up Or Be Haunted</span>
     </div>
     <div class="wanted-grid">
 
@@ -292,7 +331,7 @@
   <!-- ================= MOST VALUABLE PLAYERS ================= -->
   <section class="bulletin-section">
     <div class="bulletin-section-head">
-      <h2>Most Valuable Players</h2>
+      <h2>Most Valuable Players: The Undead Elite</h2>
     </div>
     <div class="miracle-list">
       <div class="miracle-card">
@@ -346,7 +385,7 @@
   <!-- ================= INJURY RECAP ================= -->
   <section class="bulletin-section">
     <div class="bulletin-section-head">
-      <h2>Injury Recap</h2>
+      <h2>Injury Recap: Visit to the Morgue</h2>
     </div>
     <div class="injury-list">
       <div class="injury-card">
@@ -403,7 +442,7 @@
   </section>
 
   <div class="bulletin-byline">
-    The Beefland Bulletin &middot; Week 8, 2026
+    The Beefland Bulletin &middot; Halloween Special Edition &middot; Week 8, 2026 &#127875;
   </div>
 
 </main>
